@@ -449,14 +449,11 @@ class Cube:
             case _ as unrecognized:
                 print(f"Scale Type '{unrecognized}' is not recognized")
         
-        try:
-            match dim_dict.get("unit"):
-                case "kilogramm":
-                   self._graph.add((dim_node, QUDT.hasUnit, UNIT.KiloGM))
-                case "percent":
-                   self._graph.add((dim_node, QUDT.hasUnit, UNIT.PERCENT))
-        except KeyError:
-            pass
+        
+        # unit from https://www.qudt.org/doc/DOC_VOCAB-UNITS.html
+
+        if dim_dict.get("unit") != None:
+            self._graph.add((dim_node, QUDT.hasUnit, getattr(UNIT, dim_dict.get("unit"))))
 
         try:
             data_kind = dim_dict.get("data-kind")
