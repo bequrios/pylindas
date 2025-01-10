@@ -203,7 +203,7 @@ class Cube:
         Returns:
             Graph: The graph object with namespaces bound.
         """
-        graph = Graph()
+        graph = Graph(bind_namespaces="none")
         for prefix, nmspc in Namespaces.items():
             graph.bind(prefix=prefix, namespace=nmspc)
         try:
