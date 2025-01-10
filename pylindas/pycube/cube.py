@@ -571,7 +571,10 @@ class Cube:
         elif lang!=None:
             return Literal(value, lang=lang)
         else:
-            return Literal(value, datatype=getattr(XSD, datatype))
+            if datatype != None:
+                return Literal(value, datatype=getattr(XSD, datatype))
+            else:
+                return Literal(value)
 
 
 
