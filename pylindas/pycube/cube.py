@@ -325,18 +325,18 @@ class Cube:
         self._graph.serialize(destination=filename, format="turtle", encoding="utf-8")
         return self
 
-    def _add_observation(self, obs: pd.DataFrame) -> None:
+    def _add_observation(self, obs: pd.Series) -> None:
         """Add an observation to the cube.
 
         It also adds the observation URI to the observation set of the cube.
         
             Args:
-                obs (pd.DataFrame): The observation data to be added.
+                obs (pd.Series): The observation data to be added. These are the single rows from the _dataframe.
         
             Returns:
                 None
         """
-        self._graph.add((self._cube_uri + "/ObservationSet", CUBE.observation, obs.name))
+        self._graph.add((self._cube_uri + "/ObservationSet", CUBE.observation, obs.name)) #obs.name is the index of the row which was set to be the 'obs-uri'
         self._graph.add((obs.name, RDF.type, CUBE.Observation))
         self._graph.add((obs.name, CUBE.observedBy, URIRef(self._cube_dict.get("Creator")[0].get("IRI"))))
 
