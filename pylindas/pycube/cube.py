@@ -303,7 +303,6 @@ class Cube:
         """Write observations to the cube.
 
         This function iterates over the rows in the dataframe and adds each row as an observation to the cube.
-        It also adds the observation URI to the observation set of the cube.
 
         Returns:
             Self
@@ -328,6 +327,8 @@ class Cube:
 
     def _add_observation(self, obs: pd.DataFrame) -> None:
         """Add an observation to the cube.
+
+        It also adds the observation URI to the observation set of the cube.
         
             Args:
                 obs (pd.DataFrame): The observation data to be added.
