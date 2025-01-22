@@ -1,4 +1,5 @@
 from pylindas.pycube import Cube
+from rdflib import Graph
 import pandas as pd
 import pytest
 import yaml
@@ -148,3 +149,29 @@ class TestClass:
 
         result = self.cube._graph.query(sparql)
         assert bool(result)
+
+    def test_validate_basic_valid(self):
+        self.cube._graph = Graph().parse("./example/mock/mock-cube.ttl")
+        result_bool, result_massage = self.cube._validate_basic()
+        assert bool(result_bool)
+
+    def test_validate_basic_invalid(self):
+        self.cube._graph = Graph().parse("./tests/turtle/invalid_cube_cube.ttl")
+        result_bool, result_message = self.cube._validate_basic()
+        assert bool(not result_bool)
+
+    def test_validate_visualize_valid(self):
+        self.cube._graph = Graph().parse("./example/mock/mock-cube.ttl")
+        result_bool, result_message = self.cube._validate_visualize_profile()
+        assert bool(result_bool)
+
+    def test_validate_opendata_valid(self):
+        self.cube._graph = Graph().parse("./example/mock/mock-cube.ttl")
+        result_bool, result_message = self.cube._validate_opendata_profile()
+        assert bool(result_bool)
+
+
+    # Tests:
+    # basic: standalone-cube-constraint + standalone-constraint-constraint + integrity
+    # visualize: visualize-profile
+    # opendata: opendata-profile
