@@ -9,6 +9,7 @@ import numbers
 import sys
 from pylindas.lindas.namespaces import *
 from pylindas.lindas.query import query_lindas
+from pyshacl import validate
 
 
 class Cube:
@@ -112,8 +113,10 @@ class Cube:
         for cntrbtr in contributor:
             self._graph.add((self._cube_uri, SCHEMA.contributor, URIRef(cntrbtr.get("IRI"))))
 
-        contact_node = self._write_contact_point(self._cube_dict.get("Contact Point"))
-        self._graph.add((self._cube_uri, DCAT.contactPoint, contact_node))
+        dcat_contact_point = self._write_dcat_contact_point(self._cube_dict.get("Contact Point"))
+        self._graph.add((self._cube_uri, DCAT.contactPoint, dcat_contact_point))
+        schema_contact_point = self._write_schema_contact_point(self._cube_dict.get("Contact Point"))
+        self._graph.add((self._cube_uri, SCHEMA.contactPoint, schema_contact_point))
 
         for creator in self._cube_dict.get("Creator", []):
             iri = creator.get('IRI')
@@ -258,7 +261,7 @@ class Cube:
                 assert value_type in ['Shared', 'Literal']
                 self._dataframe[dim_name] = self._dataframe[dim_name].map(lambda v: URIRef(v) if value_type == "Shared" else Literal(v))
 
-    def _write_contact_point(self, contact_dict: dict) -> BNode|URIRef:
+    def _write_dcat_contact_point(self, contact_dict: dict) -> BNode | URIRef:
         """Writes a contact point to the graph.
         
             Args:
@@ -274,6 +277,24 @@ class Cube:
             self._graph.add((contact_node, RDF.type, VCARD.Organization))
             self._graph.add((contact_node, VCARD.hasEmail, Literal(contact_dict.get("E-Mail"), datatype=XSD.string)))
             self._graph.add((contact_node, VCARD.fn, Literal(contact_dict.get("Name"), datatype=XSD.string)))
+            return contact_node
+
+    def _write_schema_contact_point(self, contact_dict: dict) -> BNode | URIRef:
+        """Writes a contact point to the graph.
+
+            Args:
+                contact_dict (dict): A dictionary containing information about the contact point.
+
+            Returns:
+                BNode or URIRef: The created BNode or URIRef representing the contact point.
+        """
+        if contact_dict.get("IRI"):
+            return URIRef(contact_dict.get("IRI"))
+        else:
+            contact_node = BNode()
+            self._graph.add((contact_node, RDF.type, SCHEMA.ContactPoint))
+            self._graph.add((contact_node, SCHEMA.email, Literal(contact_dict.get("E-Mail"), datatype=XSD.string)))
+            self._graph.add((contact_node, SCHEMA.name, Literal(contact_dict.get("Name"), datatype=XSD.string)))
             return contact_node
 
     @staticmethod
@@ -573,5 +594,34 @@ class Cube:
         else:
             return Literal(str(value))
 
+    def validate(self):
+        valid_base, validation_text = self._validate_base()
+        if valid_base:
+            return "Cube is valid."
+        else:
+            return validation_text
 
+    def _validate_base(self, serialize_results=False):
+        # first step: standalone-cube-constraint
+        shacl_graph = Graph()
+        shacl_graph.parse("https://cube.link/latest/shape/standalone-cube-constraint", format="turtle")
+        valid_cube, results_graph_cube, text_cube = validate(data_graph=self._graph, shacl_graph=shacl_graph)
+
+        # second step: standalone-constraint-constraint
+        shacl_graph = Graph()
+        shacl_graph.parse("https://cube.link/latest/shape/standalone-constraint-constraint", format="turtle")
+        valid_shape, results_graph_shape, text_shape = validate(data_graph=self._graph, shacl_graph=shacl_graph)
+
+        # third step: self-consistency
+        consistent, results_graph_consistency, text_consistency = validate(data_graph=self._graph)
+
+        if serialize_results:
+            results_graph = results_graph_cube + results_graph_shape + results_graph_consistency
+            results_graph.serialize("./validation_results.ttl", format="turtle")
+
+        if valid_cube and valid_shape and consistent:
+            return True, "Cube basics are met."
+        else:
+            result_text = f"{text_cube}\n{text_shape}\n{text_consistency}"
+            return False, result_text
 

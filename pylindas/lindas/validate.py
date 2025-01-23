@@ -1,13 +1,6 @@
 from pyshacl import validate
 from rdflib import Graph
 
-def main():
-    r = validate(
-        data_graph=Graph().parse("https://raw.githubusercontent.com/zazuko/cube-link/refs/heads/main/test/basic-cube-constraint/valid.minimal.ttl"), 
-        shacl_graph=Graph().parse("https://raw.githubusercontent.com/zazuko/cube-link/refs/heads/main/test/basic-cube-constraint/valid.minimal.ttl"))
-    conforms, results_graph, results_text = r
-
-    print(conforms)
-
-if __name__ == "__main__":
-    main()
+def validate(data_graph: Graph, shacl_graph: Graph) -> tuple:
+    conforms, results_graph, text = validate(data_graph, shacl_graph=shacl_graph, abort_on_first=True, inference="none", advanced=True)
+    return conforms, text
