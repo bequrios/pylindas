@@ -595,8 +595,14 @@ class Cube:
             return Literal(str(value))
 
     def validate(self):
-        valid_base, validation_text = self._validate_base()
-        if valid_base:
+        valid, validation_text = self._validate_base()
+
+        if self._cube_dict.get("Visualize"):
+            valid_visualize, visualization_text = self._validate_visualize_profile()
+            validation_text += "\n" + visualization_text
+            valid = valid and valid_visualize
+
+        if valid:
             return "Cube is valid."
         else:
             return validation_text
@@ -625,3 +631,12 @@ class Cube:
             result_text = f"{text_cube}\n{text_shape}\n{text_consistency}"
             return False, result_text
 
+    def _validate_visualize_profile(self, serialize_results=False):
+        shacl_graph = Graph()
+        shacl_graph.parse("https://cube.link/latest/shape/profile-visualize", format="turtle")
+
+        valid, results_graph, text = validate(data_graph=self._graph, shacl_graph=shacl_graph)
+
+        if serialize_results:
+            results_graph.serialize("./validation_results.ttl", format="turtle")
+        return valid, text
