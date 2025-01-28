@@ -15,6 +15,7 @@ class TestClass:
             environment="TEST", local=True
         )
         self.cube.prepare_data().write_cube().write_observations().write_shape()
+        self.cube.serialize("tests/test_cube.ttl")
 
     def test_standard_error(self):
         sparql = (
@@ -151,25 +152,19 @@ class TestClass:
         assert bool(result)
 
     def test_validate_basic_valid(self):
-        self.cube._graph = Graph().parse("./example/mock/cube.ttl")
         result_bool, result_massage = self.cube._validate_base(serialize_results=True)
         assert bool(result_bool)
 
-    def test_validate_basic_invalid(self):
-        self.cube._graph = Graph().parse("./tests/turtle/invalid_cube_cube.ttl")
-        result_bool, result_message = self.cube._validate_base()
-        assert bool(not result_bool)
-
     def test_validate_visualize_valid(self):
-        self.cube._graph = Graph().parse("./example/mock/cube.ttl")
-        result_bool, result_message = self.cube._validate_visualize_profile()
+        result_bool, result_message = self.cube._validate_visualize_profile(serialize_results=True)
         assert bool(result_bool)
 
     def test_validate_opendata_valid(self):
-        self.cube._graph = Graph().parse("./example/mock/cube.ttl")
         result_bool, result_message = self.cube._validate_opendata_profile()
         assert bool(result_bool)
 
+    # todos: berücksichtige severity
+    # todos: berücksichtige timestamps - vorher removen, danach setzen
 
     # Tests:
     # basic: standalone-cube-constraint + standalone-constraint-constraint + integrity

@@ -19,8 +19,8 @@ cube.serialize("example/mock/cube.ttl")
 print(cube)
 
 if not cube_exists(cube_uri=cube.get_iri(), environment="TEST"):
-    #upload_ttl(filename="./example/mock-cube.ttl", db_file="lindas.ini", environment="TEST")
-    pass
+    upload_ttl(filename="./example/mock-cube.ttl", db_file="lindas.ini", environment="TEST")
+
 # upload_ttl(filename="./example/mock-cube.ttl", db_file="lindas.ini", environment="TEST")
 
 modk_df_two_sided = pd.read_csv("tests/test_data.csv")
@@ -33,4 +33,4 @@ cube_two_sided.write_observations()
 cube_two_sided.write_shape()
 
 cube_two_sided.serialize("./example/mock-cube-two-sided.ttl")
-#upload_ttl(filename="./example/mock-cube-two-sided.ttl", db_file="lindas.ini", environment="TEST")
+upload_ttl(filename="./example/mock-cube-two-sided.ttl", db_file="lindas.ini", environment="TEST")

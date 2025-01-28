@@ -456,11 +456,11 @@ class Cube:
         match dim_dict.get("scale-type"):
             case "nominal":
                 self._graph.add((dim_node, QUDT.scaleType, QUDT.NominalScale))
-                if dim_dict.get("dimension-type") == "Measure Dimension":
+                if dim_dict.get("dimension-type") == "Key Dimension":
                     self._add_sh_list(dim_node, values)
             case "ordinal":
                 self._graph.add((dim_node, QUDT.scaleType, QUDT.OrdinalScale))
-                if dim_dict.get("dimension-type") == "Measure Dimension":
+                if dim_dict.get("dimension-type") == "Key Dimension":
                     self._add_sh_list(dim_node, values)
             case "interval":
                 self._graph.add((dim_node, QUDT.scaleType, QUDT.IntervalScale))
@@ -523,7 +523,6 @@ class Cube:
                 case "additive":
                     value = dimension_dict.get("mapping").get("base") + str(value)
                 case "replace":
-                    print(value)
                     value = dimension_dict.get("mapping").get("replacements").get(value)
             
             context_node = BNode()
