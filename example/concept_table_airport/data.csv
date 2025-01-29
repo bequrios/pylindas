@@ -1,0 +1,6 @@
+year,typeOfAirport,typeOfAirport2nd,measure
+2001,A,a,12
+2002,A,a,15
+2001,B,b,19
+2002,B,b,20
+2001,A,dummy,15

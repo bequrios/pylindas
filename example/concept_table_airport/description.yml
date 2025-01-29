@@ -1,0 +1,101 @@
+---
+"$schema": "../../linpy/description.schema.json"
+Name:
+  en: Example with a concept table
+  fr: Exemple avec une table de concept
+  de: Example with a concept table (DE)
+  it: Example with a concept table (IT)
+Description:
+  fr: Un jeu de données avec deux csv, un pour une table de concept
+  en: A dataset containing two csv, one for a concept table
+Publisher:
+- IRI: https://register.ld.admin.ch/opendataswiss/org/office_of_Mock
+Creator:
+- IRI: https://register.ld.admin.ch/opendataswiss/org/office_of_Mock
+Contributor:
+- IRI: https://register.ld.admin.ch/opendataswiss/org/bundesamt-fur-umwelt-bafu
+  Name: Bundesamt für Mock Data
+Date Created: '2024-08-26T00:00:00.000Z'
+Contact Point:
+  E-Mail: contact@mock.ld.admin.ch
+  Name: Bundesamt für Mock Data
+Base-URI: https://mock-concept.ld.admin.ch/
+Identifier: mock-concept
+Version: 1
+Work Status: Draft
+Visualize: true
+Accrual Periodicity: yearly
+Namespace: mock
+dimensions:
+  year:
+    name:
+      de: Jahr
+      fr: Année
+      it: Anno
+      en: Year
+    description:
+      de: Jahr der Erhebung
+      fr: Année du relevé
+      it: Anno di rilevamento
+      en: Year of survey
+    dimension-type: Key Dimension
+    scale-type: ordinal
+    path: Jahr
+    data-kind:
+      type: temporal
+      unit: year
+    mapping:
+      type: additive
+      base: https://ld.admin.ch/time/year/
+  typeOfAirport:
+    name:
+      fr: Type d'aéroport
+      de: Flughafentyp
+      it: Tipo di aeroporto
+      en: Type of Airport
+    description:
+      de: Flughafentyp - DESC
+      fr: Type d'aéroport - DESC
+      it: Tipo di aeroporto - DESC
+      en: Type of Airport - DESC
+    dimension-type: Key Dimension
+    scale-type: nominal
+    path: airport_type
+    mapping:
+      type: concept
+      replacement: /airport_type/{typeOfAirport}/{typeOfAirport2nd}
+  typeOfAirport2nd:
+    name:
+      fr: Type d'aéroport (second key for demo)
+      de: Flughafentyp (second key for demo)
+      it: Tipo di aeroporto (second key for demo)
+      en: Type of Airport (second key for demo)
+    description:
+      de: Flughafentyp - second key for demo
+      fr: Type d'aéroport - second key for demo
+      it: Tipo di aeroporto - second key for demo
+      en: Type of Airport - second key for demo
+    dimension-type: Annotation
+    scale-type: nominal      
+    path: airport_type_2nd
+  measure:
+    name:
+      fr: Valeur
+      de: Wert
+      it: Valore
+      en: Value
+    description:
+      de: Wert - DESC
+      fr: Valeur - DESC
+      it: Valore - DESC
+      en: Value - DESC
+    dimension-type: Measure Dimension
+    scale-type: interval
+    path: value
+    unit: kilogramm
+Concepts:
+  typeOfAirport:
+    URI: /airport_type/{typeOfAirportID}/{typeOfAirportSecondID}
+    name-field: typeOfAirport
+    position-field: position
+    multilingual: true 

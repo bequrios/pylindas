@@ -1,0 +1,3 @@
+typeOfAirportID,typeOfAirportSecondID,typeOfAirport_en,typeOfAirport_de,typeOfAirport_fr,position
+A,a,Domestic airport,Inlandflughafen,Aéroport national,1
+B,b,International airport,Internationaler Flughafen,Aéroport international,2 
