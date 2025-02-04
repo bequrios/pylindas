@@ -268,7 +268,9 @@ class Cube:
                         # It also means that the concept is generated with the cube
                         #   thus also add the hard-coded "/concept" path
                         if repl.startswith("/"):
-                            repl = self._cube_uri + "/concept" + repl
+                            # cast the URIRef to a string to avoid log warnings "does not look like a valid URI"
+                            repl = str(self._cube_uri) + "/concept" + repl
+
                         self._dataframe[dim_name] = self._dataframe.apply( lambda row: eval(f"f'{repl}'"), axis=1)
                         
                 value_type = mapping.get("value-type", 'Shared')
@@ -417,8 +419,9 @@ class Cube:
         # It also means that the concept is generated with the cube
         #   thus also add the hard-coded "/concept" path
         if uri.startswith("/"):
-            uri_versioned = self._cube_uri + "/concept" + uri
-            uri_unversioned = self._cube_uri_no_version + "/concept" + uri
+            # cast the URIRef to a string to avoid log warnings "does not look like a valid URI"
+            uri_versioned = str(self._cube_uri) + "/concept" + uri
+            uri_unversioned = str(self._cube_uri_no_version) + "/concept" + uri
             concept_data["URI_UNVERSIONED"] = concept_data.apply( lambda row: eval(f"f'{uri_unversioned}'"), axis=1)
         else:
             uri_versioned = uri
