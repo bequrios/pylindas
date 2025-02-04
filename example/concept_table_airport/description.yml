@@ -98,4 +98,10 @@ Concepts:
     URI: /airport_type/{typeOfAirportID}/{typeOfAirportSecondID}
     name-field: typeOfAirport
     position-field: position
-    multilingual: true 
+    multilingual: true
+    other-fields:
+      description:
+        URI: http://schema.org/description
+        multilingual: true
+      other_property_example:
+        URI: /airport_type/other_property_example   

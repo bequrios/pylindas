@@ -117,23 +117,51 @@ The code comes from the existing `_add_observation()`, and if that code changes,
     dimension = self._get_shape_column(dimension_name) # raises an exception if dimension not found
     path = URIRef(self._base_uri + dimension.get("path"))
 ```	
+## Additional fields for concepts
+It is possible to add additional properties (fields) for a concept.
+
+In the example, airportType.csv contains two more fields:
+- description: a multilingual field to add a description for the airport type
+- other_property_example: another string field as an example
+
+Those fields are configured directly in the description.yml, for the concept itself:
+```
+	Concepts:
+		typeOfAirport:
+			URI: /airport_type/{typeOfAirportID}/{typeOfAirportSecondID}
+			name-field: typeOfAirport
+			position-field: position
+			multilingual: true 
+			other-fields:
+				description:
+					URI: http://schema.org/description
+					multilingual: true
+				other_property_example:
+					URI: /airport_type/other_property_example   
+```		
+where:
+- other-fields is optional and will be omitted if the concept has no other field
+- key: the key of the field (`description`, `other_property_example`) must match the name of the field in the data file
+- URI: the URI to use as the RDF property for that field. It is either a full URI as `http://schema.org/description` that will be used as-is,
+or a relative path that starts with a "/" and that will be concatenated to the cube's URL, adding first a `/concept/prop` path.
+`URI` was intentionally used instead of the common `path` key, as the behavior is currently different (handling of relative or full path)
+But the behavior and the name of the field could be harmonized in all cases
+- multilingual: optional and similar to the multilingual handling for the concept's name. If true, the code will look for columns named `key` + the langage tags (_en, _de,_fr, etc). In the given example, for `description`, it will look for `description_en`, `description_fr`, etc.
+
+The data type is deduced by the current `pycube._sanitize_value()`, except when `multilingual` is true and the expected value is a string.
+
+The RDF result is:
+```
+<https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/A/a> schema1:name "Inlandflughafen"@de,
+        "Domestic airport"@en,
+        "Aéroport national"@fr ;
+	schema1:description "Domestic airport description"@en,
+        "Description de Aéroport national"@fr ;
+    schema1:position 1 ;
+    schema1:sameAs <https://mock-concept.ld.admin.ch/cube/mock-concept/concept/airport_type/A/a> ;
+    ns1:other_property_example "another property example for domesctic airport" .
+```	
 
 ##  Run the example
 Run [example_concept.py](example_concept.py) that will generate the [cube_with_concept.ttl](cube_with_concept.ttl)
 
-## Next steps
-In a further version, we could add the possibility to handle any custom value for a concept, defining also the property to be used (existing or to be created).  
-Here is a proposal:
-```
-	other-fields:
-		column_name:
-			path: http://schema.org/elevation 
-```		
-where:
-- other-fields is optional
-- column_name: the column in the dataframe 
-- path: (that is already used for dimensions) either a string that will be used to generate a URL (as for the dimensions)  
-or a string starting with "http" (as http://schema.org/theProperty) to reuse existing properties. 
-- the data type could either be explicitly specified, or deduced by the current `pycube._sanitize_value()` that could be enriched
-
-This could be used for instance to add the common `schema:description` value. 

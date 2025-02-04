@@ -439,39 +439,80 @@ class Cube:
         else:
             positionField = ""
 
+        # Prepare the optional fields of the concept by:
+        # - taking only the fields that are founc in the data
+        #   remark: the key of the entry (under the other-fields entry) being the name of the field in the data
+        # - handle the URI field if it starts with a "/": adding the cubeURI + "/concept/prop" + the defined relative path
+        # If we wanted to take only the fields that are found in the data, we could add:
+        #    for key, value in otherFields.items() if key in concept_data
+        #  But this does not work now that multilingual fields are handled (the key will be suffixed with the langage tag, in the data)
+        if "other-fields" in concept:
+            otherFields = concept.get("other-fields")
+            cubeUri =  str(self._cube_uri)
+            
+            otherFields_dict = {
+                key: {
+                    **value, 
+                    "URI": cubeUri + "/concept/prop" + value["URI"] if value["URI"].startswith("/") else value["URI"]
+                }
+                for key, value in otherFields.items()
+            }            
+        else:
+            otherFields_dict = {}
+
         # Add the concepts to the graph
-        concept_data.apply(self._add_concept, axis=1,  args=(nameField, multilingual, positionField))
+        concept_data.apply(self._add_concept, axis=1,  args=(nameField, multilingual, positionField, otherFields_dict))
 
         return self
     
-    def _add_concept(self, concept: pd.DataFrame, nameField: str, multilingual: bool, positionField:str):
+    def _add_concept(self, concept: pd.DataFrame, nameField: str, multilingual: bool, positionField:str, otherFields_dict):
         """Add a concept to the graph.
         
             Args:
-                concept (pd.DataFrame): The concept data to be added
+                concept (pd.DataFrame): The concept data to be added (original file/csv values)
                 nameField: name of the field containing the name of the concept
                 multilingual: if true, a multilingual concept is created, looking for columns named 'nameField' + '_' + a pre-defined language
                 positionField: name of the field that contains a position for the concept. Empty if no position to be added
+                otherFields_dict: an optional dictionary value that contains other fields to add to a concept (or an empty dict if no other fields)
+                    About that dictionary:
+                        - the key is the name of the field in the data
+                        - URI field: the URI of the property, must be prepared before hand if it is a relative path in the yaml file 
+                        - multilingual:  optional, look for the fields named 'key' + '_' + a pre-defined language 
 
             Note: from observing concepts in Lindas, a schema:sameAs is added to a generic URL based on the cube's URL but without the version
 
             Returns:
                 None
         """
-
+        conceptURI = URIRef(concept.URI)
         if multilingual:
             for lang in self._languages:
                 name_key = f"{nameField}_{lang}"
                 if name_key in concept:
-                    self._graph.add((URIRef(concept.URI), URIRef(SCHEMA.name), Literal(concept.get(name_key), lang=lang)))            
+                    self._graph.add((conceptURI, URIRef(SCHEMA.name), Literal(concept.get(name_key), lang=lang)))            
         else:
-            self._graph.add((URIRef(concept.URI), URIRef(SCHEMA.name), Literal(concept.get(nameField))))
+            self._graph.add((conceptURI, URIRef(SCHEMA.name), Literal(concept.get(nameField))))
 
         if positionField:
-            self._graph.add((URIRef(concept.URI), URIRef(SCHEMA.position), Literal(concept.get(positionField))))
+            self._graph.add((conceptURI, URIRef(SCHEMA.position), Literal(concept.get(positionField))))
 
         if "URI_UNVERSIONED" in concept:
-            self._graph.add((URIRef(concept.URI), URIRef(SCHEMA.sameAs), URIRef(concept.URI_UNVERSIONED)))
+            self._graph.add((conceptURI, URIRef(SCHEMA.sameAs), URIRef(concept.URI_UNVERSIONED)))
+
+        # Handling other fields/properties
+        for key, value in otherFields_dict.items():
+            if "multilingual" in value and value['multilingual']:
+                for lang in self._languages:
+                    key_lng = f"{key}_{lang}"
+                    if key_lng in concept:
+                        self._graph.add((conceptURI, URIRef(value['URI'] ), Literal(concept.get(key_lng), lang=lang)))
+            else:
+                if key in concept:
+                    sanitized_value = self._sanitize_value(concept.get(key))
+                    self._graph.add((conceptURI, URIRef(value['URI'] ), sanitized_value))
+
+
+
         
     def check_dimension_object_property(self, dimension_name: str, property: URIRef) -> bool:
         try:

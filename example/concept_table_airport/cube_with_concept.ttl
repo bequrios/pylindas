@@ -3,6 +3,7 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix meta: <https://cube.link/meta/> .
 @prefix mock: <https://mock-concept.ld.admin.ch/> .
+@prefix ns1: <https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/prop/airport_type/> .
 @prefix qudt: <http://qudt.org/schema/qudt/> .
 @prefix schema1: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -28,8 +29,8 @@
     schema1:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Draft> ;
     schema1:creator <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
     schema1:dateCreated "2024-08-26"^^xsd:date ;
-    schema1:dateModified "2025-01-29T09:04:40+00:00"^^xsd:dateTime ;
-    schema1:datePublished "2025-01-29"^^xsd:date ;
+    schema1:dateModified "2025-02-04T15:52:02+00:00"^^xsd:dateTime ;
+    schema1:datePublished "2025-02-04"^^xsd:date ;
     schema1:description "A dataset containing two csv, one for a concept table"@en,
         "Un jeu de données avec deux csv, un pour une table de concept"@fr ;
     schema1:name "Example with a concept table (DE)"@de,
@@ -46,36 +47,41 @@
     cube:observationSet <https://mock-concept.ld.admin.ch/cube/mock-concept/1/ObservationSet> .
 
 <https://mock-concept.ld.admin.ch/cube/mock-concept/1/ObservationSet> a cube:ObservationSet ;
-    cube:observation <https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2001_A>,
-        <https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2001_B>,
-        <https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2002_A>,
-        <https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2002_B> .
+    cube:observation <https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2001_A_a>,
+        <https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2001_A_dummy>,
+        <https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2001_B_b>,
+        <https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2002_A_a>,
+        <https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2002_B_b> .
 
-<https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2001_A> a cube:Observation ;
+<https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2001_A_a> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
     mock:Jahr <https://ld.admin.ch/time/year/2001> ;
-    mock:airport_type <https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/A/a>,
-        <https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/A/dummy> ;
-    mock:airport_type_2nd "a",
-        "dummy" ;
-    mock:value 12.0,
-        15.0 .
+    mock:airport_type <https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/A/a> ;
+    mock:airport_type_2nd "a" ;
+    mock:value 12.0 .
 
-<https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2001_B> a cube:Observation ;
+<https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2001_A_dummy> a cube:Observation ;
+    cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
+    mock:Jahr <https://ld.admin.ch/time/year/2001> ;
+    mock:airport_type <https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/A/dummy> ;
+    mock:airport_type_2nd "dummy" ;
+    mock:value 15.0 .
+
+<https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2001_B_b> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
     mock:Jahr <https://ld.admin.ch/time/year/2001> ;
     mock:airport_type <https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/B/b> ;
     mock:airport_type_2nd "b" ;
     mock:value 19.0 .
 
-<https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2002_A> a cube:Observation ;
+<https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2002_A_a> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
     mock:Jahr <https://ld.admin.ch/time/year/2002> ;
     mock:airport_type <https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/A/a> ;
     mock:airport_type_2nd "a" ;
     mock:value 15.0 .
 
-<https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2002_B> a cube:Observation ;
+<https://mock-concept.ld.admin.ch/cube/mock-concept/1/observation/2002_B_b> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
     mock:Jahr <https://ld.admin.ch/time/year/2002> ;
     mock:airport_type <https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/B/b> ;
@@ -84,50 +90,7 @@
 
 <https://mock-concept.ld.admin.ch/cube/mock-concept/1/shape> a cube:Constraint ;
     sh:closed true ;
-    sh:property [ a cube:KeyDimension ;
-            qudt:scaleType qudt:NominalScale ;
-            schema1:description "Flughafentyp - DESC"@de,
-                "Type of Airport - DESC"@en,
-                "Type d'aéroport - DESC"@fr,
-                "Tipo di aeroporto - DESC"@it ;
-            schema1:name "Flughafentyp"@de,
-                "Type of Airport"@en,
-                "Type d'aéroport"@fr,
-                "Tipo di aeroporto"@it ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:path mock:airport_type ],
-        [ a cube:KeyDimension ;
-            qudt:scaleType qudt:OrdinalScale ;
-            schema1:description "Jahr der Erhebung"@de,
-                "Year of survey"@en,
-                "Année du relevé"@fr,
-                "Anno di rilevamento"@it ;
-            schema1:name "Jahr"@de,
-                "Year"@en,
-                "Année"@fr,
-                "Anno"@it ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:path mock:Jahr ;
-            meta:dataKind [ a time:GeneralDateTimeDescription ;
-                    time:unitType time:unitYear ] ],
-        [ qudt:scaleType qudt:NominalScale ;
-            schema1:description "Flughafentyp - second key for demo"@de,
-                "Type of Airport - second key for demo"@en,
-                "Type d'aéroport - second key for demo"@fr,
-                "Tipo di aeroporto - second key for demo"@it ;
-            schema1:name "Flughafentyp (second key for demo)"@de,
-                "Type of Airport (second key for demo)"@en,
-                "Type d'aéroport (second key for demo)"@fr,
-                "Tipo di aeroporto (second key for demo)"@it ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:path mock:airport_type_2nd ],
-        [ a cube:MeasureDimension ;
+    sh:property [ a cube:MeasureDimension ;
             qudt:hasUnit unit:KiloGM ;
             qudt:scaleType qudt:IntervalScale ;
             schema1:description "Wert - DESC"@de,
@@ -143,17 +106,67 @@
             sh:min "12" ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:path mock:value ] .
+            sh:path mock:value ],
+        [ a cube:KeyDimension ;
+            qudt:scaleType qudt:NominalScale ;
+            schema1:description "Flughafentyp - DESC"@de,
+                "Type of Airport - DESC"@en,
+                "Type d'aéroport - DESC"@fr,
+                "Tipo di aeroporto - DESC"@it ;
+            schema1:name "Flughafentyp"@de,
+                "Type of Airport"@en,
+                "Type d'aéroport"@fr,
+                "Tipo di aeroporto"@it ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path mock:airport_type ],
+        [ a cube:KeyDimension ;
+            qudt:scaleType qudt:NominalScale ;
+            schema1:description "Flughafentyp - second key for demo"@de,
+                "Type of Airport - second key for demo"@en,
+                "Type d'aéroport - second key for demo"@fr,
+                "Tipo di aeroporto - second key for demo"@it ;
+            schema1:name "Flughafentyp (second key for demo)"@de,
+                "Type of Airport (second key for demo)"@en,
+                "Type d'aéroport (second key for demo)"@fr,
+                "Tipo di aeroporto (second key for demo)"@it ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path mock:airport_type_2nd ],
+        [ a cube:KeyDimension ;
+            qudt:scaleType qudt:OrdinalScale ;
+            schema1:description "Jahr der Erhebung"@de,
+                "Year of survey"@en,
+                "Année du relevé"@fr,
+                "Anno di rilevamento"@it ;
+            schema1:name "Jahr"@de,
+                "Year"@en,
+                "Année"@fr,
+                "Anno"@it ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path mock:Jahr ;
+            meta:dataKind [ a time:GeneralDateTimeDescription ;
+                    time:unitType time:unitYear ] ] .
 
-<https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/A/a> schema1:name "Inlandflughafen"@de,
+<https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/A/a> schema1:description "Domestic airport description"@en,
+        "Description de Aéroport national"@fr ;
+    schema1:name "Inlandflughafen"@de,
         "Domestic airport"@en,
         "Aéroport national"@fr ;
     schema1:position 1 ;
-    schema1:sameAs <https://mock-concept.ld.admin.ch/cube/mock-concept/concept/airport_type/A/a> .
+    schema1:sameAs <https://mock-concept.ld.admin.ch/cube/mock-concept/concept/airport_type/A/a> ;
+    ns1:other_property_example "another property example for domesctic airport" .
 
-<https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/B/b> schema1:name "Internationaler Flughafen"@de,
+<https://mock-concept.ld.admin.ch/cube/mock-concept/1/concept/airport_type/B/b> schema1:description "International airport description"@en,
+        "Description de Aéroport international"@fr ;
+    schema1:name "Internationaler Flughafen"@de,
         "International airport"@en,
         "Aéroport international"@fr ;
     schema1:position 2 ;
-    schema1:sameAs <https://mock-concept.ld.admin.ch/cube/mock-concept/concept/airport_type/B/b> .
+    schema1:sameAs <https://mock-concept.ld.admin.ch/cube/mock-concept/concept/airport_type/B/b> ;
+    ns1:other_property_example "another property example for international airport" .
 
