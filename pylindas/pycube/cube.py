@@ -487,12 +487,21 @@ class Cube:
             # Execute the query
             results = self._graph.query(query)
 
+            print("\nChecking links to concept table")
+            print("--------------------------------") 
+            print("Checking that objects of the '" + dimension_name + "' dimension link to a concept with a '" + str(property) + "' property")
+      
             # Print the objects that have no match with that property
             allValuesFound = True
             if results: 
                 allValuesFound = False
+                print("Result: problem with the following concept(s):")
                 for row in results:
-                    print("Missing value for ", row["obj"])
+                    print("- ", row["obj"])
+            else:
+                print("Result: no problem found")
+                
+            print("--------------------------------") 
 
             return allValuesFound
         except Exception as e:
