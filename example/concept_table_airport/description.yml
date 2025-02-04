@@ -75,7 +75,7 @@ dimensions:
       fr: Type d'aéroport - second key for demo
       it: Tipo di aeroporto - second key for demo
       en: Type of Airport - second key for demo
-    dimension-type: Annotation
+    dimension-type: Key Dimension
     scale-type: nominal      
     path: airport_type_2nd
   measure:
