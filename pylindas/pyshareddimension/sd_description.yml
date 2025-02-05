@@ -1,0 +1,22 @@
+# The SD URL will be the Identifier concatenated to the fixed "https://ld.admin.ch/cube/dimension/"
+# Note: a SD's URL is not relative to the LINDAS environment, and it will be dereferenceable only when published on PROD
+Identifier: pylindas_sd_generation_example
+Name:
+  en: PyLindas Shared Dimension generation example
+  fr: PyLindas example de génération d'une Shared Dimension 
+  de: PyLindas Shared Dimension generation example (de)
+  it: PyLindas Shared Dimension generation example (it)
+# Description is optional
+Description:
+  fr: Un example de génération d'une Shared Dimension par PyLindas
+  en: An example of Shared Dimension generation by PyLindas
+# Valid-from is optional, it is a date/time value  
+Valid-from: 2025-02-05T00:00:00Z
+# Contributor is optional, it is now dded by the Cube Creator when creating a new SD
+Contributor:
+  name: Fabian Cretton
+  email: fabian.cretton@dummy.ch
+Terms:
+  identifier-field: code
+  name-field: name
+  multilingual: True
