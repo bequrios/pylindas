@@ -4,7 +4,7 @@ from rdflib import URIRef
 """
 Author: Fabian Cretton - HEVS
 
-See shared_dimensions.py for an explanation
+See README for an explanation
 """
 
 def main():
