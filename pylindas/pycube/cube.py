@@ -1,6 +1,6 @@
 import re
 from urllib.parse import quote
-from rdflib import BNode, Graph, Literal, RDF, URIRef, XSD
+from rdflib import BNode, Graph, Literal, RDF, URIRef, XSD, DCTERMS
 from rdflib.collection import Collection
 from datetime import datetime, timezone
 from typing import Self
@@ -77,7 +77,7 @@ class Cube:
         self._apply_mappings()
         return self
 
-    def write_cube(self) -> Self:
+    def write_cube(self, opendataswiss=False) -> Self:
         """
         Write the cube metadata to the graph.
 
@@ -94,12 +94,10 @@ class Cube:
         names = self._cube_dict.get("Name")
         for lan, name in names.items():
             self._graph.add((self._cube_uri, SCHEMA.name, Literal(name, lang=lan)))
-            self._graph.add((self._cube_uri, DCT.title, Literal(name, lang=lan)))
 
         descriptions = self._cube_dict.get("Description")
         for lan, desc in descriptions.items():
             self._graph.add((self._cube_uri, SCHEMA.description, Literal(desc, lang=lan)))
-            self._graph.add((self._cube_uri, DCT.description, Literal(desc, lang=lan)))
 
         publisher = self._cube_dict.get("Publisher")
         for pblshr in publisher:
@@ -131,6 +129,9 @@ class Cube:
         version = self._cube_dict.get("Version")
         self._graph.add((self._cube_uri, SCHEMA.version, Literal(version)))
 
+        identifier = self._cube_dict.get("Identifier")
+        self._graph.add((self._cube_uri, DCTERMS.identifier, Literal(identifier)))
+
         today = datetime.today().strftime("%Y-%m-%d")
         now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -146,15 +147,19 @@ class Cube:
         if self._cube_dict.get("Visualize"):
             self._graph.add((self._cube_uri, SCHEMA.workExample, URIRef("https://ld.admin.ch/application/visualize")))
 
-        if self._cube_dict.get("Work Status"):
-            status = self._cube_dict.get("Work Status")
+        work_status = self._cube_dict.get("Work Status")
+        if work_status == "Published":
             self._graph.add((self._cube_uri, SCHEMA.creativeWorkStatus,
-                             URIRef(f"https://ld.admin.ch/vocabulary/CreativeWorkStatus/{status}")))
+                             URIRef("https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published")))
+            if opendataswiss:
+                self._add_opendata_profile()
+        elif work_status == "Draft":
+            self._graph.add((self._cube_uri, SCHEMA.creativeWorkStatus,
+                             URIRef("https://ld.admin.ch/vocabulary/CreativeWorkStatus/Draft")))
 
         if self._cube_dict.get("Accrual Periodicity"):
             accrual_periodicity_uri = self._get_accrual_periodicity(self._cube_dict.get("Accrual Periodicity"))
             self._graph.add((self._cube_uri, DCT.accrualPeriodicity, accrual_periodicity_uri))
-
         return self
 
     def get_iri(self) -> URIRef:
@@ -593,7 +598,7 @@ class Cube:
         else:
             return Literal(str(value))
 
-    def validate(self):
+    def validate(self) -> tuple[bool, str]:
         valid, validation_text = self._validate_base()
 
         if self._cube_dict.get("Visualize"):
@@ -601,38 +606,60 @@ class Cube:
             validation_text += "\n" + visualization_text
             valid = valid and valid_visualize
 
+        if self._cube_dict.get("Opendataswiss"):
+            valid_opendataswiss, opendataswiss_text = self._validate_opendata_profile()
+            validation_text += "\n" + opendataswiss_text
+            valid = valid and valid_opendataswiss
+
         if valid:
-            return "Cube is valid."
+            return True, "Cube is valid."
         else:
-            return validation_text
+            return False, validation_text
 
     def _validate_base(self, serialize_results=False):
         # first step: standalone-cube-constraint
+        # Remark: standalone-cube-constraint contains standalone-constraint-constraint!
         shacl_graph = Graph()
         shacl_graph.parse("https://cube.link/latest/shape/standalone-cube-constraint", format="turtle")
         valid_cube, results_graph_cube, text_cube = validate(data_graph=self._graph, shacl_graph=shacl_graph)
-
-        # second step: standalone-constraint-constraint
-        shacl_graph = Graph()
-        shacl_graph.parse("https://cube.link/latest/shape/standalone-constraint-constraint", format="turtle")
-        valid_shape, results_graph_shape, text_shape = validate(data_graph=self._graph, shacl_graph=shacl_graph)
 
         # third step: self-consistency
         consistent, results_graph_consistency, text_consistency = validate(data_graph=self._graph)
 
         if serialize_results:
-            results_graph = results_graph_cube + results_graph_shape + results_graph_consistency
+            results_graph = results_graph_cube + results_graph_consistency
             results_graph.serialize("./validation_results.ttl", format="turtle")
 
-        if valid_cube and valid_shape and consistent:
+        if valid_cube and consistent:
             return True, "Cube basics are met."
         else:
-            result_text = f"{text_cube}\n{text_shape}\n{text_consistency}"
+            result_text = f"{text_cube}\n{text_consistency}"
             return False, result_text
 
     def _validate_visualize_profile(self, serialize_results=False):
         shacl_graph = Graph()
         shacl_graph.parse("https://cube.link/latest/shape/profile-visualize", format="turtle")
+
+        valid, results_graph, text = validate(data_graph=self._graph, shacl_graph=shacl_graph)
+
+        if serialize_results:
+            results_graph.serialize("./validation_results.ttl", format="turtle")
+        return valid, text
+
+    def _add_opendata_profile(self):
+        names = self._cube_dict.get("Name")
+        for lan, name in names.items():
+            self._graph.add((self._cube_uri, SCHEMA.name, Literal(name, lang=lan)))
+
+        descriptions = self._cube_dict.get("Description")
+        for lan, desc in descriptions.items():
+            self._graph.add((self._cube_uri, DCT.description, Literal(desc, lang=lan)))
+
+        self._graph.add((self._cube_uri, SCHEMA.workExample, URIRef("https://ld.admin.ch/application/opendataswiss")))
+
+    def _validate_opendata_profile(self, serialize_results=False):
+        shacl_graph = Graph()
+        shacl_graph.parse("https://cube.link/latest/shape/profile-opendataswiss-lindas", format="turtle")
 
         valid, results_graph, text = validate(data_graph=self._graph, shacl_graph=shacl_graph)
 

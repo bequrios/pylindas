@@ -14,7 +14,7 @@ class TestClass:
             dataframe=test_df, cube_yaml=cube_yaml,
             environment="TEST", local=True
         )
-        self.cube.prepare_data().write_cube().write_observations().write_shape()
+        self.cube.prepare_data().write_cube(opendataswiss=True).write_observations().write_shape()
         self.cube.serialize("tests/test_cube.ttl")
 
     def test_standard_error(self):
@@ -152,21 +152,17 @@ class TestClass:
         assert bool(result)
 
     def test_validate_basic_valid(self):
-        result_bool, result_massage = self.cube._validate_base(serialize_results=True)
+        result_bool, result_massage = self.cube._validate_base()
         assert bool(result_bool)
 
     def test_validate_visualize_valid(self):
-        result_bool, result_message = self.cube._validate_visualize_profile(serialize_results=True)
+        result_bool, result_message = self.cube._validate_visualize_profile()
         assert bool(result_bool)
 
     def test_validate_opendata_valid(self):
         result_bool, result_message = self.cube._validate_opendata_profile()
         assert bool(result_bool)
 
-    # todos: berücksichtige severity
-    # todos: berücksichtige timestamps - vorher removen, danach setzen
-
-    # Tests:
-    # basic: standalone-cube-constraint + standalone-constraint-constraint + integrity
-    # visualize: visualize-profile
-    # opendata: opendata-profile
+    def test_validate_whole(self):
+        result_bool, result_message = self.cube.validate()
+        assert result_message == "Cube is valid."

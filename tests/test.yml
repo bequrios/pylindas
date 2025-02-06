@@ -22,8 +22,10 @@ Base-URI: https://mock.ld.admin.ch/
 Identifier: mock-two-sided
 Version: 1
 Work Status:
-  Draft
+  Published
 Visualize:
+  True
+Opendataswiss:
   True
 # Optional but recommended
 Accrual Periodicity: yearly
