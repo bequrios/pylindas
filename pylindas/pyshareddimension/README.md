@@ -8,11 +8,11 @@ Similarily, a SD is also composed of the SD's resource itself (with its specific
 For this first implementation, 
 
 Here are the components of this solution:
-- [sd_description.yml](sd_description.yml: the information about the SD itself (Identifier, Name in different languages, etc) and about the Terms generation
+- [sd_description.yml](sd_description.yml): the information about the SD itself (Identifier, Name in different languages, etc) and about the Terms generation
 - [sd_terms.csv](sd_terms.csv): the data for the terms with an identifier and a name in different languages
 To be noted that I took the terms from the BAFU's Red List, a use-case that I did work on
 - [sd_example.py](sd_example.py): example code to run the transformation
-- shared_dimension.py: the implementation, which is a copy the cube.py that was adapted.
+- [shared_dimension.py](shared_dimension.py): the implementation, which is a copy and adaptation ofe cube.py, to reproduce code that matches the pyCube "approach".
   
 ## Hierarchies
 This is not handeld yet, but the data is ready for that and it will be implemented soon.
