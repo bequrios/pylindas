@@ -81,7 +81,7 @@ dimensions:
     dimension-type: Measure Dimension
     scale-type: interval
     path: value
-    unit: kilogramm
+    unit: KiloGM
 
   UpperUnsicherheit:
     name:
@@ -92,7 +92,7 @@ dimensions:
     relates-to: value
     scale-type: ratio
     path: upperUncertainty
-    unit: percent
+    unit: PERCENT
 
   LowerUnsicherheit:
     name:
@@ -103,7 +103,7 @@ dimensions:
     relates-to: value
     scale-type: ratio
     path: lowerUncertainty
-    unit: percent
+    unit: PERCENT
 
   Wert2:
     name:
@@ -116,7 +116,7 @@ dimensions:
     dimension-type: Measure Dimension
     scale-type: ratio
     path: value2
-    unit: kilogramm
+    unit: KiloGM
     annotation: 
       - type: limit
         value: 11
@@ -146,7 +146,7 @@ dimensions:
     relates-to: value2
     scale-type: ratio
     path: standardError
-    unit: percent
+    unit: PERCENT
 
   Status:
     name:

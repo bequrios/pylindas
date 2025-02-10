@@ -478,7 +478,7 @@ class Cube:
         
         # unit from https://www.qudt.org/doc/DOC_VOCAB-UNITS.html
 
-        if dim_dict.get("unit") != None:
+        if dim_dict.get("unit") is not None:
             self._graph.add((dim_node, QUDT.hasUnit, getattr(UNIT, dim_dict.get("unit"))))
 
         try:
