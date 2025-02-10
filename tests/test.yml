@@ -64,11 +64,18 @@ dimensions:
     dimension-type: Key Dimension
     scale-type: nominal
     path: station
+    hierarchy:
+      root: Schweiz
+      name: Schweiz
+      next-in-hierarchy:
+        path: https://schema.org/hasPart
+        name: Stationen
     mapping:
       type: replace
       replacements:
         Bern: https://mock.ld.admin.ch/station/01
         Zürich: https://mock.ld.admin.ch/station/02
+        Schweiz: https://mock.ld.admin.ch/station/switzerland
 
   Wert:
     name:
