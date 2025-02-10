@@ -16,9 +16,3 @@ To be noted that I took the terms from the BAFU's Red List, a use-case that I di
   
 ## Hierarchies
 This is not handeld yet, but the data is ready for that and it will be implemented soon.
-
-## Questioning about pyCube performances
-I take here the opportunity to ask if pyCube does scale ? how does pyCube handle a big .csv in input (as the Zefix dataset for instance), given that it creates first the full graph in memory, parse the data with pandas, and then serialize the output ?
-I do not have the answer, but for the first implementation of the Zefix dataset a few years ago, tarql was choosen as the RDFizer because it was easy to configure and performant.
-I remember that at that time, the library used by Barnard59 was taking much more time than tarql (here we talk about 30 minutes of transforation becoming hours), but now Barnard59 is very performant.
-My question being: shouldn't we reuse an existing RDFizer, pyCube handling the configuration of the RDFizer and launching the process ? Just a questioning.
