@@ -1,12 +1,465 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix meta: <https://cube.link/meta/> .
+@prefix ns1: <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/> .
 @prefix qudt: <http://qudt.org/schema/qudt/> .
 @prefix schema1: <http://schema.org/> .
 @prefix sd_md: <https://cube-creator.zazuko.com/shared-dimensions/vocab#> .
 @prefix shacl: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1> a schema1:DefinedTerm,
+ns1:1.1.1.1.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.1.1.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Säugetiere (ohne Fledermäuse)"@de,
+        "Mammals (without bats)"@en,
+        "Mammifères (sans Chauves-souris)"@fr,
+        "Mammiferi (senza Pipistrelli)"@it ;
+    skos:broader ns1:1.1.1.1 ;
+    ns1:parent_identifier_example "1.1.1.1" .
+
+ns1:1.1.1.1.2 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.1.1.2" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Fledermäuse"@de,
+        "Bats"@en,
+        "Chauves-souris"@fr,
+        "Pipistrelli"@it ;
+    skos:broader ns1:1.1.1.1 ;
+    ns1:parent_identifier_example "1.1.1.1" .
+
+ns1:1.1.1.2 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.1.2" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Brutvögel"@de,
+        "Breeding birds"@en,
+        "Oiseaux nicheurs"@fr,
+        "Uccelli nidificanti"@it ;
+    skos:broader ns1:1.1.1 ;
+    ns1:parent_identifier_example "1.1.1" .
+
+ns1:1.1.1.3 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.1.3" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Reptilien"@de,
+        "Reptiles"@en,
+        "Reptiles"@fr,
+        "Rettili"@it ;
+    skos:broader ns1:1.1.1 ;
+    ns1:parent_identifier_example "1.1.1" .
+
+ns1:1.1.1.4 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.1.4" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Amphibien"@de,
+        "Amphibians"@en,
+        "Amphibiens"@fr,
+        "Anfibi"@it ;
+    skos:broader ns1:1.1.1 ;
+    ns1:parent_identifier_example "1.1.1" .
+
+ns1:1.1.1.5 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.1.5" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Fische und Rundmäuler"@de,
+        "Fishes and cyclostomes"@en,
+        "Poissons et Cyclostomes"@fr,
+        "Pesci e Ciclostomi"@it ;
+    skos:broader ns1:1.1.1 ;
+    ns1:parent_identifier_example "1.1.1" .
+
+ns1:1.1.2.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.2.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Muscheln"@de,
+        "Bivalves"@en,
+        "Bivalves"@fr,
+        "Bivalvi"@it ;
+    skos:broader ns1:1.1.2 ;
+    ns1:parent_identifier_example "1.1.2" .
+
+ns1:1.1.2.2 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.2.2" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Schnecken"@de,
+        "Gasteropodi"@en,
+        "Gastéropodes"@fr,
+        "Gasteropodi"@it ;
+    skos:broader ns1:1.1.2 ;
+    ns1:parent_identifier_example "1.1.2" .
+
+ns1:1.1.3.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.3.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Zehnfusskrebse"@de,
+        "Crayfishes"@en,
+        "Écrevisses"@fr,
+        "Gamberi"@it ;
+    skos:broader ns1:1.1.3 ;
+    ns1:parent_identifier_example "1.1.3" .
+
+ns1:1.1.4.1.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.1.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Bienen"@de,
+        "Bees"@en,
+        "Abeilles"@fr,
+        "Api"@it ;
+    skos:broader ns1:1.1.4.1 ;
+    ns1:parent_identifier_example "1.1.4.1" .
+
+ns1:1.1.4.1.2 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.1.2" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Ameisen"@de,
+        "Ants"@en,
+        "Fourmis"@fr,
+        "Formiche"@it ;
+    skos:broader ns1:1.1.4.1 ;
+    ns1:parent_identifier_example "1.1.4.1" .
+
+ns1:1.1.4.10 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.10" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Libellen"@de,
+        "Dragonflies"@en,
+        "Libellules, Odonates"@fr,
+        "Libellule"@it ;
+    skos:broader ns1:1.1.4 ;
+    ns1:parent_identifier_example "1.1.4" .
+
+ns1:1.1.4.11 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.11" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Eintagsfliegen"@de,
+        "Mayflies"@en,
+        "Éphémères"@fr,
+        "Efemerotteri"@it ;
+    skos:broader ns1:1.1.4 ;
+    ns1:parent_identifier_example "1.1.4" .
+
+ns1:1.1.4.2.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.2.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Tagfalter und Widderchen"@de,
+        "Diurnal Butterflies and Zigene"@en,
+        "Papillons diurnes et Zygènes"@fr,
+        "Farfalle diurne  e Zigene"@it ;
+    skos:broader ns1:1.1.4.2 ;
+    ns1:parent_identifier_example "1.1.4.2" .
+
+ns1:1.1.4.3 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.3" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Köcherfliegen"@de,
+        "Caddisflies"@en,
+        "Trichoptères"@fr,
+        "Tricotteri"@it ;
+    skos:broader ns1:1.1.4 ;
+    ns1:parent_identifier_example "1.1.4" .
+
+ns1:1.1.4.4 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.4" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Schnaken"@de,
+        "Diptera Tipulids"@en,
+        "Tipules"@fr,
+        "Ditteri Tipulidi"@it ;
+    skos:broader ns1:1.1.4 ;
+    ns1:parent_identifier_example "1.1.4" .
+
+ns1:1.1.4.5.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.5.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Pracht-, Bock-, Rosenkäfer und Schröter"@de,
+        "Coleopterae Buprestides, Cerambicides, Cetonides, Lucanides"@en,
+        "Coléoptères Buprestidés, Cérambycidés, Cétoniidés et Lucanidés"@fr,
+        "Coleotteri Buprestidi, Cerambicidi, Cetonidi e Lucanidi"@it ;
+    skos:broader ns1:1.1.4.5 ;
+    ns1:parent_identifier_example "1.1.4.5" .
+
+ns1:1.1.4.5.2 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.5.2" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Laufkäfer und Sandlaufkäfer"@de,
+        "Carabidae and Cicindelinae"@en,
+        "Carabidés et Cicindèles"@fr,
+        "Carabidi e Cicindelidi"@it ;
+    skos:broader ns1:1.1.4.5 ;
+    ns1:parent_identifier_example "1.1.4.5" .
+
+ns1:1.1.4.5.3 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.5.3" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Wasserkäfer"@de,
+        "Aquatic beetles Adefagians"@en,
+        "Coléoptères hydradéphages"@fr,
+        "Coleotteri Adefagi acquatici"@it ;
+    skos:broader ns1:1.1.4.5 ;
+    ns1:parent_identifier_example "1.1.4.5" .
+
+ns1:1.1.4.6 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.6" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Netzflügler"@de,
+        "Neuropterans"@en,
+        "Névroptères"@fr,
+        "Neurotteri"@it ;
+    skos:broader ns1:1.1.4 ;
+    ns1:parent_identifier_example "1.1.4" .
+
+ns1:1.1.4.7 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.7" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Singzikaden"@de,
+        "Cicadas"@en,
+        "Cigales"@fr,
+        "Cicale"@it ;
+    skos:broader ns1:1.1.4 ;
+    ns1:parent_identifier_example "1.1.4" .
+
+ns1:1.1.4.8 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.8" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Heuschrecken"@de,
+        "Ortopterans"@en,
+        "Orthoptères"@fr,
+        "Ortotteri"@it ;
+    skos:broader ns1:1.1.4 ;
+    ns1:parent_identifier_example "1.1.4" .
+
+ns1:1.1.4.9 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.9" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Steinfliegen"@de,
+        "Stoneflies"@en,
+        "Plécoptères"@fr,
+        "Plecotteri"@it ;
+    skos:broader ns1:1.1.4 ;
+    ns1:parent_identifier_example "1.1.4" .
+
+ns1:1.2.1.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.2.1.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Blütenpflanzen"@de,
+        "Flowering plants"@en,
+        "Plantes â  fleurs"@fr,
+        "Piante da fiori"@it ;
+    skos:broader ns1:1.2.1 ;
+    ns1:parent_identifier_example "1.2.1" .
+
+ns1:1.2.1.2 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.2.1.2" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Farnartige Pflanzen"@de,
+        "Ferns"@en,
+        "Fougères"@fr,
+        "Felci"@it ;
+    skos:broader ns1:1.2.1 ;
+    ns1:parent_identifier_example "1.2.1" .
+
+ns1:1.2.2.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.2.2.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Lebermoose"@de,
+        "Hepaticae"@en,
+        "Hépatiques"@fr,
+        "Epatiche"@it ;
+    skos:broader ns1:1.2.2 ;
+    ns1:parent_identifier_example "1.2.2" .
+
+ns1:1.2.2.2 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.2.2.2" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Laubmoose"@de,
+        "Musci"@en,
+        "Mousses"@fr,
+        "Muschi"@it ;
+    skos:broader ns1:1.2.2 ;
+    ns1:parent_identifier_example "1.2.2" .
+
+ns1:1.2.2.3 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.2.2.3" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Hormoose"@de,
+        "Anthocerotae"@en,
+        "Anthocérotes"@fr,
+        "Antocerote"@it ;
+    skos:broader ns1:1.2.2 ;
+    ns1:parent_identifier_example "1.2.2" .
+
+ns1:1.2.3.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.2.3.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Armleuchteralgen"@de,
+        "Stoneworts"@en,
+        "Characées"@fr,
+        "Caracee"@it ;
+    skos:broader ns1:1.2.3 ;
+    ns1:parent_identifier_example "1.2.3" .
+
+ns1:1.3.1.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.3.1.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Baumflechten"@de,
+        "Epiphytic lichens"@en,
+        "Lichens épiphytes"@fr,
+        "Licheni epifiti"@it ;
+    skos:broader ns1:1.3.1 ;
+    ns1:parent_identifier_example "1.3.1" .
+
+ns1:1.3.1.2 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.3.1.2" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Bodenflechten"@de,
+        "Soil lichens"@en,
+        "Lichens terricoles"@fr,
+        "Licheni terricoli"@it ;
+    skos:broader ns1:1.3.1 ;
+    ns1:parent_identifier_example "1.3.1" .
+
+ns1:1.3.2 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.3.2" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Grosspilze"@de,
+        "Macromycetes"@en,
+        "Champignons supérieurs"@fr,
+        "Macromiceti"@it ;
+    skos:broader ns1:1.3 ;
+    ns1:parent_identifier_example "1.3" .
+
+ns1:1.1.3 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.3" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Krebstiere"@de,
+        "Crustaceans"@en,
+        "Crustacés"@fr,
+        "Crostacei"@it ;
+    skos:broader ns1:1.1 ;
+    ns1:parent_identifier_example "1.1" .
+
+ns1:1.1.4.2 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.2" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Schmetterlinge"@de,
+        "Butterflies"@en,
+        "Papillons"@fr,
+        "Farfalle"@it ;
+    skos:broader ns1:1.1.4 ;
+    ns1:parent_identifier_example "1.1.4" .
+
+ns1:1.2.3 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.2.3" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Makroalgen"@de,
+        "Macroalgae"@en,
+        "Macroalgues"@fr,
+        "Macroalga"@it ;
+    skos:broader ns1:1.2 ;
+    ns1:parent_identifier_example "1.2" .
+
+ns1:1.1.1.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.1.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Säugetiere "@de,
+        "Mammals"@en,
+        "Mammifères"@fr,
+        "Mammiferi"@it ;
+    skos:broader ns1:1.1.1 ;
+    ns1:parent_identifier_example "1.1.1" .
+
+ns1:1.1.2 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.2" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Weichtiere"@de,
+        "Molluscs"@en,
+        "Mollusques"@fr,
+        "Molluschi"@it ;
+    skos:broader ns1:1.1 ;
+    ns1:parent_identifier_example "1.1" .
+
+ns1:1.1.4.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.1.4.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Hautflügler"@de,
+        "Hymenopterae"@en,
+        "Hyménoptères"@fr,
+        "Imenotteri"@it ;
+    skos:broader ns1:1.1.4 ;
+    ns1:parent_identifier_example "1.1.4" .
+
+ns1:1.2.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.2.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Gefässpflanzen"@de,
+        "Vascular plants"@en,
+        "Plantes vasculaires"@fr,
+        "Piante vascolari"@it ;
+    skos:broader ns1:1.2 ;
+    ns1:parent_identifier_example "1.2" .
+
+ns1:1.3 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.3" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Flechten und Pilze"@de,
+        "Lichens and mycetes"@en,
+        "Lichens et champignons"@fr,
+        "Licheni e funghi"@it ;
+    skos:broader ns1:1 ;
+    ns1:parent_identifier_example "1" .
+
+ns1:1.3.1 a schema1:DefinedTerm,
+        sd_md:SharedDimensionTerm ;
+    dct:identifier "1.3.1" ;
+    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:name "Flechten"@de,
+        "Lichens and fungi"@en,
+        "Lichens"@fr,
+        "Licheni"@it ;
+    skos:broader ns1:1.3 ;
+    ns1:parent_identifier_example "1.3" .
+
+ns1:1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     dct:identifier "1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
@@ -15,428 +468,71 @@
         "Tous les groupes d'espèces"@fr,
         "Tutti i gruppi di specie"@it .
 
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Tiere"@de,
-        "Animals"@en,
-        "Animaux"@fr,
-        "Animali"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Wirbeltiere"@de,
-        "Vertebrates"@en,
-        "Vertébrés"@fr,
-        "Vertebrati"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.1.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Säugetiere "@de,
-        "Mammals"@en,
-        "Mammifères"@fr,
-        "Mammiferi"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.1.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.1.1.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Säugetiere (ohne Fledermäuse)"@de,
-        "Mammals (without bats)"@en,
-        "Mammifères (sans Chauves-souris)"@fr,
-        "Mammiferi (senza Pipistrelli)"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.1.2> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.1.1.2" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Fledermäuse"@de,
-        "Bats"@en,
-        "Chauves-souris"@fr,
-        "Pipistrelli"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.2> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.1.2" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Brutvögel"@de,
-        "Breeding birds"@en,
-        "Oiseaux nicheurs"@fr,
-        "Uccelli nidificanti"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.3> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.1.3" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Reptilien"@de,
-        "Reptiles"@en,
-        "Reptiles"@fr,
-        "Rettili"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.4> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.1.4" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Amphibien"@de,
-        "Amphibians"@en,
-        "Amphibiens"@fr,
-        "Anfibi"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.5> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.1.5" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Fische und Rundmäuler"@de,
-        "Fishes and cyclostomes"@en,
-        "Poissons et Cyclostomes"@fr,
-        "Pesci e Ciclostomi"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.2> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.2" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Weichtiere"@de,
-        "Molluscs"@en,
-        "Mollusques"@fr,
-        "Molluschi"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.2.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.2.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Muscheln"@de,
-        "Bivalves"@en,
-        "Bivalves"@fr,
-        "Bivalvi"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.2.2> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.2.2" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Schnecken"@de,
-        "Gasteropodi"@en,
-        "Gastéropodes"@fr,
-        "Gasteropodi"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.3> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.3" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Krebstiere"@de,
-        "Crustaceans"@en,
-        "Crustacés"@fr,
-        "Crostacei"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.3.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.3.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Zehnfusskrebse"@de,
-        "Crayfishes"@en,
-        "Écrevisses"@fr,
-        "Gamberi"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Insekten"@de,
-        "Insects"@en,
-        "Insectes"@fr,
-        "Insetti"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Hautflügler"@de,
-        "Hymenopterae"@en,
-        "Hyménoptères"@fr,
-        "Imenotteri"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.1.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.1.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Bienen"@de,
-        "Bees"@en,
-        "Abeilles"@fr,
-        "Api"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.1.2> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.1.2" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Ameisen"@de,
-        "Ants"@en,
-        "Fourmis"@fr,
-        "Formiche"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.10> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.10" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Libellen"@de,
-        "Dragonflies"@en,
-        "Libellules, Odonates"@fr,
-        "Libellule"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.11> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.11" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Eintagsfliegen"@de,
-        "Mayflies"@en,
-        "Éphémères"@fr,
-        "Efemerotteri"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.2> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.2" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Schmetterlinge"@de,
-        "Butterflies"@en,
-        "Papillons"@fr,
-        "Farfalle"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.2.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.2.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Tagfalter und Widderchen"@de,
-        "Diurnal Butterflies and Zigene"@en,
-        "Papillons diurnes et Zygènes"@fr,
-        "Farfalle diurne  e Zigene"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.3> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.3" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Köcherfliegen"@de,
-        "Caddisflies"@en,
-        "Trichoptères"@fr,
-        "Tricotteri"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.4> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.4" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Schnaken"@de,
-        "Diptera Tipulids"@en,
-        "Tipules"@fr,
-        "Ditteri Tipulidi"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.5> a schema1:DefinedTerm,
+ns1:1.1.4.5 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     dct:identifier "1.1.4.5" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
     schema1:name "Käfer"@de,
         "Coleopterae"@en,
         "Coléoptères"@fr,
-        "Coleotteri"@it .
+        "Coleotteri"@it ;
+    skos:broader ns1:1.1.4 ;
+    ns1:parent_identifier_example "1.1.4" .
 
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.5.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.5.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Pracht-, Bock-, Rosenkäfer und Schröter"@de,
-        "Coleopterae Buprestides, Cerambicides, Cetonides, Lucanides"@en,
-        "Coléoptères Buprestidés, Cérambycidés, Cétoniidés et Lucanidés"@fr,
-        "Coleotteri Buprestidi, Cerambicidi, Cetonidi e Lucanidi"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.5.2> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.5.2" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Laufkäfer und Sandlaufkäfer"@de,
-        "Carabidae and Cicindelinae"@en,
-        "Carabidés et Cicindèles"@fr,
-        "Carabidi e Cicindelidi"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.5.3> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.5.3" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Wasserkäfer"@de,
-        "Aquatic beetles Adefagians"@en,
-        "Coléoptères hydradéphages"@fr,
-        "Coleotteri Adefagi acquatici"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.6> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.6" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Netzflügler"@de,
-        "Neuropterans"@en,
-        "Névroptères"@fr,
-        "Neurotteri"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.7> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.7" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Singzikaden"@de,
-        "Cicadas"@en,
-        "Cigales"@fr,
-        "Cicale"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.8> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.8" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Heuschrecken"@de,
-        "Ortopterans"@en,
-        "Orthoptères"@fr,
-        "Ortotteri"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.9> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.1.4.9" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Steinfliegen"@de,
-        "Stoneflies"@en,
-        "Plécoptères"@fr,
-        "Plecotteri"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2> a schema1:DefinedTerm,
+ns1:1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     dct:identifier "1.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
     schema1:name "Pflanzen"@de,
         "Plants"@en,
         "Plantes"@fr,
-        "Piante"@it .
+        "Piante"@it ;
+    skos:broader ns1:1 ;
+    ns1:parent_identifier_example "1" .
 
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.2.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Gefässpflanzen"@de,
-        "Vascular plants"@en,
-        "Plantes vasculaires"@fr,
-        "Piante vascolari"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.1.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.2.1.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Blütenpflanzen"@de,
-        "Flowering plants"@en,
-        "Plantes â  fleurs"@fr,
-        "Piante da fiori"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.1.2> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.2.1.2" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Farnartige Pflanzen"@de,
-        "Ferns"@en,
-        "Fougères"@fr,
-        "Felci"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.2> a schema1:DefinedTerm,
+ns1:1.2.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     dct:identifier "1.2.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
     schema1:name "Moose"@de,
         "Bryophytes"@en,
         "Bryophytes"@fr,
-        "Briofite"@it .
+        "Briofite"@it ;
+    skos:broader ns1:1.2 ;
+    ns1:parent_identifier_example "1.2" .
 
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.2.1> a schema1:DefinedTerm,
+ns1:1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
-    dct:identifier "1.2.2.1" ;
+    dct:identifier "1.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Lebermoose"@de,
-        "Hepaticae"@en,
-        "Hépatiques"@fr,
-        "Epatiche"@it .
+    schema1:name "Tiere"@de,
+        "Animals"@en,
+        "Animaux"@fr,
+        "Animali"@it ;
+    skos:broader ns1:1 ;
+    ns1:parent_identifier_example "1" .
 
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.2.2> a schema1:DefinedTerm,
+ns1:1.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
-    dct:identifier "1.2.2.2" ;
+    dct:identifier "1.1.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Laubmoose"@de,
-        "Musci"@en,
-        "Mousses"@fr,
-        "Muschi"@it .
+    schema1:name "Wirbeltiere"@de,
+        "Vertebrates"@en,
+        "Vertébrés"@fr,
+        "Vertebrati"@it ;
+    skos:broader ns1:1.1 ;
+    ns1:parent_identifier_example "1.1" .
 
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.2.3> a schema1:DefinedTerm,
+ns1:1.1.4 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
-    dct:identifier "1.2.2.3" ;
+    dct:identifier "1.1.4" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Hormoose"@de,
-        "Anthocerotae"@en,
-        "Anthocérotes"@fr,
-        "Antocerote"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.3> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.2.3" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Makroalgen"@de,
-        "Macroalgae"@en,
-        "Macroalgues"@fr,
-        "Macroalga"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.3.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.2.3.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Armleuchteralgen"@de,
-        "Stoneworts"@en,
-        "Characées"@fr,
-        "Caracee"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.3> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.3" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Flechten und Pilze"@de,
-        "Lichens and mycetes"@en,
-        "Lichens et champignons"@fr,
-        "Licheni e funghi"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.3.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.3.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Flechten"@de,
-        "Lichens and fungi"@en,
-        "Lichens"@fr,
-        "Licheni"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.3.1.1> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.3.1.1" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Baumflechten"@de,
-        "Epiphytic lichens"@en,
-        "Lichens épiphytes"@fr,
-        "Licheni epifiti"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.3.1.2> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.3.1.2" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Bodenflechten"@de,
-        "Soil lichens"@en,
-        "Lichens terricoles"@fr,
-        "Licheni terricoli"@it .
-
-<https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.3.2> a schema1:DefinedTerm,
-        sd_md:SharedDimensionTerm ;
-    dct:identifier "1.3.2" ;
-    schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
-    schema1:name "Grosspilze"@de,
-        "Macromycetes"@en,
-        "Champignons supérieurs"@fr,
-        "Macromiceti"@it .
+    schema1:name "Insekten"@de,
+        "Insects"@en,
+        "Insectes"@fr,
+        "Insetti"@it ;
+    skos:broader ns1:1.1 ;
+    ns1:parent_identifier_example "1.1" .
 
 <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> a schema1:DefinedTermSet,
         meta:SharedDimension ;
@@ -449,54 +545,54 @@
         "PyLindas Shared Dimension generation example (it)"@it ;
     schema1:description "An example of Shared Dimension generation by PyLindas"@en,
         "Un example de génération d'une Shared Dimension par PyLindas"@fr ;
-    schema1:hasDefinedTerm <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.1.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.1.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.3>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.4>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.1.5>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.2.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.2.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.3>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.3.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.1.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.1.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.10>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.11>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.2.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.3>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.4>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.5>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.5.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.5.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.5.3>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.6>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.7>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.8>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.1.4.9>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.1.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.1.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.2.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.2.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.2.3>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.3>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.2.3.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.3>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.3.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.3.1.1>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.3.1.2>,
-        <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example/1.3.2> ;
+    schema1:hasDefinedTerm ns1:1,
+        ns1:1.1,
+        ns1:1.1.1,
+        ns1:1.1.1.1,
+        ns1:1.1.1.1.1,
+        ns1:1.1.1.1.2,
+        ns1:1.1.1.2,
+        ns1:1.1.1.3,
+        ns1:1.1.1.4,
+        ns1:1.1.1.5,
+        ns1:1.1.2,
+        ns1:1.1.2.1,
+        ns1:1.1.2.2,
+        ns1:1.1.3,
+        ns1:1.1.3.1,
+        ns1:1.1.4,
+        ns1:1.1.4.1,
+        ns1:1.1.4.1.1,
+        ns1:1.1.4.1.2,
+        ns1:1.1.4.10,
+        ns1:1.1.4.11,
+        ns1:1.1.4.2,
+        ns1:1.1.4.2.1,
+        ns1:1.1.4.3,
+        ns1:1.1.4.4,
+        ns1:1.1.4.5,
+        ns1:1.1.4.5.1,
+        ns1:1.1.4.5.2,
+        ns1:1.1.4.5.3,
+        ns1:1.1.4.6,
+        ns1:1.1.4.7,
+        ns1:1.1.4.8,
+        ns1:1.1.4.9,
+        ns1:1.2,
+        ns1:1.2.1,
+        ns1:1.2.1.1,
+        ns1:1.2.1.2,
+        ns1:1.2.2,
+        ns1:1.2.2.1,
+        ns1:1.2.2.2,
+        ns1:1.2.2.3,
+        ns1:1.2.3,
+        ns1:1.2.3.1,
+        ns1:1.3,
+        ns1:1.3.1,
+        ns1:1.3.1.1,
+        ns1:1.3.1.2,
+        ns1:1.3.2 ;
     schema1:name "PyLindas Shared Dimension generation example (de)"@de,
         "PyLindas Shared Dimension generation example"@en,
         "PyLindas example de génération d'une Shared Dimension"@fr,

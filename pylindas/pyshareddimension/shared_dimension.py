@@ -61,14 +61,20 @@ class SharedDimension:
 
     def prepare_data(self) -> Self:
         """
-        Prepare the cube data by constructing observation URIs and applying mappings.
+        Prepare the cube data by constructing terms URIs and applying mappings.
+        Also handling the parent term if defined in the configuration.
 
-        This method constructs observation URIs for each row in the dataframe and applies mappings to the dataframe.
+        This method constructs terms/parents URIs for each row in the dataframe and applies mappings to the dataframe.
 
         Returns:
             self
         """
         self._construct_terms_uri()
+
+        terms = self._sd_dict.get("Terms")
+        if "parent-field" in terms:
+            self._construct_parent_uri(terms.get("parent-field"))
+
         return self
 
     def write_sd(self) -> Self:
@@ -154,7 +160,7 @@ class SharedDimension:
         """
         termIdentifierField = self._sd_dict.get("Terms").get("identifier-field")
 
-        # Note: Shared Dimension usually do not have a training "/" in there URL
+        # Note: Shared Dimension usually do not have a trailing "/" in there URL
         #   -> add it 
         def make_iri(row):
             return self._sd_uri + "/" + quote(row[termIdentifierField])
@@ -163,6 +169,24 @@ class SharedDimension:
         )
         self._dataframe['terms-uri'] = self._dataframe['terms-uri'].map(URIRef)
         self._dataframe = self._dataframe.set_index("terms-uri")
+
+    def _construct_parent_uri(self, parentField) -> None:
+        """Construct parent URIs for each row in the dataframe.
+        
+        Note: the parentField is the field, in the data, that contains the parent ID from which to build a term's URI
+        IMPORTANT: this parentField could be empty, which is the case for the root node
+
+        Returns:
+            None
+        """
+        # Note: Shared Dimension usually do not have a trailing "/" in there URL
+        #   -> add it 
+        def make_iri(row):
+            if not pd.isna(row[parentField]):
+                return URIRef(self._sd_uri + "/" + quote(row[parentField]))
+        self._dataframe['parent-uri'] = self._dataframe.apply(
+            make_iri, axis=1
+        )
 
     def _write_contributor(self, contributor_dict: dict) -> BNode:
         """Writes a contributor to the graph.
@@ -210,18 +234,46 @@ class SharedDimension:
         Returns:
             Self
         """
-        termIdentifierField = self._sd_dict.get("Terms").get("identifier-field")
-        termNameField= self._sd_dict.get("Terms").get("name-field")
-        multilingual= self._sd_dict.get("Terms").get("multilingual")
+        terms = self._sd_dict.get("Terms")
+        termIdentifierField = terms.get("identifier-field")
+        termNameField= terms.get("name-field")
+        multilingual= terms.get("multilingual")
 
-        self._dataframe.apply(self._add_term, axis=1,  args=(termIdentifierField, termNameField, multilingual))
+        # TODO: optional-field handling: which is currently based on the handling  proposed for the "concepts" (in the respective branch)
+        #   After the final decisions are taken about the "concepts" handling, apply it here
+        # Prepare the optional fields of the term:
+        # - the key of the entry (under the other-fields entry) being the name of the field in the data
+        # - handle the URI field if it starts with a "/": adding the sd URI + the defined relative path
+        if "other-fields" in terms:
+            otherFields = terms.get("other-fields")
+
+            # Note: Shared Dimension usually do not have a trailing "/" in there URL
+            #   and the URI field will start with a "/" if it is a relative path
+            sdUri =  str(self._sd_uri)
+            
+            otherFields_dict = {
+                key: {
+                    **value, 
+                    "URI": sdUri + value["URI"] if value["URI"].startswith("/") else value["URI"]
+                }
+                for key, value in otherFields.items()
+            }            
+        else:
+            otherFields_dict = {}
+
+
+        self._dataframe.apply(self._add_term, axis=1,  args=(termIdentifierField, termNameField, multilingual, otherFields_dict))
         return self
 
-    def _add_term(self, termsData: pd.DataFrame, termIdentifierField: str, termNameField: str, multilingual: bool) -> None:
+    def _add_term(self, termsData: pd.DataFrame, termIdentifierField: str, termNameField: str, multilingual: bool, otherFields_dict) -> None:
         """Add an observation to the cube.
         
             Args:
-                obs (pd.DataFrame): The observation data to be added.
+                termsData (pd.DataFrame): The terms data to be added
+                termIdentifierField: the name of the field for the term's identifier
+                termNameField: the name of the field for the term's name
+                multilingual: is it a multilingual value
+
         
             Returns:
                 None
@@ -244,6 +296,27 @@ class SharedDimension:
                     self._graph.add((termsData.name, URIRef(SCHEMA.name), Literal(termsData.get(name_key), lang=lang)))            
         else:
             self._graph.add((termsData.name, URIRef(SCHEMA.name), Literal(termsData.get(termNameField))))
+
+        # Handling parent field
+        # If terms have a parent field, a 'parent-uri' was prepared in the dataset (see prepareData())
+        if 'parent-uri' in termsData:
+            parentURL = termsData.get('parent-uri')
+            if parentURL:
+                self._graph.add((termsData.name, SKOS.broader, parentURL))
+
+        # Handling other fields/properties
+        for key, value in otherFields_dict.items():
+            if "multilingual" in value and value['multilingual']:
+                for lang in self._languages:
+                    key_lng = f"{key}_{lang}"
+                    if key_lng in termsData:
+                        self._graph.add((termsData.name, URIRef(value['URI']), Literal(termsData.get(key_lng), lang=lang)))
+            else:
+                if key in termsData:
+                    rawValue = termsData.get(key)
+                    if not pd.isna(rawValue):
+                        sanitized_value = self._sanitize_value(rawValue)
+                        self._graph.add((termsData.name, URIRef(value['URI']), sanitized_value))
 
         # for column in terms.keys():
         #     path = URIRef(self._base_uri + self._get_shape_column(column).get("path"))
