@@ -387,7 +387,12 @@ class Cube:
         """
         self._graph.add((self._shape_URI, RDF.type, CUBE.Constraint))
         self._graph.add((self._shape_URI, RDF.type, SH.NodeShape))
+
         self._graph.add((self._shape_URI, SH.closed, Literal("true", datatype=XSD.boolean)))
+
+        observation_class_node = self._write_observation_class_shape()
+        self._graph.add((self._shape_URI, SH.property, observation_class_node))
+
         for dim, dim_dict in self._shape_dict.items():
             shape = self._write_dimension_shape(dim_dict, self._dataframe[dim])
             self._graph.add((self._shape_URI, SH.property, shape))
@@ -515,6 +520,16 @@ class Cube:
                 self._graph.add((dim_node, META.inHierarchy, hierarchy_node))
 
         return dim_node
+
+    def _write_observation_class_shape(self):
+        observation_class_shape = BNode()
+        self._graph.add((observation_class_shape, SH.path, RDF.type))
+        self._graph.add((observation_class_shape, SH.nodeKind, SH.IRI))
+
+        list_node = BNode()
+        Collection(self._graph, list_node, [CUBE.Observation])
+        self._graph.add((observation_class_shape, URIRef(SH + "in"), list_node))
+        return observation_class_shape
 
     def _write_hierarchy(self, hierarchy_dict:dict, dim_dict = None) -> BNode:
         hierarchy_node = BNode()
