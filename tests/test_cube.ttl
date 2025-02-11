@@ -29,8 +29,8 @@
     schema:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ;
     schema:creator <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
     schema:dateCreated "2024-11-12"^^<http://www.w3.org/2001/XMLSchema#date> ;
-    schema:dateModified "2025-02-10T19:12:54+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
-    schema:datePublished "2025-02-10"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    schema:dateModified "2025-02-11T11:44:25+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    schema:datePublished "2025-02-11"^^<http://www.w3.org/2001/XMLSchema#date> ;
     schema:description "Ein Beispiel Cube, der simulierte Daten enthält mit zweiseitiger Unsicherheit"@de,
         "An example Cube containing some simulated data with two-sided uncertainty"@en ;
     schema:name "Mock Cube - two sided error"@de,
@@ -60,106 +60,179 @@
 
 <https://mock.ld.admin.ch/cube/mock-two-sided/1/observation/2000_Bern> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:lowerUncertainty 1e+00 ;
-    mock:standardError "5" ;
-    mock:station "https://mock.ld.admin.ch/station/01" ;
+    mock:lowerUncertainty "1.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:standardError "5.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:station <https://mock.ld.admin.ch/station/01> ;
     mock:status "final" ;
-    mock:upperUncertainty 1e+01 ;
-    mock:value 2.3e+01 ;
-    mock:value2 1.15e+01 ;
-    mock:year "https://ld.admin.ch/time/year/2000" .
+    mock:upperUncertainty "10.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value "23.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value2 "11.5"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:year <https://ld.admin.ch/time/year/2000> .
 
 <https://mock.ld.admin.ch/cube/mock-two-sided/1/observation/2000_Schweiz> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:lowerUncertainty 1e+00 ;
-    mock:standardError "final" ;
-    mock:station "https://mock.ld.admin.ch/station/switzerland" ;
-    mock:status ""^^cube:Undefined ;
-    mock:upperUncertainty 1.1e+01 ;
-    mock:value 2.31e+01 ;
-    mock:value2 4e+00 ;
-    mock:year "https://ld.admin.ch/time/year/2000" .
+    mock:lowerUncertainty "1.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:standardError "12.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:station <https://mock.ld.admin.ch/station/switzerland> ;
+    mock:status "final" ;
+    mock:upperUncertainty "11.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value "23.1"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value2 "4.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:year <https://ld.admin.ch/time/year/2000> .
 
 <https://mock.ld.admin.ch/cube/mock-two-sided/1/observation/2000_Z%C3%BCrich> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:lowerUncertainty 1e+00 ;
-    mock:standardError "5" ;
-    mock:station "https://mock.ld.admin.ch/station/02" ;
+    mock:lowerUncertainty "1.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:standardError "5.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:station <https://mock.ld.admin.ch/station/02> ;
     mock:status "final" ;
-    mock:upperUncertainty 1e+01 ;
-    mock:value 2.355574e+01 ;
-    mock:value2 1.16e+01 ;
-    mock:year "https://ld.admin.ch/time/year/2000" .
+    mock:upperUncertainty "10.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value "23.555744036232408"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value2 "11.6"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:year <https://ld.admin.ch/time/year/2000> .
 
 <https://mock.ld.admin.ch/cube/mock-two-sided/1/observation/2001_Bern> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:lowerUncertainty 1e+00 ;
-    mock:standardError "5" ;
-    mock:station "https://mock.ld.admin.ch/station/01" ;
+    mock:lowerUncertainty "1.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:standardError "5.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:station <https://mock.ld.admin.ch/station/01> ;
     mock:status "final" ;
-    mock:upperUncertainty 1e+01 ;
-    mock:value 2.153609e+01 ;
-    mock:value2 1.075e+01 ;
-    mock:year "https://ld.admin.ch/time/year/2001" .
+    mock:upperUncertainty "10.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value "21.536090723505524"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value2 "10.75"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:year <https://ld.admin.ch/time/year/2001> .
 
 <https://mock.ld.admin.ch/cube/mock-two-sided/1/observation/2001_Schweiz> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:lowerUncertainty 1e+00 ;
-    mock:standardError "final" ;
-    mock:station "https://mock.ld.admin.ch/station/switzerland" ;
-    mock:status ""^^cube:Undefined ;
-    mock:upperUncertainty 1e+01 ;
-    mock:value 2.11e+01 ;
-    mock:value2 1.03e+01 ;
-    mock:year "https://ld.admin.ch/time/year/2001" .
+    mock:lowerUncertainty "1.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:standardError "11.3"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:station <https://mock.ld.admin.ch/station/switzerland> ;
+    mock:status "final" ;
+    mock:upperUncertainty "10.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value "21.1"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value2 "10.3"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:year <https://ld.admin.ch/time/year/2001> .
 
 <https://mock.ld.admin.ch/cube/mock-two-sided/1/observation/2001_Z%C3%BCrich> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:lowerUncertainty 1e+00 ;
-    mock:standardError "5" ;
-    mock:station "https://mock.ld.admin.ch/station/02" ;
+    mock:lowerUncertainty "1.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:standardError "5.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:station <https://mock.ld.admin.ch/station/02> ;
     mock:status "final" ;
-    mock:upperUncertainty 1e+01 ;
-    mock:value 2.165992e+01 ;
-    mock:value2 1.03e+01 ;
-    mock:year "https://ld.admin.ch/time/year/2001" .
+    mock:upperUncertainty "10.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value "21.659924330021255"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value2 "10.3"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:year <https://ld.admin.ch/time/year/2001> .
 
 <https://mock.ld.admin.ch/cube/mock-two-sided/1/observation/2002_Bern> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:lowerUncertainty 2e+00 ;
-    mock:standardError "5" ;
-    mock:station "https://mock.ld.admin.ch/station/01" ;
+    mock:lowerUncertainty "2.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:standardError "5.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:station <https://mock.ld.admin.ch/station/01> ;
     mock:status "provisionally" ;
-    mock:upperUncertainty 1e+01 ;
-    mock:value 2.257514e+01 ;
-    mock:value2 1.125e+01 ;
-    mock:year "https://ld.admin.ch/time/year/2002" .
+    mock:upperUncertainty "10.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value "22.575144684250287"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value2 "11.25"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:year <https://ld.admin.ch/time/year/2002> .
 
 <https://mock.ld.admin.ch/cube/mock-two-sided/1/observation/2002_Schweiz> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:lowerUncertainty 2.1e+00 ;
-    mock:standardError "provisionally" ;
-    mock:station "https://mock.ld.admin.ch/station/switzerland" ;
-    mock:status ""^^cube:Undefined ;
-    mock:upperUncertainty 4.3e+00 ;
-    mock:value 2.14e+01 ;
-    mock:value2 4e+00 ;
-    mock:year "https://ld.admin.ch/time/year/2002" .
+    mock:lowerUncertainty "2.1"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:standardError "8.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:station <https://mock.ld.admin.ch/station/switzerland> ;
+    mock:status "provisionally" ;
+    mock:upperUncertainty "4.3"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value "21.4"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value2 "41.2"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:year <https://ld.admin.ch/time/year/2002> .
 
 <https://mock.ld.admin.ch/cube/mock-two-sided/1/observation/2002_Z%C3%BCrich> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:lowerUncertainty 2e+00 ;
-    mock:standardError "5" ;
-    mock:station "https://mock.ld.admin.ch/station/02" ;
+    mock:lowerUncertainty "2.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:standardError "5.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:station <https://mock.ld.admin.ch/station/02> ;
     mock:status "provisionally" ;
-    mock:upperUncertainty 1e+01 ;
-    mock:value 2.068821e+01 ;
-    mock:value2 1.03e+01 ;
-    mock:year "https://ld.admin.ch/time/year/2002" .
+    mock:upperUncertainty "10.0"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value "20.688211936144263"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:value2 "10.3"^^<http://www.w3.org/2001/XMLSchema#float> ;
+    mock:year <https://ld.admin.ch/time/year/2002> .
 
 <https://mock.ld.admin.ch/cube/mock-two-sided/1/shape> a cube:Constraint ;
     sh:closed true ;
-    sh:property [ a cube:KeyDimension ;
+    sh:property [ a cube:MeasureDimension ;
+            qudt:hasUnit unit:KiloGM ;
+            qudt:scaleType qudt:RatioScale ;
+            schema:description "Gemessener Wert 2 an der Station"@de ;
+            schema:name "Wert2"@de,
+                "Value2"@en,
+                "Valeur2"@fr,
+                "Valore2"@it ;
+            sh:max 4.12e+01 ;
+            sh:maxCount 1 ;
+            sh:min 4e+00 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path mock:value2 ;
+            meta:annotation [ a meta:Limit ;
+                    schema:name "Richtwert 2020 in Zürich"@de ;
+                    schema:value 11 ;
+                    meta:annotationContext [ sh:hasValue <https://mock.ld.admin.ch/station/02> ;
+                            sh:path mock:station ],
+                        [ sh:hasValue <https://ld.admin.ch/time/year/2020> ;
+                            sh:path mock:year ] ],
+                [ a meta:Limit ;
+                    schema:maxValue 13 ;
+                    schema:minValue 9 ;
+                    schema:name "Zielwert für 2021 in Zürich"@de ;
+                    meta:annotationContext [ sh:hasValue <https://mock.ld.admin.ch/station/02> ;
+                            sh:path mock:station ],
+                        [ sh:hasValue <https://ld.admin.ch/time/year/2021> ;
+                            sh:path mock:year ] ] ],
+        [ a cube:KeyDimension ;
+            qudt:scaleType qudt:NominalScale ;
+            schema:description "Station der Untersuchung"@de ;
+            schema:name "Station"@de,
+                "Station"@en,
+                "Station"@fr,
+                "Stazione"@it ;
+            sh:in ( <https://mock.ld.admin.ch/station/01> <https://mock.ld.admin.ch/station/02> <https://mock.ld.admin.ch/station/switzerland> ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path mock:station ;
+            meta:inHierarchy [ a meta:Hierarchy ;
+                    schema:name "Schweiz" ;
+                    meta:hierarchyRoot <https://mock.ld.admin.ch/station/switzerland> ;
+                    meta:nextInHierarchy [ schema:name "Stationen" ;
+                            sh:path schema:hasPart ] ] ],
+        [ a cube:MeasureDimension ;
+            qudt:hasUnit unit:KiloGM ;
+            qudt:scaleType qudt:IntervalScale ;
+            schema:description "Gemessener Wert an der Station"@de ;
+            schema:name "Wert"@de,
+                "Value"@en,
+                "Valeur"@fr,
+                "Valore"@it ;
+            sh:max 2.355574e+01 ;
+            sh:maxCount 1 ;
+            sh:min 2.068821e+01 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path mock:value ],
+        [ qudt:hasUnit unit:PERCENT ;
+            qudt:scaleType qudt:RatioScale ;
+            schema:description "Lower Unsicherheit"@de ;
+            schema:name "Lower Unsicherheit"@de ;
+            sh:max 2.1e+00 ;
+            sh:maxCount 1 ;
+            sh:min 1e+00 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path mock:lowerUncertainty ;
+            meta:dimensionRelation [ a relation:ConfidenceLowerBound ;
+                    dct:type "Confidence interval" ;
+                    meta:relatesTo mock:value ] ],
+        [ a cube:KeyDimension ;
             qudt:scaleType qudt:OrdinalScale ;
             schema:description "Jahr der Erhebung"@de ;
             schema:name "Jahr"@de,
@@ -175,21 +248,6 @@
                     time:unitType time:unitYear ] ],
         [ qudt:hasUnit unit:PERCENT ;
             qudt:scaleType qudt:RatioScale ;
-            schema:description "Standardfehler der Schätzung Wert2"@de ;
-            schema:name "Standardfehler für Wert2"@de,
-                "standard error for Value2"@en,
-                "erreur standard pour Value2"@fr,
-                "errore"@it ;
-            sh:max "provisionally" ;
-            sh:maxCount 1 ;
-            sh:min "5" ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:path mock:standardError ;
-            meta:dimensionRelation [ a relation:StandardError ;
-                    meta:relatesTo mock:value2 ] ],
-        [ qudt:hasUnit unit:PERCENT ;
-            qudt:scaleType qudt:RatioScale ;
             schema:description "Upper Unsicherheit"@de ;
             schema:name "Upper Unsicherheit"@de ;
             sh:max 1.1e+01 ;
@@ -203,29 +261,19 @@
                     meta:relatesTo mock:value ] ],
         [ qudt:hasUnit unit:PERCENT ;
             qudt:scaleType qudt:RatioScale ;
-            schema:description "Lower Unsicherheit"@de ;
-            schema:name "Lower Unsicherheit"@de ;
-            sh:max 2.1e+00 ;
+            schema:description "Standardfehler der Schätzung Wert2"@de ;
+            schema:name "Standardfehler für Wert2"@de,
+                "standard error for Value2"@en,
+                "erreur standard pour Value2"@fr,
+                "errore"@it ;
+            sh:max 1.2e+01 ;
             sh:maxCount 1 ;
-            sh:min 1e+00 ;
+            sh:min 5e+00 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:path mock:lowerUncertainty ;
-            meta:dimensionRelation [ a relation:ConfidenceLowerBound ;
-                    dct:type "Confidence interval" ;
-                    meta:relatesTo mock:value ] ],
-        [ a cube:KeyDimension ;
-            qudt:scaleType qudt:NominalScale ;
-            schema:description "Station der Untersuchung"@de ;
-            schema:name "Station"@de,
-                "Station"@en,
-                "Station"@fr,
-                "Stazione"@it ;
-            sh:in ( <https://mock.ld.admin.ch/station/01> <https://mock.ld.admin.ch/station/02> <https://mock.ld.admin.ch/station/switzerland> ) ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:path mock:station ],
+            sh:path mock:standardError ;
+            meta:dimensionRelation [ a relation:StandardError ;
+                    meta:relatesTo mock:value2 ] ],
         [ qudt:scaleType qudt:NominalScale ;
             schema:description "Status der Veröffentlichung, provisorisch oder final"@de ;
             schema:name "Veröffentlichungsstatus"@de,
@@ -235,48 +283,5 @@
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:path mock:status ],
-        [ a cube:MeasureDimension ;
-            qudt:hasUnit unit:KiloGM ;
-            qudt:scaleType qudt:RatioScale ;
-            schema:description "Gemessener Wert 2 an der Station"@de ;
-            schema:name "Wert2"@de,
-                "Value2"@en,
-                "Valeur2"@fr,
-                "Valore2"@it ;
-            sh:max 1.16e+01 ;
-            sh:maxCount 1 ;
-            sh:min 4e+00 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:path mock:value2 ;
-            meta:annotation [ a meta:Limit ;
-                    schema:maxValue 13 ;
-                    schema:minValue 9 ;
-                    schema:name "Zielwert für 2021 in Zürich"@de ;
-                    meta:annotationContext [ sh:hasValue <https://ld.admin.ch/time/year/2021> ;
-                            sh:path mock:year ],
-                        [ sh:hasValue <https://mock.ld.admin.ch/station/02> ;
-                            sh:path mock:station ] ],
-                [ a meta:Limit ;
-                    schema:name "Richtwert 2020 in Zürich"@de ;
-                    schema:value 11 ;
-                    meta:annotationContext [ sh:hasValue <https://ld.admin.ch/time/year/2020> ;
-                            sh:path mock:year ],
-                        [ sh:hasValue <https://mock.ld.admin.ch/station/02> ;
-                            sh:path mock:station ] ] ],
-        [ a cube:MeasureDimension ;
-            qudt:hasUnit unit:KiloGM ;
-            qudt:scaleType qudt:IntervalScale ;
-            schema:description "Gemessener Wert an der Station"@de ;
-            schema:name "Wert"@de,
-                "Value"@en,
-                "Valeur"@fr,
-                "Valore"@it ;
-            sh:max 2.355574e+01 ;
-            sh:maxCount 1 ;
-            sh:min 2.068821e+01 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:path mock:value ] .
+            sh:path mock:status ] .
 

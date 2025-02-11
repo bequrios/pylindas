@@ -508,8 +508,47 @@ class Cube:
                 annotation_node = self._write_annotation(antn)
                 self._graph.add((dim_node, META.annotation, annotation_node))
 
+        if dim_dict.get("hierarchy"):
+            for hrch in dim_dict.get("hierarchy"):
+                hierarchy_node = self._write_hierarchy(hrch, dim_dict)
+                self._graph.add((dim_node, META.inHierarchy, hierarchy_node))
+
         return dim_node
-    
+
+    def _write_hierarchy(self, hierarchy_dict:dict, dim_dict = None) -> BNode:
+        hierarchy_node = BNode()
+        self._graph.add((hierarchy_node, RDF.type, META.Hierarchy))
+
+        root = str(hierarchy_dict.get("root"))
+        if root.startswith("http"):
+            self._graph.add((hierarchy_node, META.hierarchyRoot, URIRef(root)))
+        else:
+            mapping_dict = dim_dict.get("mapping")
+            if mapping_dict.get("type") == "additive":
+                root_uri = mapping_dict.get("base") + root
+                self._graph.add((hierarchy_node, META.hierarchyRoot, URIRef(root_uri)))
+            elif mapping_dict.get("type") == "replace":
+                root_uri = mapping_dict.get("replacements").get(root)
+                self._graph.add((hierarchy_node, META.hierarchyRoot, URIRef(root_uri)))
+
+        name = hierarchy_dict.get("name")
+        self._graph.add((hierarchy_node, SCHEMA.name, Literal(name)))
+
+        next_dict = hierarchy_dict.get("next-in-hierarchy")
+        self._write_next_in_hierarchy(next_dict, parent_node=hierarchy_node)
+        
+        return hierarchy_node
+
+    def _write_next_in_hierarchy(self, next_dict: dict, parent_node: BNode):
+        next_node = BNode()
+        self._graph.add((next_node, SCHEMA.name, Literal(next_dict.get("name"))))
+        self._graph.add((next_node, SH.path, URIRef(next_dict.get("path"))))
+
+        self._graph.add((parent_node, META.nextInHierarchy, next_node))
+
+        if next_dict.get("next-in-hierarchy"):
+            self._write_next_in_hierarchy(next_dict.get("next-in-hierarchy"), next_node)
+
     def _write_annotation(self, annotation_dict: dict) -> BNode:
         annotation_node = BNode()
         for lan, name in annotation_dict.get("name").items():
