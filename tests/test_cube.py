@@ -152,7 +152,7 @@ class TestClass:
         assert bool(result)
 
     def test_validate_basic_valid(self):
-        result_bool, result_massage = self.cube._validate_base()
+        result_bool, result_massage = self.cube._validate_base(serialize_results=True)
         assert bool(result_bool)
 
     def test_validate_visualize_valid(self):

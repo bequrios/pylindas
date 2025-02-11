@@ -386,6 +386,7 @@ class Cube:
                 Self
         """
         self._graph.add((self._shape_URI, RDF.type, CUBE.Constraint))
+        self._graph.add((self._shape_URI, RDF.type, SH.NodeShape))
         self._graph.add((self._shape_URI, SH.closed, Literal("true", datatype=XSD.boolean)))
         for dim, dim_dict in self._shape_dict.items():
             shape = self._write_dimension_shape(dim_dict, self._dataframe[dim])
@@ -663,6 +664,8 @@ class Cube:
         valid_cube, results_graph_cube, text_cube = validate(data_graph=self._graph, shacl_graph=shacl_graph)
 
         # third step: self-consistency
+        # to do this, add the cube:Observations as target of the cube:Constraint
+        self._graph.add((URIRef(self._shape_URI), SH.targetClass, CUBE.Observation))
         consistent, results_graph_consistency, text_consistency = validate(data_graph=self._graph)
 
         if serialize_results:
