@@ -61,8 +61,16 @@ dimensions:
     dimension-type: Key Dimension
     scale-type: nominal
     path: airport_type
+    # This is a new mapping type, for concepts
+    # Concept are independant Resources, a little like Shared Dimension Terms
+    # See the 'Concepts' key here under
     mapping:
       type: concept
+      # Each value will be replaced by an URL that links to the concept
+      # The URL starts with "/" and is relative to the URL of the cube
+      # The URL must allow to identify a concept, and can be made of one ore more fields
+      # This is an example with two fields needed to identify an airport type: {typeOfAirport} and {typeOfAirport2nd}
+      # It must match the URI defined for the concept (see here under), and the fields name can be different as coming from different files
       replacement: /airport_type/{typeOfAirport}/{typeOfAirport2nd}
   typeOfAirport2nd:
     name:
@@ -93,12 +101,22 @@ dimensions:
     scale-type: interval
     path: value
     unit: kilogramm
+# See the README for further explanation about the Concepts metadata
 Concepts:
   typeOfAirport:
+    # The URL starts with "/" and is relative to the URL of the cube
+    # The URL must allow to identify a concept, and can be made of one ore more fields
+    # This is an example with two fields needed to identify an airport type: {typeOfAirportID} and {typeOfAirportSecondID}
+    # It must match the URI defined for the dimension's replacemetn (see here above), and the fields name can be different as coming from different files
     URI: /airport_type/{typeOfAirportID}/{typeOfAirportSecondID}
+    # The name of the field/column that contains the name (label)
     name-field: typeOfAirport
-    position-field: position
+    # Defines if the name is multilingual, meaning that a language suffix (_de, _fr, etc.) wil be concatenated to the name-field to find the different values
     multilingual: true
+    # position-field is optional: the name of the csv column that contains a numeric position value for the concept
+    # used by Visualize to order the concept (instead of alphabe)
+    position-field: position
+    # other-fields are optional, URI could be relative (and concatenated to the concept's URI) or a full URI starting with 'http/https'
     other-fields:
       description:
         URI: http://schema.org/description
