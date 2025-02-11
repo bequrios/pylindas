@@ -6,6 +6,9 @@
 
 For further information, please refer to our [Wiki](https://github.com/Kronmar-Bafu/cubelink/wiki)
 
+## TEMPORARY - About this branch: generation of shared dimensions
+See the folder `pylindas/pyshareddimension` and its [README](pylindas/pyshareddimension/README.md) for detailed explanation
+
 ## Installation
 
 There are two ways to install this package, locally or through the [Python Package Index (PyPI)](https://pypi.org).
