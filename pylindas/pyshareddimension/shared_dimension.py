@@ -88,7 +88,7 @@ class SharedDimension:
         self._graph.add((self._sd_uri, RDF.type, SCHEMA.DefinedTermSet))
         # self._graph.add((self._sd_uri, RDF.type, SKOS.ConceptScheme))
 
-        self._graph.add((self._sd_uri, DCT.identifier, Literal(self._sd_dict.get("Identifier"))))
+        self._graph.add((self._sd_uri, SCHEMA.identifier, Literal(self._sd_dict.get("Identifier"))))
 
         names = self._sd_dict.get("Name")
         for lan, name in names.items():
@@ -287,7 +287,7 @@ class SharedDimension:
         # Seems optional: add the link from the SD to the term
         self._graph.add((self._sd_uri, SCHEMA.hasDefinedTerm, termsData.name))
 
-        self._graph.add((termsData.name, DCT.identifier, Literal(termsData.get(termIdentifierField))))
+        self._graph.add((termsData.name, SCHEMA.identifier, Literal(termsData.get(termIdentifierField))))
         
         if multilingual:
             for lang in self._languages:
