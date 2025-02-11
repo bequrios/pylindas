@@ -6,6 +6,10 @@
 
 For further information, please refer to our [Wiki](https://github.com/Kronmar-Bafu/cubelink/wiki)
 
+## TEMPORARY - About this branch: shared dimensions queries
+See the folder `pylindas/shared_dimension_queries` and its [README](pylindas/shared_dimension_queries/README.md) for detailed explanation
+
+
 ## Installation
 
 There are two ways to install this package, locally or through the [Python Package Index (PyPI)](https://pypi.org).
