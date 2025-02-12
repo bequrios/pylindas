@@ -16,6 +16,7 @@ ns1:1.1.1.1.1 a schema1:DefinedTerm,
         "Mammals (without bats)"@en,
         "Mammifères (sans Chauves-souris)"@fr,
         "Mammiferi (senza Pipistrelli)"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1.1 ;
     ns1:parent_identifier_example "1.1.1.1" .
 
@@ -27,6 +28,7 @@ ns1:1.1.1.1.2 a schema1:DefinedTerm,
         "Bats"@en,
         "Chauves-souris"@fr,
         "Pipistrelli"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1.1 ;
     ns1:parent_identifier_example "1.1.1.1" .
 
@@ -38,6 +40,7 @@ ns1:1.1.1.2 a schema1:DefinedTerm,
         "Breeding birds"@en,
         "Oiseaux nicheurs"@fr,
         "Uccelli nidificanti"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1 ;
     ns1:parent_identifier_example "1.1.1" .
 
@@ -49,6 +52,7 @@ ns1:1.1.1.3 a schema1:DefinedTerm,
         "Reptiles"@en,
         "Reptiles"@fr,
         "Rettili"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1 ;
     ns1:parent_identifier_example "1.1.1" .
 
@@ -60,6 +64,7 @@ ns1:1.1.1.4 a schema1:DefinedTerm,
         "Amphibians"@en,
         "Amphibiens"@fr,
         "Anfibi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1 ;
     ns1:parent_identifier_example "1.1.1" .
 
@@ -71,6 +76,7 @@ ns1:1.1.1.5 a schema1:DefinedTerm,
         "Fishes and cyclostomes"@en,
         "Poissons et Cyclostomes"@fr,
         "Pesci e Ciclostomi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1 ;
     ns1:parent_identifier_example "1.1.1" .
 
@@ -82,6 +88,7 @@ ns1:1.1.2.1 a schema1:DefinedTerm,
         "Bivalves"@en,
         "Bivalves"@fr,
         "Bivalvi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.2 ;
     ns1:parent_identifier_example "1.1.2" .
 
@@ -93,6 +100,7 @@ ns1:1.1.2.2 a schema1:DefinedTerm,
         "Gasteropodi"@en,
         "Gastéropodes"@fr,
         "Gasteropodi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.2 ;
     ns1:parent_identifier_example "1.1.2" .
 
@@ -104,6 +112,7 @@ ns1:1.1.3.1 a schema1:DefinedTerm,
         "Crayfishes"@en,
         "Écrevisses"@fr,
         "Gamberi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.3 ;
     ns1:parent_identifier_example "1.1.3" .
 
@@ -115,6 +124,7 @@ ns1:1.1.4.1.1 a schema1:DefinedTerm,
         "Bees"@en,
         "Abeilles"@fr,
         "Api"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.1 ;
     ns1:parent_identifier_example "1.1.4.1" .
 
@@ -126,6 +136,7 @@ ns1:1.1.4.1.2 a schema1:DefinedTerm,
         "Ants"@en,
         "Fourmis"@fr,
         "Formiche"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.1 ;
     ns1:parent_identifier_example "1.1.4.1" .
 
@@ -137,6 +148,7 @@ ns1:1.1.4.10 a schema1:DefinedTerm,
         "Dragonflies"@en,
         "Libellules, Odonates"@fr,
         "Libellule"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
     ns1:parent_identifier_example "1.1.4" .
 
@@ -148,6 +160,7 @@ ns1:1.1.4.11 a schema1:DefinedTerm,
         "Mayflies"@en,
         "Éphémères"@fr,
         "Efemerotteri"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
     ns1:parent_identifier_example "1.1.4" .
 
@@ -159,6 +172,7 @@ ns1:1.1.4.2.1 a schema1:DefinedTerm,
         "Diurnal Butterflies and Zigene"@en,
         "Papillons diurnes et Zygènes"@fr,
         "Farfalle diurne  e Zigene"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.2 ;
     ns1:parent_identifier_example "1.1.4.2" .
 
@@ -170,6 +184,7 @@ ns1:1.1.4.3 a schema1:DefinedTerm,
         "Caddisflies"@en,
         "Trichoptères"@fr,
         "Tricotteri"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
     ns1:parent_identifier_example "1.1.4" .
 
@@ -181,6 +196,7 @@ ns1:1.1.4.4 a schema1:DefinedTerm,
         "Diptera Tipulids"@en,
         "Tipules"@fr,
         "Ditteri Tipulidi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
     ns1:parent_identifier_example "1.1.4" .
 
@@ -192,6 +208,7 @@ ns1:1.1.4.5.1 a schema1:DefinedTerm,
         "Coleopterae Buprestides, Cerambicides, Cetonides, Lucanides"@en,
         "Coléoptères Buprestidés, Cérambycidés, Cétoniidés et Lucanidés"@fr,
         "Coleotteri Buprestidi, Cerambicidi, Cetonidi e Lucanidi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.5 ;
     ns1:parent_identifier_example "1.1.4.5" .
 
@@ -203,6 +220,7 @@ ns1:1.1.4.5.2 a schema1:DefinedTerm,
         "Carabidae and Cicindelinae"@en,
         "Carabidés et Cicindèles"@fr,
         "Carabidi e Cicindelidi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.5 ;
     ns1:parent_identifier_example "1.1.4.5" .
 
@@ -214,6 +232,7 @@ ns1:1.1.4.5.3 a schema1:DefinedTerm,
         "Aquatic beetles Adefagians"@en,
         "Coléoptères hydradéphages"@fr,
         "Coleotteri Adefagi acquatici"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.5 ;
     ns1:parent_identifier_example "1.1.4.5" .
 
@@ -225,6 +244,7 @@ ns1:1.1.4.6 a schema1:DefinedTerm,
         "Neuropterans"@en,
         "Névroptères"@fr,
         "Neurotteri"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
     ns1:parent_identifier_example "1.1.4" .
 
@@ -236,6 +256,7 @@ ns1:1.1.4.7 a schema1:DefinedTerm,
         "Cicadas"@en,
         "Cigales"@fr,
         "Cicale"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
     ns1:parent_identifier_example "1.1.4" .
 
@@ -247,6 +268,7 @@ ns1:1.1.4.8 a schema1:DefinedTerm,
         "Ortopterans"@en,
         "Orthoptères"@fr,
         "Ortotteri"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
     ns1:parent_identifier_example "1.1.4" .
 
@@ -258,6 +280,7 @@ ns1:1.1.4.9 a schema1:DefinedTerm,
         "Stoneflies"@en,
         "Plécoptères"@fr,
         "Plecotteri"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
     ns1:parent_identifier_example "1.1.4" .
 
@@ -269,6 +292,7 @@ ns1:1.2.1.1 a schema1:DefinedTerm,
         "Flowering plants"@en,
         "Plantes â  fleurs"@fr,
         "Piante da fiori"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.1 ;
     ns1:parent_identifier_example "1.2.1" .
 
@@ -280,6 +304,7 @@ ns1:1.2.1.2 a schema1:DefinedTerm,
         "Ferns"@en,
         "Fougères"@fr,
         "Felci"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.1 ;
     ns1:parent_identifier_example "1.2.1" .
 
@@ -291,6 +316,7 @@ ns1:1.2.2.1 a schema1:DefinedTerm,
         "Hepaticae"@en,
         "Hépatiques"@fr,
         "Epatiche"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.2 ;
     ns1:parent_identifier_example "1.2.2" .
 
@@ -302,6 +328,7 @@ ns1:1.2.2.2 a schema1:DefinedTerm,
         "Musci"@en,
         "Mousses"@fr,
         "Muschi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.2 ;
     ns1:parent_identifier_example "1.2.2" .
 
@@ -313,6 +340,7 @@ ns1:1.2.2.3 a schema1:DefinedTerm,
         "Anthocerotae"@en,
         "Anthocérotes"@fr,
         "Antocerote"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.2 ;
     ns1:parent_identifier_example "1.2.2" .
 
@@ -324,6 +352,7 @@ ns1:1.2.3.1 a schema1:DefinedTerm,
         "Stoneworts"@en,
         "Characées"@fr,
         "Caracee"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.3 ;
     ns1:parent_identifier_example "1.2.3" .
 
@@ -335,6 +364,7 @@ ns1:1.3.1.1 a schema1:DefinedTerm,
         "Epiphytic lichens"@en,
         "Lichens épiphytes"@fr,
         "Licheni epifiti"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.3.1 ;
     ns1:parent_identifier_example "1.3.1" .
 
@@ -346,6 +376,7 @@ ns1:1.3.1.2 a schema1:DefinedTerm,
         "Soil lichens"@en,
         "Lichens terricoles"@fr,
         "Licheni terricoli"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.3.1 ;
     ns1:parent_identifier_example "1.3.1" .
 
@@ -357,6 +388,7 @@ ns1:1.3.2 a schema1:DefinedTerm,
         "Macromycetes"@en,
         "Champignons supérieurs"@fr,
         "Macromiceti"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.3 ;
     ns1:parent_identifier_example "1.3" .
 
@@ -368,6 +400,7 @@ ns1:1.1.3 a schema1:DefinedTerm,
         "Crustaceans"@en,
         "Crustacés"@fr,
         "Crostacei"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1 ;
     ns1:parent_identifier_example "1.1" .
 
@@ -379,6 +412,7 @@ ns1:1.1.4.2 a schema1:DefinedTerm,
         "Butterflies"@en,
         "Papillons"@fr,
         "Farfalle"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
     ns1:parent_identifier_example "1.1.4" .
 
@@ -390,6 +424,7 @@ ns1:1.2.3 a schema1:DefinedTerm,
         "Macroalgae"@en,
         "Macroalgues"@fr,
         "Macroalga"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2 ;
     ns1:parent_identifier_example "1.2" .
 
@@ -401,6 +436,7 @@ ns1:1.1.1.1 a schema1:DefinedTerm,
         "Mammals"@en,
         "Mammifères"@fr,
         "Mammiferi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1 ;
     ns1:parent_identifier_example "1.1.1" .
 
@@ -412,6 +448,7 @@ ns1:1.1.2 a schema1:DefinedTerm,
         "Molluscs"@en,
         "Mollusques"@fr,
         "Molluschi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1 ;
     ns1:parent_identifier_example "1.1" .
 
@@ -423,6 +460,7 @@ ns1:1.1.4.1 a schema1:DefinedTerm,
         "Hymenopterae"@en,
         "Hyménoptères"@fr,
         "Imenotteri"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
     ns1:parent_identifier_example "1.1.4" .
 
@@ -434,6 +472,7 @@ ns1:1.2.1 a schema1:DefinedTerm,
         "Vascular plants"@en,
         "Plantes vasculaires"@fr,
         "Piante vascolari"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2 ;
     ns1:parent_identifier_example "1.2" .
 
@@ -445,6 +484,7 @@ ns1:1.3 a schema1:DefinedTerm,
         "Lichens and mycetes"@en,
         "Lichens et champignons"@fr,
         "Licheni e funghi"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1 ;
     ns1:parent_identifier_example "1" .
 
@@ -456,6 +496,7 @@ ns1:1.3.1 a schema1:DefinedTerm,
         "Lichens and fungi"@en,
         "Lichens"@fr,
         "Licheni"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.3 ;
     ns1:parent_identifier_example "1.3" .
 
@@ -466,7 +507,8 @@ ns1:1 a schema1:DefinedTerm,
     schema1:name "Alle Artengruppen"@de,
         "All species groups"@en,
         "Tous les groupes d'espèces"@fr,
-        "Tutti i gruppi di specie"@it .
+        "Tutti i gruppi di specie"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime .
 
 ns1:1.1.4.5 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -476,6 +518,7 @@ ns1:1.1.4.5 a schema1:DefinedTerm,
         "Coleopterae"@en,
         "Coléoptères"@fr,
         "Coleotteri"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
     ns1:parent_identifier_example "1.1.4" .
 
@@ -487,6 +530,7 @@ ns1:1.2 a schema1:DefinedTerm,
         "Plants"@en,
         "Plantes"@fr,
         "Piante"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1 ;
     ns1:parent_identifier_example "1" .
 
@@ -498,6 +542,7 @@ ns1:1.2.2 a schema1:DefinedTerm,
         "Bryophytes"@en,
         "Bryophytes"@fr,
         "Briofite"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2 ;
     ns1:parent_identifier_example "1.2" .
 
@@ -509,6 +554,7 @@ ns1:1.1 a schema1:DefinedTerm,
         "Animals"@en,
         "Animaux"@fr,
         "Animali"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1 ;
     ns1:parent_identifier_example "1" .
 
@@ -520,6 +566,7 @@ ns1:1.1.1 a schema1:DefinedTerm,
         "Vertebrates"@en,
         "Vertébrés"@fr,
         "Vertebrati"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1 ;
     ns1:parent_identifier_example "1.1" .
 
@@ -531,6 +578,7 @@ ns1:1.1.4 a schema1:DefinedTerm,
         "Insects"@en,
         "Insectes"@fr,
         "Insetti"@it ;
+    schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1 ;
     ns1:parent_identifier_example "1.1" .
 

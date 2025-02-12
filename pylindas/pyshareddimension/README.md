@@ -14,6 +14,22 @@ To be noted that I took the terms from the BAFU's Red List, a use-case that I di
 - [sd_example.py](sd_example.py): example code to run the transformation
 - [shared_dimension.py](shared_dimension.py): the implementation, which is a copy and adaptation ofe cube.py, to reproduce code that matches the pyCube "approach".
   
+## WARNING: Persistent URLs
+It is to be noted that when publishing a SD, the goal is that other datasets will make links to that SD.  
+This link is the basic principle of Linked Data, and it consist in the re-use of the identifier of the SD and its terms (their URLs) in other datasets, as Cube's dimensions for instance.  
+Therefore, the basic requirement of Persistent URLs should be carefully applied when publishing Shared Dimensions, because removing an existing SD or one of its term could break another dataset (or hundreds, thousands of other datasets).  
+When trying things out on LINDAS TEST, it might not really matter, but when publishing a SD on LINDAS INT it is already more important, and when publishing to LINDAS PROD it is of course vital.  
+
+To handle this properly, a SD and each term have a `schema:validFrom` triple which indicates the starting date of validity.  
+The value comes from the configuration .yml file and is a date/time value: 
+```
+Valid-from: 2025-02-05T00:00:00Z
+```
+When a SD or one term should no more to be used, it must still exist but become "deprecated". This is done by adding a `schema:validThrough` triple with an ending date/time.  
+This mechanism allows to avoid breaking existing datasets.  
+
+The generation of the `schema:validThrough` triple is not currently handled in this code, further thoughts might be needed to handle this properly and allow to deprecate a whole SD, or only one/some of its terms.
+
 ## Hierarchies
 A first implementation of hierarchies is available.
 This currently handled hierarchy is in the data itself:

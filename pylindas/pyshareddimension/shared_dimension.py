@@ -238,7 +238,9 @@ class SharedDimension:
         termIdentifierField = terms.get("identifier-field")
         termNameField= terms.get("name-field")
         multilingual= terms.get("multilingual")
-
+        # Read the valid-from value from the configuration file, as a validFrom information will be added to each term
+        validFrom = self._sd_dict.get("Valid-from")
+            
         # TODO: optional-field handling: which is currently based on the handling  proposed for the "concepts" (in the respective branch)
         #   After the final decisions are taken about the "concepts" handling, apply it here
         # Prepare the optional fields of the term:
@@ -262,10 +264,10 @@ class SharedDimension:
             otherFields_dict = {}
 
 
-        self._dataframe.apply(self._add_term, axis=1,  args=(termIdentifierField, termNameField, multilingual, otherFields_dict))
+        self._dataframe.apply(self._add_term, axis=1,  args=(termIdentifierField, termNameField, multilingual, validFrom, otherFields_dict))
         return self
 
-    def _add_term(self, termsData: pd.DataFrame, termIdentifierField: str, termNameField: str, multilingual: bool, otherFields_dict) -> None:
+    def _add_term(self, termsData: pd.DataFrame, termIdentifierField: str, termNameField: str, multilingual: bool, validFrom, otherFields_dict) -> None:
         """Add an observation to the cube.
         
             Args:
@@ -296,6 +298,9 @@ class SharedDimension:
                     self._graph.add((termsData.name, URIRef(SCHEMA.name), Literal(termsData.get(name_key), lang=lang)))            
         else:
             self._graph.add((termsData.name, URIRef(SCHEMA.name), Literal(termsData.get(termNameField))))
+
+        if validFrom:
+            self._graph.add((termsData.name, SCHEMA.validFrom, Literal(validFrom, datatype=XSD.dateTime)))
 
         # Handling parent field
         # If terms have a parent field, a 'parent-uri' was prepared in the dataset (see prepareData())
