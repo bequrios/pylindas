@@ -536,7 +536,7 @@ class Cube:
                         self._graph.add((conceptURI, URIRef(value['URI'] ), Literal(concept.get(key_lng), lang=lang)))
             else:
                 if key in concept:
-                    sanitized_value = self._sanitize_value(concept.get(key))
+                    sanitized_value = self._sanitize_value(concept.get(key), None, None)
                     self._graph.add((conceptURI, URIRef(value['URI'] ), sanitized_value))
 
 
