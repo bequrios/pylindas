@@ -27,7 +27,7 @@
     schema:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Draft> ;
     schema:creator <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
     schema:dateCreated "2024-08-26"^^<http://www.w3.org/2001/XMLSchema#date> ;
-    schema:dateModified "2025-02-14T10:20:20+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+    schema:dateModified "2025-02-14T15:58:57+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
     schema:datePublished "2025-02-14"^^<http://www.w3.org/2001/XMLSchema#date> ;
     schema:description "Ein Beispiel Cube, der simulierte Daten enthält"@de,
         "An example Cube containing some simulated data"@en ;
@@ -463,24 +463,20 @@
 <https://mock.ld.admin.ch/cube/mock-example/1/shape> a sh:NodeShape,
         cube:Constraint ;
     sh:closed true ;
-    sh:property [ qudt:hasUnit unit:PERCENT ;
-            qudt:scaleType qudt:RatioScale ;
-            schema:description "Standardfehler des berechneten Werts"@de ;
-            schema:name "Standardfehler"@de,
-                "Standard error"@en,
-                "Erreur standard"@fr,
-                "Errore standard"@it ;
-            sh:max 9.624033e+00 ;
+    sh:property [ a cube:MeasureDimension ;
+            qudt:hasUnit unit:KiloGM ;
+            qudt:scaleType qudt:IntervalScale ;
+            schema:description "Gemessener Wert an der Station"@de ;
+            schema:name "Wert"@de,
+                "Value"@en,
+                "Valeur"@fr,
+                "Valore"@it ;
+            sh:max 2.355574e+01 ;
             sh:maxCount 1 ;
-            sh:min 3.648574e-01 ;
+            sh:min 6.873746e+00 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:path mock:standardError ;
-            meta:dimensionRelation [ a relation:StandardError ;
-                    meta:relatesTo mock:value ] ],
-        [ sh:in ( cube:Observation ) ;
-            sh:nodeKind sh:IRI ;
-            sh:path rdf:type ],
+            sh:path mock:value ],
         [ a cube:KeyDimension ;
             qudt:scaleType qudt:OrdinalScale ;
             schema:description "Jahr der Erhebung"@de ;
@@ -495,23 +491,6 @@
             sh:path mock:year ;
             meta:dataKind [ a time:GeneralDateTimeDescription ;
                     time:unitType time:unitYear ] ],
-        [ a cube:MeasureDimension ;
-            qudt:hasUnit unit:KiloGM ;
-            qudt:scaleType qudt:IntervalScale ;
-            schema:description "Gemessener Wert an der Station"@de ;
-            schema:name "Wert"@de,
-                "Value"@en,
-                "Valeur"@fr,
-                "Valore"@it ;
-            sh:max 2.355574e+01 ;
-            sh:maxCount 1 ;
-            sh:min 6.873746e+00 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:path mock:value ],
-        [ sh:in ( <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ) ;
-            sh:nodeKind sh:IRI ;
-            sh:path cube:observedBy ],
         [ qudt:scaleType qudt:NominalScale ;
             schema:description "Status der Veröffentlichung, provisorisch oder final"@de ;
             schema:name "Veröffentlichungsstatus"@de,
@@ -533,5 +512,26 @@
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
-            sh:path mock:station ] .
+            sh:path mock:station ],
+        [ sh:in ( <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ) ;
+            sh:nodeKind sh:IRI ;
+            sh:path cube:observedBy ],
+        [ sh:in ( cube:Observation ) ;
+            sh:nodeKind sh:IRI ;
+            sh:path rdf:type ],
+        [ qudt:hasUnit unit:PERCENT ;
+            qudt:scaleType qudt:RatioScale ;
+            schema:description "Standardfehler des berechneten Werts"@de ;
+            schema:name "Standardfehler"@de,
+                "Standard error"@en,
+                "Erreur standard"@fr,
+                "Errore standard"@it ;
+            sh:max 9.624033e+00 ;
+            sh:maxCount 1 ;
+            sh:min 3.648574e-01 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path mock:standardError ;
+            meta:dimensionRelation [ a relation:StandardError ;
+                    meta:relatesTo mock:value ] ] .
 
