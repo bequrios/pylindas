@@ -166,5 +166,8 @@ cython_debug/
 
 .DS_Store
 
+# Test cube for unit tests
+/tests/test_cube.ttl
+
 # VSCode
 .vscode
