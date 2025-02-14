@@ -110,7 +110,7 @@ class SharedDimension:
             self._graph.add((self._sd_uri, DCT.contributor, contributor_node))
 
         shacl_node = self._write_shacl()
-        self._graph.add((self._sd_uri, SHACL.property, shacl_node))
+        self._graph.add((self._sd_uri, SH.property, shacl_node))
 
         return self
 
