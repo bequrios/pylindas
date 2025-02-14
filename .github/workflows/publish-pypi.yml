@@ -14,7 +14,7 @@ jobs:
             contents: write
 
         # don't run on this job on forks
-        if: ${{ github.repository_owner == 'SwissFederalArchives' }}
+        if: ${{ github.repository_owner == 'Kronmar-Bafu' }}
 
         steps:
             - name: Checkout code

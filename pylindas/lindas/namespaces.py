@@ -8,6 +8,7 @@ FOAF = Namespace("http://xmlns.com/foaf/0.1/")
 LDADMIN = Namespace("https.//ld.admin.ch/application/")
 META = Namespace("https://cube.link/meta/")
 QUDT = Namespace("http://qudt.org/schema/qudt/")
+RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 RELATION = Namespace("https://cube.link/relation/")
 SCHEMA = Namespace("http://schema.org/")
 SH = Namespace("http://www.w3.org/ns/shacl#")
@@ -23,10 +24,12 @@ Namespaces = {
     "dcat": DCAT,
     "dct": DCT,
     "schema": SCHEMA,
+    "sh": SH,
     "foaf": FOAF,
     "ldadmin": LDADMIN,
     "meta": META,
     "qudt": QUDT,
+    "rdf": RDF,
     "relation": RELATION,
     "time": TIME,
     "unit": UNIT,

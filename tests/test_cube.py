@@ -1,4 +1,5 @@
 from pylindas.pycube import Cube
+from rdflib import Graph
 import pandas as pd
 import pytest
 import yaml
@@ -13,7 +14,8 @@ class TestClass:
             dataframe=test_df, cube_yaml=cube_yaml,
             environment="TEST", local=True
         )
-        self.cube.prepare_data().write_cube().write_observations().write_shape()
+        self.cube.prepare_data().write_cube(opendataswiss=True).write_observations().write_shape()
+        self.cube.serialize("tests/test_cube.ttl")
 
     def test_standard_error(self):
         sparql = (
@@ -21,8 +23,8 @@ class TestClass:
             "{"
             "  ?shape a cube:Constraint ;"
             "    sh:property ?prop ."
-            "  ?prop schema1:name 'Standardfehler für Wert2'@de ;"
-            "    schema1:description 'Standardfehler der Schätzung Wert2'@de ;"
+            "  ?prop schema:name 'Standardfehler für Wert2'@de ;"
+            "    schema:description 'Standardfehler der Schätzung Wert2'@de ;"
             "    sh:path mock:standardError ;"
             "    qudt:scaleType qudt:RatioScale ;"
             "    qudt:hasUnit unit:PERCENT ;"
@@ -43,7 +45,7 @@ class TestClass:
             "  ?shape a cube:Constraint ;"
             "    sh:property ?prop ."
             "  ?prop sh:path mock:upperUncertainty ;"
-            "    schema1:name 'Upper Unsicherheit'@de ;"
+            "    schema:name 'Upper Unsicherheit'@de ;"
             "    sh:maxCount 1 ;"
             "    qudt:scaleType qudt:RatioScale ;"
             "    meta:dimensionRelation ["
@@ -63,8 +65,8 @@ class TestClass:
             "{"
             "  ?shape a cube:Constraint ;"
             "    sh:property ?prop ."
-            "  ?prop schema1:name 'Lower Unsicherheit'@de ;"
-            "    schema1:description 'Lower Unsicherheit'@de ;"
+            "  ?prop schema:name 'Lower Unsicherheit'@de ;"
+            "    schema:description 'Lower Unsicherheit'@de ;"
             "    sh:path mock:lowerUncertainty ;"
             "    qudt:scaleType qudt:RatioScale ;"
             "    qudt:hasUnit unit:PERCENT ;"
@@ -88,7 +90,7 @@ class TestClass:
             "  ?prop sh:path mock:value2 ;"
             "    meta:annotation ?annotation ."
             "  ?annotation a meta:Limit ;"
-            "    schema1:value 11 ;"
+            "    schema:value 11 ;"
             "    meta:annotationContext ["
             "      sh:path mock:year ;"
             "      sh:hasValue <https://ld.admin.ch/time/year/2020> ;"
@@ -112,8 +114,8 @@ class TestClass:
             "  ?prop sh:path mock:value2 ;"
             "    meta:annotation ?annotation ."
             "  ?annotation a meta:Limit ;"
-            "    schema1:minValue 9 ;"
-            "    schema1:maxValue 13 ;"
+            "    schema:minValue 9 ;"
+            "    schema:maxValue 13 ;"
             "    meta:annotationContext ["
             "      sh:path mock:year ;"
             "      sh:hasValue <https://ld.admin.ch/time/year/2021> ;"
@@ -135,7 +137,7 @@ class TestClass:
             "  ?shape a cube:Constraint ;"
             "    sh:property ?prop ."
             "  ?prop sh:path mock:status ;"
-            "     schema1:name 'Veröffentlichungsstatus'@de ;"
+            "     schema:name 'Veröffentlichungsstatus'@de ;"
             "     qudt:scaleType qudt:NominalScale ."
             "   minus {"
             "     ?prop a cube:KeyDimension ."
@@ -148,3 +150,19 @@ class TestClass:
 
         result = self.cube._graph.query(sparql)
         assert bool(result)
+
+    def test_validate_basic_valid(self):
+        result_bool, result_massage = self.cube._validate_base()
+        assert bool(result_bool)
+
+    def test_validate_visualize_valid(self):
+        result_bool, result_message = self.cube._validate_visualize_profile()
+        assert bool(result_bool)
+
+    def test_validate_opendata_valid(self):
+        result_bool, result_message = self.cube._validate_opendata_profile()
+        assert bool(result_bool)
+
+    def test_validate_whole(self):
+        result_bool, result_message = self.cube.validate()
+        assert result_message == "Cube is valid."
