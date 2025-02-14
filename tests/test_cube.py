@@ -7,15 +7,23 @@ import yaml
 class TestClass:
 
     def setup_method(self):
-        with open("tests/test.yml") as file:
-            cube_yaml = yaml.safe_load(file)
-        test_df = pd.read_csv("tests/test_data.csv")
-        self.cube = Cube(
-            dataframe=test_df, cube_yaml=cube_yaml,
+        with open("example/Cubes/mock/description.yml") as file:
+            se_description = yaml.safe_load(file)
+        se_df = pd.read_csv("example/Cubes/mock/data.csv")
+        self.se_cube = Cube(
+            dataframe=se_df, cube_yaml=se_description,
             environment="TEST", local=True
         )
-        self.cube.prepare_data().write_cube(opendataswiss=True).write_observations().write_shape()
-        self.cube.serialize("tests/test_cube.ttl")
+        self.se_cube.prepare_data().write_cube(opendataswiss=True).write_observations().write_shape()
+        self.se_cube.serialize("example/Cubes/mock/mock-cube.ttl")
+        # with open("tests/test.yml") as file:
+        #     cube_yaml = yaml.safe_load(file)
+        # test_df = pd.read_csv("tests/test_data.csv")
+        # self.cube = Cube(
+        #     dataframe=test_df, cube_yaml=cube_yaml,
+        #     environment="TEST", local=True
+        # )
+        # self.cube.prepare_data().write_cube(opendataswiss=True).write_observations().write_shape()
 
     def test_standard_error(self):
         sparql = (
@@ -23,20 +31,24 @@ class TestClass:
             "{"
             "  ?shape a cube:Constraint ;"
             "    sh:property ?prop ."
-            "  ?prop schema:name 'Standardfehler für Wert2'@de ;"
-            "    schema:description 'Standardfehler der Schätzung Wert2'@de ;"
+            "  ?prop schema:name 'Standardfehler'@de ;"
+            "    schema:description 'Standardfehler des berechneten Werts'@de ;"
             "    sh:path mock:standardError ;"
             "    qudt:scaleType qudt:RatioScale ;"
             "    qudt:hasUnit unit:PERCENT ;"
             "    meta:dimensionRelation ["
             "      a relation:StandardError;"
-            "      meta:relatesTo mock:value2 ;"
+            "      meta:relatesTo mock:value ;"
             "    ] ."
             "}"
         )
 
-        result = self.cube._graph.query(sparql)
+        result = self.se_cube._graph.query(sparql)
         assert bool(result)
+
+    def test_standard_error_cube_validity(self):
+        result_bool, result_message = self.se_cube.validate()
+        assert result_message == "Cube is valid."
 
     def test_upper_uncertainty(self):
         sparql = (
