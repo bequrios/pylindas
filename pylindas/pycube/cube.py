@@ -393,6 +393,8 @@ class Cube:
         observation_class_node = self._write_observation_class_shape()
         self._graph.add((self._shape_URI, SH.property, observation_class_node))
 
+        observed_by_node = self._write_observed_by_node()
+        self._graph.add((self._shape_URI, SH.property, observed_by_node))
         for dim, dim_dict in self._shape_dict.items():
             shape = self._write_dimension_shape(dim_dict, self._dataframe[dim])
             self._graph.add((self._shape_URI, SH.property, shape))
@@ -530,6 +532,16 @@ class Cube:
         Collection(self._graph, list_node, [CUBE.Observation])
         self._graph.add((observation_class_shape, URIRef(SH + "in"), list_node))
         return observation_class_shape
+
+    def _write_observed_by_node(self):
+        observed_by_node = BNode()
+        self._graph.add((observed_by_node, SH.path, CUBE.observedBy))
+        self._graph.add((observed_by_node, SH.nodeKind, SH.IRI))
+
+        list_node = BNode()
+        Collection(self._graph, list_node, [URIRef(self._cube_dict.get("Creator")[0].get("IRI"))])
+        self._graph.add((observed_by_node, URIRef(SH + "in"), list_node))
+        return observed_by_node
 
     def _write_hierarchy(self, hierarchy_dict:dict, dim_dict = None) -> BNode:
         hierarchy_node = BNode()
@@ -680,8 +692,10 @@ class Cube:
 
         # third step: self-consistency
         # to do this, add the cube:Observations as target of the cube:Constraint
-        self._graph.add((URIRef(self._shape_URI), SH.targetClass, CUBE.Observation))
+        self._graph.add((self._shape_URI, SH.targetClass, CUBE.Observation))
         consistent, results_graph_consistency, text_consistency = validate(data_graph=self._graph)
+        # remove the target again
+        self._graph.remove((self._shape_URI, SH.targetClass, CUBE.Observation))
 
         if serialize_results:
             results_graph = results_graph_cube + results_graph_consistency
