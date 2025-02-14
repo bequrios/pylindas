@@ -386,7 +386,15 @@ class Cube:
                 Self
         """
         self._graph.add((self._shape_URI, RDF.type, CUBE.Constraint))
+        self._graph.add((self._shape_URI, RDF.type, SH.NodeShape))
+
         self._graph.add((self._shape_URI, SH.closed, Literal("true", datatype=XSD.boolean)))
+
+        observation_class_node = self._write_observation_class_shape()
+        self._graph.add((self._shape_URI, SH.property, observation_class_node))
+
+        observed_by_node = self._write_observed_by_node()
+        self._graph.add((self._shape_URI, SH.property, observed_by_node))
         for dim, dim_dict in self._shape_dict.items():
             shape = self._write_dimension_shape(dim_dict, self._dataframe[dim])
             self._graph.add((self._shape_URI, SH.property, shape))
@@ -508,8 +516,67 @@ class Cube:
                 annotation_node = self._write_annotation(antn)
                 self._graph.add((dim_node, META.annotation, annotation_node))
 
+        if dim_dict.get("hierarchy"):
+            for hrch in dim_dict.get("hierarchy"):
+                hierarchy_node = self._write_hierarchy(hrch, dim_dict)
+                self._graph.add((dim_node, META.inHierarchy, hierarchy_node))
+
         return dim_node
-    
+
+    def _write_observation_class_shape(self):
+        observation_class_shape = BNode()
+        self._graph.add((observation_class_shape, SH.path, RDF.type))
+        self._graph.add((observation_class_shape, SH.nodeKind, SH.IRI))
+
+        list_node = BNode()
+        Collection(self._graph, list_node, [CUBE.Observation])
+        self._graph.add((observation_class_shape, URIRef(SH + "in"), list_node))
+        return observation_class_shape
+
+    def _write_observed_by_node(self):
+        observed_by_node = BNode()
+        self._graph.add((observed_by_node, SH.path, CUBE.observedBy))
+        self._graph.add((observed_by_node, SH.nodeKind, SH.IRI))
+
+        list_node = BNode()
+        Collection(self._graph, list_node, [URIRef(self._cube_dict.get("Creator")[0].get("IRI"))])
+        self._graph.add((observed_by_node, URIRef(SH + "in"), list_node))
+        return observed_by_node
+
+    def _write_hierarchy(self, hierarchy_dict:dict, dim_dict = None) -> BNode:
+        hierarchy_node = BNode()
+        self._graph.add((hierarchy_node, RDF.type, META.Hierarchy))
+
+        root = str(hierarchy_dict.get("root"))
+        if root.startswith("http"):
+            self._graph.add((hierarchy_node, META.hierarchyRoot, URIRef(root)))
+        else:
+            mapping_dict = dim_dict.get("mapping")
+            if mapping_dict.get("type") == "additive":
+                root_uri = mapping_dict.get("base") + root
+                self._graph.add((hierarchy_node, META.hierarchyRoot, URIRef(root_uri)))
+            elif mapping_dict.get("type") == "replace":
+                root_uri = mapping_dict.get("replacements").get(root)
+                self._graph.add((hierarchy_node, META.hierarchyRoot, URIRef(root_uri)))
+
+        name = hierarchy_dict.get("name")
+        self._graph.add((hierarchy_node, SCHEMA.name, Literal(name)))
+
+        next_dict = hierarchy_dict.get("next-in-hierarchy")
+        self._write_next_in_hierarchy(next_dict, parent_node=hierarchy_node)
+        
+        return hierarchy_node
+
+    def _write_next_in_hierarchy(self, next_dict: dict, parent_node: BNode):
+        next_node = BNode()
+        self._graph.add((next_node, SCHEMA.name, Literal(next_dict.get("name"))))
+        self._graph.add((next_node, SH.path, URIRef(next_dict.get("path"))))
+
+        self._graph.add((parent_node, META.nextInHierarchy, next_node))
+
+        if next_dict.get("next-in-hierarchy"):
+            self._write_next_in_hierarchy(next_dict.get("next-in-hierarchy"), next_node)
+
     def _write_annotation(self, annotation_dict: dict) -> BNode:
         annotation_node = BNode()
         for lan, name in annotation_dict.get("name").items():
@@ -624,7 +691,11 @@ class Cube:
         valid_cube, results_graph_cube, text_cube = validate(data_graph=self._graph, shacl_graph=shacl_graph)
 
         # third step: self-consistency
+        # to do this, add the cube:Observations as target of the cube:Constraint
+        self._graph.add((self._shape_URI, SH.targetClass, CUBE.Observation))
         consistent, results_graph_consistency, text_consistency = validate(data_graph=self._graph)
+        # remove the target again
+        self._graph.remove((self._shape_URI, SH.targetClass, CUBE.Observation))
 
         if serialize_results:
             results_graph = results_graph_cube + results_graph_consistency

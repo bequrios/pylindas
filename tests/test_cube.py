@@ -164,7 +164,7 @@ class TestClass:
         assert bool(result)
 
     def test_validate_basic_valid(self):
-        result_bool, result_massage = self.cube._validate_base()
+        result_bool, result_massage = self.cube._validate_base(serialize_results=True)
         assert bool(result_bool)
 
     def test_validate_visualize_valid(self):
@@ -178,3 +178,23 @@ class TestClass:
     def test_validate_whole(self):
         result_bool, result_message = self.cube.validate()
         assert result_message == "Cube is valid."
+
+    def test_hierarchies(self):
+        sparql = (
+            "ASK"
+            "{"
+            "  ?shape a cube:Constraint ;"
+            "    sh:property ?prop ."
+            "  ?prop sh:path mock:station ;"
+            "    meta:inHierarchy ?hierarchy ."
+            "  ?hierarchy a meta:Hierarchy ;"
+            "    meta:hierarchyRoot <https://mock.ld.admin.ch/station/switzerland> ;"
+            "    schema:name 'Schweiz' ;"
+            "    meta:nextInHierarchy ?nextInHierarchy ."
+            "  ?nextInHierarchy schema:name 'Stationen' ;"
+            "    sh:path schema:hasPart ;"
+            "}"
+        )
+
+        result = self.cube._graph.query(sparql)
+        assert bool(result)
