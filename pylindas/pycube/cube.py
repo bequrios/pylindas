@@ -1,6 +1,6 @@
 import re
 from urllib.parse import quote
-from rdflib import BNode, Graph, Literal, RDF, URIRef, XSD
+from rdflib import BNode, Graph, Literal, RDF, URIRef, XSD, DCTERMS
 from rdflib.collection import Collection
 from datetime import datetime, timezone
 from typing import Self, Tuple
@@ -9,6 +9,7 @@ import numbers
 import sys
 from pylindas.lindas.namespaces import *
 from pylindas.lindas.query import query_lindas
+from pyshacl import validate
 
 class Cube:
     _base_uri: URIRef
@@ -77,7 +78,7 @@ class Cube:
         self._apply_mappings()
         return self
 
-    def write_cube(self) -> Self:
+    def write_cube(self, opendataswiss=False) -> Self:
         """
         Write the cube metadata to the graph.
 
@@ -94,12 +95,10 @@ class Cube:
         names = self._cube_dict.get("Name")
         for lan, name in names.items():
             self._graph.add((self._cube_uri, SCHEMA.name, Literal(name, lang=lan)))
-            self._graph.add((self._cube_uri, DCT.title, Literal(name, lang=lan)))
 
         descriptions = self._cube_dict.get("Description")
         for lan, desc in descriptions.items():
             self._graph.add((self._cube_uri, SCHEMA.description, Literal(desc, lang=lan)))
-            self._graph.add((self._cube_uri, DCT.description, Literal(desc, lang=lan)))
 
         publisher = self._cube_dict.get("Publisher")
         for pblshr in publisher:
@@ -113,8 +112,10 @@ class Cube:
         for cntrbtr in contributor:
             self._graph.add((self._cube_uri, SCHEMA.contributor, URIRef(cntrbtr.get("IRI"))))
 
-        contact_node = self._write_contact_point(self._cube_dict.get("Contact Point"))
-        self._graph.add((self._cube_uri, DCAT.contactPoint, contact_node))
+        dcat_contact_point = self._write_dcat_contact_point(self._cube_dict.get("Contact Point"))
+        self._graph.add((self._cube_uri, DCAT.contactPoint, dcat_contact_point))
+        schema_contact_point = self._write_schema_contact_point(self._cube_dict.get("Contact Point"))
+        self._graph.add((self._cube_uri, SCHEMA.contactPoint, schema_contact_point))
 
         for creator in self._cube_dict.get("Creator", []):
             iri = creator.get('IRI')
@@ -128,6 +129,9 @@ class Cube:
 
         version = self._cube_dict.get("Version")
         self._graph.add((self._cube_uri, SCHEMA.version, Literal(version)))
+
+        identifier = self._cube_dict.get("Identifier")
+        self._graph.add((self._cube_uri, DCTERMS.identifier, Literal(identifier)))
 
         today = datetime.today().strftime("%Y-%m-%d")
         now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -144,15 +148,19 @@ class Cube:
         if self._cube_dict.get("Visualize"):
             self._graph.add((self._cube_uri, SCHEMA.workExample, URIRef("https://ld.admin.ch/application/visualize")))
 
-        if self._cube_dict.get("Work Status"):
-            status = self._cube_dict.get("Work Status")
+        work_status = self._cube_dict.get("Work Status")
+        if work_status == "Published":
             self._graph.add((self._cube_uri, SCHEMA.creativeWorkStatus,
-                             URIRef(f"https://ld.admin.ch/vocabulary/CreativeWorkStatus/{status}")))
+                             URIRef("https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published")))
+            if opendataswiss:
+                self._add_opendata_profile()
+        elif work_status == "Draft":
+            self._graph.add((self._cube_uri, SCHEMA.creativeWorkStatus,
+                             URIRef("https://ld.admin.ch/vocabulary/CreativeWorkStatus/Draft")))
 
         if self._cube_dict.get("Accrual Periodicity"):
             accrual_periodicity_uri = self._get_accrual_periodicity(self._cube_dict.get("Accrual Periodicity"))
             self._graph.add((self._cube_uri, DCT.accrualPeriodicity, accrual_periodicity_uri))
-
         return self
 
     def get_iri(self) -> URIRef:
@@ -206,7 +214,7 @@ class Cube:
         Returns:
             Graph: The graph object with namespaces bound.
         """
-        graph = Graph()
+        graph = Graph(bind_namespaces="none")
         for prefix, nmspc in Namespaces.items():
             graph.bind(prefix=prefix, namespace=nmspc)
         try:
@@ -239,7 +247,7 @@ class Cube:
         For dimensions with 'additive' mapping type, it adds a baseline URI in front of the value. For example the entry 1999 will be replaced with 
         https://ld.admin.ch/time/year/1999. 
         For dimensions with 'replace' mapping type, it replaces values in the dataframe column based on the specified replacements.
-        Finally, it converts the values in the dataframe column to URIRef objects.
+        Values are not transformed to URIRef or Literal.
         
         Returns:
             None
@@ -277,7 +285,7 @@ class Cube:
                 assert value_type in ['Shared', 'Literal']
                 self._dataframe[dim_name] = self._dataframe[dim_name].map(lambda v: URIRef(v) if value_type == "Shared" else Literal(v))
 
-    def _write_contact_point(self, contact_dict: dict) -> BNode|URIRef:
+    def _write_dcat_contact_point(self, contact_dict: dict) -> BNode | URIRef:
         """Writes a contact point to the graph.
         
             Args:
@@ -293,6 +301,24 @@ class Cube:
             self._graph.add((contact_node, RDF.type, VCARD.Organization))
             self._graph.add((contact_node, VCARD.hasEmail, Literal(contact_dict.get("E-Mail"), datatype=XSD.string)))
             self._graph.add((contact_node, VCARD.fn, Literal(contact_dict.get("Name"), datatype=XSD.string)))
+            return contact_node
+
+    def _write_schema_contact_point(self, contact_dict: dict) -> BNode | URIRef:
+        """Writes a contact point to the graph.
+
+            Args:
+                contact_dict (dict): A dictionary containing information about the contact point.
+
+            Returns:
+                BNode or URIRef: The created BNode or URIRef representing the contact point.
+        """
+        if contact_dict.get("IRI"):
+            return URIRef(contact_dict.get("IRI"))
+        else:
+            contact_node = BNode()
+            self._graph.add((contact_node, RDF.type, SCHEMA.ContactPoint))
+            self._graph.add((contact_node, SCHEMA.email, Literal(contact_dict.get("E-Mail"), datatype=XSD.string)))
+            self._graph.add((contact_node, SCHEMA.name, Literal(contact_dict.get("Name"), datatype=XSD.string)))
             return contact_node
 
     @staticmethod
@@ -322,7 +348,6 @@ class Cube:
         """Write observations to the cube.
 
         This function iterates over the rows in the dataframe and adds each row as an observation to the cube.
-        It also adds the observation URI to the observation set of the cube.
 
         Returns:
             Self
@@ -345,22 +370,25 @@ class Cube:
         self._graph.serialize(destination=filename, format="turtle", encoding="utf-8")
         return self
 
-    def _add_observation(self, obs: pd.DataFrame) -> None:
+    def _add_observation(self, obs: pd.Series) -> None:
         """Add an observation to the cube.
+
+        It also adds the observation URI to the observation set of the cube.
         
             Args:
-                obs (pd.DataFrame): The observation data to be added.
+                obs (pd.Series): The observation data to be added. These are the single rows from the _dataframe.
         
             Returns:
                 None
         """
-        self._graph.add((self._cube_uri + "/ObservationSet", CUBE.observation, obs.name))
+        self._graph.add((self._cube_uri + "/ObservationSet", CUBE.observation, obs.name)) #obs.name is the index of the row which was set to be the 'obs-uri'
         self._graph.add((obs.name, RDF.type, CUBE.Observation))
         self._graph.add((obs.name, CUBE.observedBy, URIRef(self._cube_dict.get("Creator")[0].get("IRI"))))
 
         for column in obs.keys():
-            path = URIRef(self._base_uri + self._get_shape_column(column).get("path"))
-            sanitized_value = self._sanitize_value(obs.get(column))
+            shape_column = self._get_shape_column(column)
+            path = URIRef(self._base_uri + shape_column.get("path"))
+            sanitized_value = self._sanitize_value(obs.get(column), shape_column.get("datatype"), shape_column.get("language"))
             self._graph.add((obs.name, URIRef(path), sanitized_value))
 
     def _get_shape_column(self, column: str):
@@ -620,11 +648,11 @@ class Cube:
         match dim_dict.get("scale-type"):
             case "nominal":
                 self._graph.add((dim_node, QUDT.scaleType, QUDT.NominalScale))
-                if dim_dict.get("dimension-type") == "Measure Dimension":
+                if dim_dict.get("dimension-type") == "Key Dimension":
                     self._add_sh_list(dim_node, values)
             case "ordinal":
                 self._graph.add((dim_node, QUDT.scaleType, QUDT.OrdinalScale))
-                if dim_dict.get("dimension-type") == "Measure Dimension":
+                if dim_dict.get("dimension-type") == "Key Dimension":
                     self._add_sh_list(dim_node, values)
             case "interval":
                 self._graph.add((dim_node, QUDT.scaleType, QUDT.IntervalScale))
@@ -635,14 +663,11 @@ class Cube:
             case _ as unrecognized:
                 print(f"Scale Type '{unrecognized}' is not recognized")
         
-        try:
-            match dim_dict.get("unit"):
-                case "kilogramm":
-                   self._graph.add((dim_node, QUDT.hasUnit, UNIT.KiloGM))
-                case "percent":
-                   self._graph.add((dim_node, QUDT.hasUnit, UNIT.PERCENT))
-        except KeyError:
-            pass
+        
+        # unit from https://www.qudt.org/doc/DOC_VOCAB-UNITS.html
+
+        if dim_dict.get("unit") is not None:
+            self._graph.add((dim_node, QUDT.hasUnit, getattr(UNIT, dim_dict.get("unit"))))
 
         try:
             data_kind = dim_dict.get("data-kind")
@@ -687,7 +712,6 @@ class Cube:
                 case "additive":
                     value = dimension_dict.get("mapping").get("base") + str(value)
                 case "replace":
-                    print(value)
                     value = dimension_dict.get("mapping").get("replacements").get(value)
             
             context_node = BNode()
@@ -739,24 +763,94 @@ class Cube:
         self._graph.add((dim_node, SH.max, Literal(_max)))
 
     @staticmethod
-    def _sanitize_value(value) -> Literal|URIRef:
+    def _sanitize_value(value, datatype, lang) -> Literal|URIRef:
         """Sanitize the input value to ensure it is in a valid format.
         
             Args:
                 value: The value to be sanitized.
+                datatype: The datatype of the value, given as string from XSD namespace (e.g. "integer", "string", "gYear", ...).
+                lang: The language of the value if it is a string (e.g. "de", "fr", ...).
         
             Returns:
-                Literal or URIRef: The sanitized value in the form of a Literal or URIRef.
+                Literal or URIRef: The sanitized value in the form of a typed or language tagged Literal or URIRef.
         """
-        if isinstance(value, numbers.Number):
-            if pd.isna(value):
-                return Literal("", datatype=CUBE.Undefined)
-            else:
-                return Literal(value, datatype=XSD.decimal)
-        elif isinstance(value, URIRef):
-            return value
+        if pd.isna(value):
+            return Literal("", datatype=CUBE.Undefined)
+        elif datatype == "URI":
+            return URIRef(value)
+        elif lang!=None:
+            return Literal(value, lang=lang)
         else:
-            return Literal(str(value))
+            if datatype != None:
+                return Literal(value, datatype=getattr(XSD, datatype))
+            else:
+                return Literal(value)
 
+    def validate(self) -> tuple[bool, str]:
+        valid, validation_text = self._validate_base()
 
+        if self._cube_dict.get("Visualize"):
+            valid_visualize, visualization_text = self._validate_visualize_profile()
+            validation_text += "\n" + visualization_text
+            valid = valid and valid_visualize
 
+        if self._cube_dict.get("Opendataswiss"):
+            valid_opendataswiss, opendataswiss_text = self._validate_opendata_profile()
+            validation_text += "\n" + opendataswiss_text
+            valid = valid and valid_opendataswiss
+
+        if valid:
+            return True, "Cube is valid."
+        else:
+            return False, validation_text
+
+    def _validate_base(self, serialize_results=False):
+        # first step: standalone-cube-constraint
+        # Remark: standalone-cube-constraint contains standalone-constraint-constraint!
+        shacl_graph = Graph()
+        shacl_graph.parse("https://cube.link/latest/shape/standalone-cube-constraint", format="turtle")
+        valid_cube, results_graph_cube, text_cube = validate(data_graph=self._graph, shacl_graph=shacl_graph)
+
+        # third step: self-consistency
+        consistent, results_graph_consistency, text_consistency = validate(data_graph=self._graph)
+
+        if serialize_results:
+            results_graph = results_graph_cube + results_graph_consistency
+            results_graph.serialize("./validation_results.ttl", format="turtle")
+
+        if valid_cube and consistent:
+            return True, "Cube basics are met."
+        else:
+            result_text = f"{text_cube}\n{text_consistency}"
+            return False, result_text
+
+    def _validate_visualize_profile(self, serialize_results=False):
+        shacl_graph = Graph()
+        shacl_graph.parse("https://cube.link/latest/shape/profile-visualize", format="turtle")
+
+        valid, results_graph, text = validate(data_graph=self._graph, shacl_graph=shacl_graph)
+
+        if serialize_results:
+            results_graph.serialize("./validation_results.ttl", format="turtle")
+        return valid, text
+
+    def _add_opendata_profile(self):
+        names = self._cube_dict.get("Name")
+        for lan, name in names.items():
+            self._graph.add((self._cube_uri, SCHEMA.name, Literal(name, lang=lan)))
+
+        descriptions = self._cube_dict.get("Description")
+        for lan, desc in descriptions.items():
+            self._graph.add((self._cube_uri, DCT.description, Literal(desc, lang=lan)))
+
+        self._graph.add((self._cube_uri, SCHEMA.workExample, URIRef("https://ld.admin.ch/application/opendataswiss")))
+
+    def _validate_opendata_profile(self, serialize_results=False):
+        shacl_graph = Graph()
+        shacl_graph.parse("https://cube.link/latest/shape/profile-opendataswiss-lindas", format="turtle")
+
+        valid, results_graph, text = validate(data_graph=self._graph, shacl_graph=shacl_graph)
+
+        if serialize_results:
+            results_graph.serialize("./validation_results.ttl", format="turtle")
+        return valid, text
