@@ -42,6 +42,7 @@ dimensions:
     description:
       de: Jahr der Erhebung
     dimension-type: Key Dimension
+    datatype: URI
     scale-type: ordinal
     path: year
     data-kind: 
@@ -61,6 +62,7 @@ dimensions:
       de: Station der Untersuchung
     dimension-type: Key Dimension
     scale-type: nominal
+    datatype: URI
     path: station
     mapping:
       type: replace
@@ -77,6 +79,7 @@ dimensions:
     description:
       de: Gemessener Wert an der Station
     dimension-type: Measure Dimension
+    datatype: float
     scale-type: interval
     path: value
     unit: KiloGM
@@ -90,6 +93,7 @@ dimensions:
     description:
       de: Standardfehler des berechneten Werts
     dimension-type: Standard Error
+    datatype: float
     relates-to: value
     scale-type: ratio
     path: standardError
@@ -104,5 +108,6 @@ dimensions:
     description:
       de: "Status der Veröffentlichung, provisorisch oder final"
     dimension-type: Annotation
+    datatype: string
     scale-type: nominal
     path: status
