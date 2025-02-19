@@ -320,13 +320,12 @@ class SharedDimension:
                 if key in termsData:
                     rawValue = termsData.get(key)
                     if not pd.isna(rawValue):
-                        sanitized_value = self._sanitize_value(rawValue)
+                        # Note: get the datatype + language of the concept from the configuration file
+                        # if multilingual, this is handeled here above
+                        #   but it might happen that a field is not multilingual, but still concerns a specific language
+                        #   on the other hand, if the 'language' key is not in the configuration file -> it will be a simple string with no language tag
+                        sanitized_value = self._sanitize_value(rawValue, value.get('datatype'), value.get('language'))                        
                         self._graph.add((termsData.name, URIRef(value['URI']), sanitized_value))
-
-        # for column in terms.keys():
-        #     path = URIRef(self._base_uri + self._get_shape_column(column).get("path"))
-        #     sanitized_value = self._sanitize_value(terms.get(column))
-        #     self._graph.add((terms.name, URIRef(path), sanitized_value))
 
     def serialize(self, filename: str) -> Self:
         """Serialize the cube to a file.
@@ -343,24 +342,28 @@ class SharedDimension:
         return self
     
     @staticmethod
-    def _sanitize_value(value) -> Literal|URIRef:
+    def _sanitize_value(value, datatype, lang) -> Literal|URIRef:
         """Sanitize the input value to ensure it is in a valid format.
         
             Args:
                 value: The value to be sanitized.
+                datatype: The datatype of the value, given as string from XSD namespace (e.g. "integer", "string", "gYear", ...).
+                lang: The language of the value if it is a string (e.g. "de", "fr", ...).
         
             Returns:
-                Literal or URIRef: The sanitized value in the form of a Literal or URIRef.
+                Literal or URIRef: The sanitized value in the form of a typed or language tagged Literal or URIRef.
         """
-        if isinstance(value, numbers.Number):
-            if pd.isna(value):
-                return Literal("", datatype=CUBE.Undefined)
-            else:
-                return Literal(value, datatype=XSD.decimal)
-        elif isinstance(value, URIRef):
-            return value
+        if pd.isna(value):
+            return Literal("", datatype=CUBE.Undefined)
+        elif datatype == "URI":
+            return URIRef(value)
+        elif lang!=None:
+            return Literal(value, lang=lang)
         else:
-            return Literal(str(value))
+            if datatype != None:
+                return Literal(value, datatype=getattr(XSD, datatype))
+            else:
+                return Literal(value)
 
 
 

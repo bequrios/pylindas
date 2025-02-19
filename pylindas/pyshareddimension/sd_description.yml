@@ -27,3 +27,4 @@ Terms:
   other-fields:
     parent_code:
       URI: /parent_identifier_example
+      datatype: string

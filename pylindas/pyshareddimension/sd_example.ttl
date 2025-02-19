@@ -18,7 +18,7 @@ ns1:1.1.1.1.1 a schema1:DefinedTerm,
         "Mammiferi (senza Pipistrelli)"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1.1 ;
-    ns1:parent_identifier_example "1.1.1.1" .
+    ns1:parent_identifier_example "1.1.1.1"^^xsd:string .
 
 ns1:1.1.1.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -30,7 +30,7 @@ ns1:1.1.1.1.2 a schema1:DefinedTerm,
         "Pipistrelli"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1.1 ;
-    ns1:parent_identifier_example "1.1.1.1" .
+    ns1:parent_identifier_example "1.1.1.1"^^xsd:string .
 
 ns1:1.1.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -42,7 +42,7 @@ ns1:1.1.1.2 a schema1:DefinedTerm,
         "Uccelli nidificanti"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1 ;
-    ns1:parent_identifier_example "1.1.1" .
+    ns1:parent_identifier_example "1.1.1"^^xsd:string .
 
 ns1:1.1.1.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -54,7 +54,7 @@ ns1:1.1.1.3 a schema1:DefinedTerm,
         "Rettili"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1 ;
-    ns1:parent_identifier_example "1.1.1" .
+    ns1:parent_identifier_example "1.1.1"^^xsd:string .
 
 ns1:1.1.1.4 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -66,7 +66,7 @@ ns1:1.1.1.4 a schema1:DefinedTerm,
         "Anfibi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1 ;
-    ns1:parent_identifier_example "1.1.1" .
+    ns1:parent_identifier_example "1.1.1"^^xsd:string .
 
 ns1:1.1.1.5 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -78,7 +78,7 @@ ns1:1.1.1.5 a schema1:DefinedTerm,
         "Pesci e Ciclostomi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1 ;
-    ns1:parent_identifier_example "1.1.1" .
+    ns1:parent_identifier_example "1.1.1"^^xsd:string .
 
 ns1:1.1.2.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -90,7 +90,7 @@ ns1:1.1.2.1 a schema1:DefinedTerm,
         "Bivalvi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.2 ;
-    ns1:parent_identifier_example "1.1.2" .
+    ns1:parent_identifier_example "1.1.2"^^xsd:string .
 
 ns1:1.1.2.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -102,7 +102,7 @@ ns1:1.1.2.2 a schema1:DefinedTerm,
         "Gasteropodi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.2 ;
-    ns1:parent_identifier_example "1.1.2" .
+    ns1:parent_identifier_example "1.1.2"^^xsd:string .
 
 ns1:1.1.3.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -114,7 +114,7 @@ ns1:1.1.3.1 a schema1:DefinedTerm,
         "Gamberi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.3 ;
-    ns1:parent_identifier_example "1.1.3" .
+    ns1:parent_identifier_example "1.1.3"^^xsd:string .
 
 ns1:1.1.4.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -126,7 +126,7 @@ ns1:1.1.4.1.1 a schema1:DefinedTerm,
         "Api"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.1 ;
-    ns1:parent_identifier_example "1.1.4.1" .
+    ns1:parent_identifier_example "1.1.4.1"^^xsd:string .
 
 ns1:1.1.4.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -138,7 +138,7 @@ ns1:1.1.4.1.2 a schema1:DefinedTerm,
         "Formiche"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.1 ;
-    ns1:parent_identifier_example "1.1.4.1" .
+    ns1:parent_identifier_example "1.1.4.1"^^xsd:string .
 
 ns1:1.1.4.10 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -150,7 +150,7 @@ ns1:1.1.4.10 a schema1:DefinedTerm,
         "Libellule"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
-    ns1:parent_identifier_example "1.1.4" .
+    ns1:parent_identifier_example "1.1.4"^^xsd:string .
 
 ns1:1.1.4.11 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -162,7 +162,7 @@ ns1:1.1.4.11 a schema1:DefinedTerm,
         "Efemerotteri"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
-    ns1:parent_identifier_example "1.1.4" .
+    ns1:parent_identifier_example "1.1.4"^^xsd:string .
 
 ns1:1.1.4.2.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -174,7 +174,7 @@ ns1:1.1.4.2.1 a schema1:DefinedTerm,
         "Farfalle diurne  e Zigene"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.2 ;
-    ns1:parent_identifier_example "1.1.4.2" .
+    ns1:parent_identifier_example "1.1.4.2"^^xsd:string .
 
 ns1:1.1.4.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -186,7 +186,7 @@ ns1:1.1.4.3 a schema1:DefinedTerm,
         "Tricotteri"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
-    ns1:parent_identifier_example "1.1.4" .
+    ns1:parent_identifier_example "1.1.4"^^xsd:string .
 
 ns1:1.1.4.4 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -198,7 +198,7 @@ ns1:1.1.4.4 a schema1:DefinedTerm,
         "Ditteri Tipulidi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
-    ns1:parent_identifier_example "1.1.4" .
+    ns1:parent_identifier_example "1.1.4"^^xsd:string .
 
 ns1:1.1.4.5.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -210,7 +210,7 @@ ns1:1.1.4.5.1 a schema1:DefinedTerm,
         "Coleotteri Buprestidi, Cerambicidi, Cetonidi e Lucanidi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.5 ;
-    ns1:parent_identifier_example "1.1.4.5" .
+    ns1:parent_identifier_example "1.1.4.5"^^xsd:string .
 
 ns1:1.1.4.5.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -222,7 +222,7 @@ ns1:1.1.4.5.2 a schema1:DefinedTerm,
         "Carabidi e Cicindelidi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.5 ;
-    ns1:parent_identifier_example "1.1.4.5" .
+    ns1:parent_identifier_example "1.1.4.5"^^xsd:string .
 
 ns1:1.1.4.5.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -234,7 +234,7 @@ ns1:1.1.4.5.3 a schema1:DefinedTerm,
         "Coleotteri Adefagi acquatici"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4.5 ;
-    ns1:parent_identifier_example "1.1.4.5" .
+    ns1:parent_identifier_example "1.1.4.5"^^xsd:string .
 
 ns1:1.1.4.6 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -246,7 +246,7 @@ ns1:1.1.4.6 a schema1:DefinedTerm,
         "Neurotteri"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
-    ns1:parent_identifier_example "1.1.4" .
+    ns1:parent_identifier_example "1.1.4"^^xsd:string .
 
 ns1:1.1.4.7 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -258,7 +258,7 @@ ns1:1.1.4.7 a schema1:DefinedTerm,
         "Cicale"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
-    ns1:parent_identifier_example "1.1.4" .
+    ns1:parent_identifier_example "1.1.4"^^xsd:string .
 
 ns1:1.1.4.8 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -270,7 +270,7 @@ ns1:1.1.4.8 a schema1:DefinedTerm,
         "Ortotteri"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
-    ns1:parent_identifier_example "1.1.4" .
+    ns1:parent_identifier_example "1.1.4"^^xsd:string .
 
 ns1:1.1.4.9 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -282,7 +282,7 @@ ns1:1.1.4.9 a schema1:DefinedTerm,
         "Plecotteri"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
-    ns1:parent_identifier_example "1.1.4" .
+    ns1:parent_identifier_example "1.1.4"^^xsd:string .
 
 ns1:1.2.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -294,7 +294,7 @@ ns1:1.2.1.1 a schema1:DefinedTerm,
         "Piante da fiori"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.1 ;
-    ns1:parent_identifier_example "1.2.1" .
+    ns1:parent_identifier_example "1.2.1"^^xsd:string .
 
 ns1:1.2.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -306,7 +306,7 @@ ns1:1.2.1.2 a schema1:DefinedTerm,
         "Felci"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.1 ;
-    ns1:parent_identifier_example "1.2.1" .
+    ns1:parent_identifier_example "1.2.1"^^xsd:string .
 
 ns1:1.2.2.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -318,7 +318,7 @@ ns1:1.2.2.1 a schema1:DefinedTerm,
         "Epatiche"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.2 ;
-    ns1:parent_identifier_example "1.2.2" .
+    ns1:parent_identifier_example "1.2.2"^^xsd:string .
 
 ns1:1.2.2.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -330,7 +330,7 @@ ns1:1.2.2.2 a schema1:DefinedTerm,
         "Muschi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.2 ;
-    ns1:parent_identifier_example "1.2.2" .
+    ns1:parent_identifier_example "1.2.2"^^xsd:string .
 
 ns1:1.2.2.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -342,7 +342,7 @@ ns1:1.2.2.3 a schema1:DefinedTerm,
         "Antocerote"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.2 ;
-    ns1:parent_identifier_example "1.2.2" .
+    ns1:parent_identifier_example "1.2.2"^^xsd:string .
 
 ns1:1.2.3.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -354,7 +354,7 @@ ns1:1.2.3.1 a schema1:DefinedTerm,
         "Caracee"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2.3 ;
-    ns1:parent_identifier_example "1.2.3" .
+    ns1:parent_identifier_example "1.2.3"^^xsd:string .
 
 ns1:1.3.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -366,7 +366,7 @@ ns1:1.3.1.1 a schema1:DefinedTerm,
         "Licheni epifiti"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.3.1 ;
-    ns1:parent_identifier_example "1.3.1" .
+    ns1:parent_identifier_example "1.3.1"^^xsd:string .
 
 ns1:1.3.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -378,7 +378,7 @@ ns1:1.3.1.2 a schema1:DefinedTerm,
         "Licheni terricoli"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.3.1 ;
-    ns1:parent_identifier_example "1.3.1" .
+    ns1:parent_identifier_example "1.3.1"^^xsd:string .
 
 ns1:1.3.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -390,7 +390,7 @@ ns1:1.3.2 a schema1:DefinedTerm,
         "Macromiceti"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.3 ;
-    ns1:parent_identifier_example "1.3" .
+    ns1:parent_identifier_example "1.3"^^xsd:string .
 
 ns1:1.1.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -402,7 +402,7 @@ ns1:1.1.3 a schema1:DefinedTerm,
         "Crostacei"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1 ;
-    ns1:parent_identifier_example "1.1" .
+    ns1:parent_identifier_example "1.1"^^xsd:string .
 
 ns1:1.1.4.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -414,7 +414,7 @@ ns1:1.1.4.2 a schema1:DefinedTerm,
         "Farfalle"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
-    ns1:parent_identifier_example "1.1.4" .
+    ns1:parent_identifier_example "1.1.4"^^xsd:string .
 
 ns1:1.2.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -426,7 +426,7 @@ ns1:1.2.3 a schema1:DefinedTerm,
         "Macroalga"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2 ;
-    ns1:parent_identifier_example "1.2" .
+    ns1:parent_identifier_example "1.2"^^xsd:string .
 
 ns1:1.1.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -438,7 +438,7 @@ ns1:1.1.1.1 a schema1:DefinedTerm,
         "Mammiferi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.1 ;
-    ns1:parent_identifier_example "1.1.1" .
+    ns1:parent_identifier_example "1.1.1"^^xsd:string .
 
 ns1:1.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -450,7 +450,7 @@ ns1:1.1.2 a schema1:DefinedTerm,
         "Molluschi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1 ;
-    ns1:parent_identifier_example "1.1" .
+    ns1:parent_identifier_example "1.1"^^xsd:string .
 
 ns1:1.1.4.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -462,7 +462,7 @@ ns1:1.1.4.1 a schema1:DefinedTerm,
         "Imenotteri"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
-    ns1:parent_identifier_example "1.1.4" .
+    ns1:parent_identifier_example "1.1.4"^^xsd:string .
 
 ns1:1.2.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -474,7 +474,7 @@ ns1:1.2.1 a schema1:DefinedTerm,
         "Piante vascolari"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2 ;
-    ns1:parent_identifier_example "1.2" .
+    ns1:parent_identifier_example "1.2"^^xsd:string .
 
 ns1:1.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -486,7 +486,7 @@ ns1:1.3 a schema1:DefinedTerm,
         "Licheni e funghi"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1 ;
-    ns1:parent_identifier_example "1" .
+    ns1:parent_identifier_example "1"^^xsd:string .
 
 ns1:1.3.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -498,7 +498,7 @@ ns1:1.3.1 a schema1:DefinedTerm,
         "Licheni"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.3 ;
-    ns1:parent_identifier_example "1.3" .
+    ns1:parent_identifier_example "1.3"^^xsd:string .
 
 ns1:1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -520,7 +520,7 @@ ns1:1.1.4.5 a schema1:DefinedTerm,
         "Coleotteri"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1.4 ;
-    ns1:parent_identifier_example "1.1.4" .
+    ns1:parent_identifier_example "1.1.4"^^xsd:string .
 
 ns1:1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -532,7 +532,7 @@ ns1:1.2 a schema1:DefinedTerm,
         "Piante"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1 ;
-    ns1:parent_identifier_example "1" .
+    ns1:parent_identifier_example "1"^^xsd:string .
 
 ns1:1.2.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -544,7 +544,7 @@ ns1:1.2.2 a schema1:DefinedTerm,
         "Briofite"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.2 ;
-    ns1:parent_identifier_example "1.2" .
+    ns1:parent_identifier_example "1.2"^^xsd:string .
 
 ns1:1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -556,7 +556,7 @@ ns1:1.1 a schema1:DefinedTerm,
         "Animali"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1 ;
-    ns1:parent_identifier_example "1" .
+    ns1:parent_identifier_example "1"^^xsd:string .
 
 ns1:1.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -568,7 +568,7 @@ ns1:1.1.1 a schema1:DefinedTerm,
         "Vertebrati"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1 ;
-    ns1:parent_identifier_example "1.1" .
+    ns1:parent_identifier_example "1.1"^^xsd:string .
 
 ns1:1.1.4 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
@@ -580,7 +580,7 @@ ns1:1.1.4 a schema1:DefinedTerm,
         "Insetti"@it ;
     schema1:validFrom "2025-02-05T00:00:00+00:00"^^xsd:dateTime ;
     skos:broader ns1:1.1 ;
-    ns1:parent_identifier_example "1.1" .
+    ns1:parent_identifier_example "1.1"^^xsd:string .
 
 <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> a schema1:DefinedTermSet,
         meta:SharedDimension ;
