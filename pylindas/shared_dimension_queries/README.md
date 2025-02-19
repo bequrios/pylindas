@@ -1,5 +1,5 @@
 # Shared dimensions queries
-The goal of [shared_dimensions.py](shared_dimensions.py) is to become a tool for developers to find a useful shared dimension,
+The goal of [shared_dimensions_queries.py](shared_dimensions_queries.py) is to become a tool for developers to find a useful shared dimension,
 then get the URLs of the terms in order to configure the mapping for a cube's dimension.
 
 This is a first implementation of:
