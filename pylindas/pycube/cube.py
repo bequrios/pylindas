@@ -544,7 +544,11 @@ class Cube:
                         self._graph.add((conceptURI, URIRef(value['URI'] ), Literal(concept.get(key_lng), lang=lang)))
             else:
                 if key in concept:
-                    sanitized_value = self._sanitize_value(concept.get(key), None, None)
+                    # Note: get the datatype + language of the concept from the configuration file
+                    # if multilingual, this is handeled here above
+                    #   but it might happen that a field is not multilingual, but still concerns a specific language
+                    #   on the other hand, if the 'language' key is not in the configuration file -> it will be a simple string with no language tag
+                    sanitized_value = self._sanitize_value(concept.get(key), value.get('datatype'), value.get('language'))
                     self._graph.add((conceptURI, URIRef(value['URI'] ), sanitized_value))
 
 
