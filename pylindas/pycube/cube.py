@@ -581,23 +581,24 @@ class Cube:
         annotation_node = BNode()
         for lan, name in annotation_dict.get("name").items():
             self._graph.add((annotation_node, SCHEMA.name, Literal(name, lang=lan)))
-        
-        for dimension, value in annotation_dict.get("context").items():
-            dimension_dict = self._shape_dict.get(dimension)
-            dimension_path = dimension_dict.get("path")
 
-            type_of_mapping = dimension_dict.get("mapping").get("type")
-            match type_of_mapping:
-                case "additive":
-                    value = dimension_dict.get("mapping").get("base") + str(value)
-                case "replace":
-                    value = dimension_dict.get("mapping").get("replacements").get(value)
-            
-            context_node = BNode()
-            self._graph.add((context_node, SH.path, URIRef(self._base_uri + dimension_path)))
-            self._graph.add((context_node, SH.hasValue, URIRef(value)))
+        if annotation_dict.get("context"):
+            for dimension, value in annotation_dict.get("context").items():
+                dimension_dict = self._shape_dict.get(dimension)
+                dimension_path = dimension_dict.get("path")
 
-            self._graph.add((annotation_node, META.annotationContext, context_node))
+                type_of_mapping = dimension_dict.get("mapping").get("type")
+                match type_of_mapping:
+                    case "additive":
+                        value = dimension_dict.get("mapping").get("base") + str(value)
+                    case "replace":
+                        value = dimension_dict.get("mapping").get("replacements").get(value)
+
+                context_node = BNode()
+                self._graph.add((context_node, SH.path, URIRef(self._base_uri + dimension_path)))
+                self._graph.add((context_node, SH.hasValue, URIRef(value)))
+
+                self._graph.add((annotation_node, META.annotationContext, context_node))
 
         match annotation_dict.get("type"):
             case "limit":
