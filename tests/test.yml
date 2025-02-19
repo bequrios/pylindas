@@ -44,6 +44,7 @@ dimensions:
     description:
       de: Jahr der Erhebung
     dimension-type: Key Dimension
+    datatype: URI
     scale-type: ordinal
     path: year
     data-kind:
@@ -62,13 +63,21 @@ dimensions:
     description:
       de: Station der Untersuchung
     dimension-type: Key Dimension
+    datatype: URI
     scale-type: nominal
     path: station
+    hierarchy:
+      - root: Schweiz
+        name: Schweiz
+        next-in-hierarchy:
+          path: http://schema.org/hasPart
+          name: Stationen
     mapping:
       type: replace
       replacements:
         Bern: https://mock.ld.admin.ch/station/01
         Zürich: https://mock.ld.admin.ch/station/02
+        Schweiz: https://mock.ld.admin.ch/station/switzerland
 
   Wert:
     name:
@@ -79,6 +88,7 @@ dimensions:
     description:
       de: Gemessener Wert an der Station
     dimension-type: Measure Dimension
+    datatype: float
     scale-type: interval
     path: value
     unit: KiloGM
@@ -89,6 +99,7 @@ dimensions:
     description:
       de: Upper Unsicherheit
     dimension-type: Upper uncertainty
+    datatype: float
     relates-to: value
     scale-type: ratio
     path: upperUncertainty
@@ -100,6 +111,7 @@ dimensions:
     description:
       de: Lower Unsicherheit
     dimension-type: Lower uncertainty
+    datatype: float
     relates-to: value
     scale-type: ratio
     path: lowerUncertainty
@@ -115,6 +127,7 @@ dimensions:
       de: Gemessener Wert 2 an der Station
     dimension-type: Measure Dimension
     scale-type: ratio
+    datatype: float
     path: value2
     unit: KiloGM
     annotation: 
@@ -143,6 +156,7 @@ dimensions:
     description:
       de: Standardfehler der Schätzung Wert2
     dimension-type: Standard Error
+    datatype: float
     relates-to: value2
     scale-type: ratio
     path: standardError
