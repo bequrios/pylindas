@@ -16,3 +16,9 @@ sd.write_sd()
 sd.write_terms()
 sd.serialize("example/Shared_Dimensions/shared_dimension_generation/sd_example.ttl")
 print(sd)
+
+# About the SHACL validation, please see the comment of the SharedDimension.validate() method
+#   in order to understand the parameters
+# This is work in progress as the SHACL file has to be passed as parameter instead of being downloaded from the Web behind the scene
+resultBool, resultTxt = sd.validate("./pylindas/pyshareddimension/shared_dimension_shape.ttl", "./example/Shared_Dimensions/shared_dimension_generation/sd_example_SHACL_result.ttl")
+print(f"Shared dimension validation result: {resultBool}, with message '{resultTxt}'")

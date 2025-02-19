@@ -10,6 +10,7 @@ import sys
 
 from pylindas.lindas.namespaces import *
 from pylindas.lindas.query import query_lindas
+from pyshacl import validate
 
 class SharedDimension:
     _sd_uri: URIRef # Note: Shared Dimension usually do not have a trailing "/" in there URL
@@ -365,5 +366,37 @@ class SharedDimension:
             else:
                 return Literal(value)
 
+    def validate(self, shacl_file_path, result_file_path="") -> tuple[bool, str]:
+        """Vaildate the shared dimension's graph with SHACL
 
+            IMPORTANT Remark:
+                This code is inspired/copied from the cube.py validate() code
+                However, the SHACL file to validate a Shared Dimension is not available online currently
+                We received an extract from Zazuko and saved it locally in shared_dimension_shape.ttl 
+        
+                This code demonstrates the validation, but should be improved when that SHACL is finalized and saved online.
 
+            Args:
+                shacl_file_path: path to the shacl file to use for validation as it is not yet available online
+                    shared_dimension_shape.ttl is available for that purpose in this folder
+                result_file_path: path to a turtle file to save the result of the SHACL validation. Emtpy string = result will not be saved
+        """        
+        valid, validation_text = self._validate_base(shacl_file_path, result_file_path)
+
+        if valid:
+            return True, "Shared dimension is valid."
+        else:
+            return False, validation_text
+
+    def _validate_base(self, shacl_file_path, result_file_path=""):
+        shacl_graph = Graph()
+        shacl_graph.parse(shacl_file_path, format="turtle")
+        valid_sd, results_graph_sd, text_sd = validate(data_graph=self._graph, shacl_graph=shacl_graph)
+
+        if result_file_path != "":
+            results_graph_sd.serialize(result_file_path, format="turtle")
+
+        if valid_sd:
+            return True, "Shared dimension basics are met."
+        else:
+            return False, text_sd

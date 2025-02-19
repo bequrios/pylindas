@@ -1,0 +1,486 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+
+<https://test.cube-creator.lindas.admin.ch/dimension/_shape/shared-dimension-update> sh:ignoredProperties
+    (
+      dcterms:identifier
+      <https://cube-creator.zazuko.com/shared-dimensions/vocab#terms>
+      <https://cube-creator.zazuko.com/shared-dimensions/vocab#export>
+    ) ;
+  a sh:NodeShape ;
+  sh:property
+    [
+      rdf:type sh:PropertyShape ;
+      sh:name "Name" ;
+      sh:path schema:name ;
+      sh:uniqueLang true ;
+      sh:minCount 1 ;
+      sh:maxCount 5 ;
+      sh:languageIn
+        (
+          "de"
+          "fr"
+          "it"
+          "rm"
+          "en"
+        ) ;
+      sh:order 10 ;
+      sh:group <#default-group> ;
+    ],
+    [
+      rdf:type sh:PropertyShape ;
+      sh:name "Abbreviation" ;
+      sh:path schema:alternateName ;
+      sh:uniqueLang true ;
+      sh:maxCount 5 ;
+      sh:languageIn
+        (
+          "de"
+          "fr"
+          "it"
+          "rm"
+          "en"
+        ) ;
+      sh:order 15 ;
+      sh:group <#default-group> ;
+    ],
+    [
+      rdf:type sh:PropertyShape ;
+      sh:name "Valid from" ;
+      sh:path schema:validFrom ;
+      sh:maxCount 1 ;
+      sh:order 20 ;
+      sh:group <#default-group> ;
+      sh:datatype xsd:dateTime ;
+      sh:defaultValue "2024-11-26T08:37:08.012Z"^^xsd:dateTime ;
+    ],
+    [
+      rdf:type sh:PropertyShape ;
+      sh:name "Valid to" ;
+      sh:path schema:validThrough ;
+      sh:maxCount 1 ;
+      sh:order 25 ;
+      sh:group <#default-group> ;
+      sh:datatype xsd:dateTime ;
+    ],
+    [
+      rdf:type sh:PropertyShape ;
+      sh:name "Default metadata" ;
+      sh:path sh:property ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:order 30 ;
+      sh:group <#default-group> ;
+      sh:defaultValue _:b697 ;
+      sh:description "Metadata copied to cube's metadata when this dimension is selected" ;
+      sh:nodeKind sh:BlankNodeOrIRI ;
+      sh:node
+        [
+          rdf:type sh:NodeShape ;
+          sh:property
+            [
+              rdf:type sh:PropertyShape ;
+              sh:name "Name" ;
+              sh:path schema:name ;
+              sh:uniqueLang true ;
+              sh:maxCount 4 ;
+              sh:languageIn
+                (
+                  "de"
+                  "fr"
+                  "it"
+                  "rm"
+                  "en"
+                ) ;
+              sh:order 10 ;
+            ],
+            [
+              rdf:type sh:PropertyShape ;
+              sh:name "Scale type" ;
+              sh:path qudt:scaleType ;
+              sh:maxCount 1 ;
+              sh:order 20 ;
+              sh:defaultValue qudt:NominalScale ;
+              sh:in
+                (
+                  qudt:NominalScale
+                  qudt:OrdinalScale
+                ) ;
+            ],
+            [
+              rdf:type sh:PropertyShape ;
+              sh:name "Data kind" ;
+              sh:path <https://cube.link/meta/dataKind> ;
+              sh:maxCount 1 ;
+              sh:order 30 ;
+              sh:nodeKind sh:BlankNodeOrIRI ;
+              sh:node
+                [
+                  rdf:type sh:NodeShape ;
+                  sh:property
+                    [
+                      rdf:type sh:PropertyShape ;
+                      sh:name "Choose type" ;
+                      sh:path rdf:type ;
+                      sh:minCount 1 ;
+                      sh:maxCount 1 ;
+                      sh:order 10 ;
+                      sh:nodeKind sh:IRI ;
+                      sh:in
+                        (
+                          schema:GeoCoordinates
+                          schema:GeoShape
+                          time:GeneralDateTimeDescription
+                        ) ;
+                      dash:editor dash:EnumSelectEditor ;
+                    ],
+                    [
+                      rdf:type sh:PropertyShape ;
+                      sh:name "Time precision" ;
+                      sh:path time:unitType ;
+                      sh:maxCount 1 ;
+                      sh:order 20 ;
+                      sh:nodeKind sh:IRI ;
+                      sh:in
+                        (
+                          time:unitYear
+                          time:unitMonth
+                          time:unitWeek
+                          time:unitDay
+                          time:unitHour
+                          time:unitMinute
+                          time:unitSecond
+                        ) ;
+                      <https://hypermedia.app/shaperone#if>
+                        [
+                          sh:path rdf:type ;
+                          sh:hasValue time:GeneralDateTimeDescription ;
+                        ] ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
+    ],
+    [
+      rdf:type sh:PropertyShape ;
+      sh:name "Term properties" ;
+      sh:path schema:additionalProperty ;
+      sh:order 40 ;
+      sh:group
+        [
+          rdf:type sh:PropertyGroup ;
+          rdfs:label "Term properties" ;
+        ] ;
+      sh:description "Additional properties for Shared Terms" ;
+      sh:nodeKind sh:BlankNodeOrIRI ;
+      sh:node
+        [
+          rdf:type sh:NodeShape ;
+          sh:property
+            [
+              rdf:type sh:PropertyShape ;
+              sh:name "Name" ;
+              sh:path rdfs:label ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+              sh:order 5 ;
+            ],
+            [
+              rdf:type sh:PropertyShape ;
+              sh:name "Predicate" ;
+              sh:path rdf:predicate ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+              sh:order 10 ;
+              sh:nodeKind sh:IRI ;
+              dash:editor <https://cube-creator.zazuko.com/vocab#dashPropertyEditor> ;
+            ],
+            [
+              rdf:type sh:PropertyShape ;
+              sh:name "Value type" ;
+              sh:path <https://cube-creator.zazuko.com/shared-dimensions/vocab#dynamicPropertyType> ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+              sh:order 20 ;
+              sh:in
+                (
+                  "Literal"
+                  "Shared Term"
+                  "Lang String"
+                ) ;
+            ],
+            [
+              rdf:type sh:PropertyShape ;
+              sh:name "Required" ;
+              sh:path hydra:required ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+              sh:order 15 ;
+              sh:datatype xsd:boolean ;
+              sh:defaultValue false ;
+            ],
+            [
+              rdf:type sh:PropertyShape ;
+              sh:name "Allow multiple" ;
+              sh:path schema:multipleValues ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+              sh:order 15 ;
+              sh:datatype xsd:boolean ;
+              sh:defaultValue false ;
+            ] ;
+          <https://hypermedia.app/shaperone#xoneDiscriminator>
+            <https://cube-creator.zazuko.com/shared-dimensions/vocab#dynamicPropertyType> ;
+          sh:xone
+            (
+              [
+                sh:ignoredProperties
+                  (
+                    hydra:required
+                    rdf:predicate
+                    rdfs:label
+                    schema:multipleValues
+                  ) ;
+                rdf:type sh:NodeShape ;
+                sh:property
+                  [
+                    rdf:type sh:PropertyShape ;
+                    sh:path
+                      <https://cube-creator.zazuko.com/shared-dimensions/vocab#dynamicPropertyType> ;
+                    sh:hasValue "Literal" ;
+                    dash:hidden true ;
+                  ],
+                  [
+                    rdf:type sh:PropertyShape ;
+                    sh:name "Data type" ;
+                    sh:path sh:datatype ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    sh:order 30 ;
+                    sh:nodeKind sh:IRI ;
+                    sh:in
+                      (
+                        xsd:string
+                        xsd:boolean
+                        xsd:integer
+                        xsd:decimal
+                        xsd:time
+                        xsd:date
+                        xsd:dateTime
+                        xsd:gDay
+                        xsd:gMonth
+                        xsd:gYear
+                        xsd:gYearMonth
+                        xsd:anyURI
+                      ) ;
+                  ] ;
+                sh:closed true ;
+              ]
+              [
+                sh:ignoredProperties
+                  (
+                    hydra:required
+                    rdf:predicate
+                    rdfs:label
+                    schema:multipleValues
+                  ) ;
+                rdf:type sh:NodeShape ;
+                sh:property
+                  [
+                    rdf:type sh:PropertyShape ;
+                    sh:path
+                      <https://cube-creator.zazuko.com/shared-dimensions/vocab#dynamicPropertyType> ;
+                    sh:hasValue "Shared Term" ;
+                    dash:hidden true ;
+                  ],
+                  [
+                    rdf:type sh:PropertyShape ;
+                    sh:name "Shared dimension" ;
+                    sh:path sh:class ;
+                    sh:minCount 1 ;
+                    sh:maxCount 1 ;
+                    sh:order 30 ;
+                    sh:nodeKind sh:IRI ;
+                    dash:editor dash:AutoCompleteEditor ;
+                    hydra:search
+                      [
+                        rdf:type hydra:IriTemplate ;
+                        hydra:template "/dimension/_term-sets{?q}"^^hydra:Rfc6570Template ;
+                        hydra:mapping
+                          [
+                            rdf:type hydra:IriTemplateMapping ;
+                            hydra:variable "q" ;
+                            hydra:property hydra:freetextQuery ;
+                            sh:minLength 0 ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sh:closed true ;
+              ]
+              [
+                sh:ignoredProperties
+                  (
+                    hydra:required
+                    rdf:predicate
+                    rdfs:label
+                    schema:multipleValues
+                  ) ;
+                rdf:type sh:NodeShape ;
+                sh:property
+                  [
+                    rdf:type sh:PropertyShape ;
+                    sh:path
+                      <https://cube-creator.zazuko.com/shared-dimensions/vocab#dynamicPropertyType> ;
+                    sh:hasValue "Lang String" ;
+                    dash:hidden true ;
+                  ],
+                  [
+                    rdf:type sh:PropertyShape ;
+                    sh:name "Languages" ;
+                    sh:path sh:languageIn ;
+                    sh:order 30 ;
+                    sh:in
+                      (
+                        <http://lexvo.org/id/iso639-1/de>
+                        <http://lexvo.org/id/iso639-1/fr>
+                        <http://lexvo.org/id/iso639-1/it>
+                        <http://lexvo.org/id/iso639-1/rm>
+                        <http://lexvo.org/id/iso639-1/en>
+                      ) ;
+                    dash:editor <https://cube-creator.zazuko.com/vocab#dashCheckboxListEditor> ;
+                  ] ;
+                sh:closed true ;
+              ]
+            ) ;
+        ] ;
+    ],
+    [
+      rdf:type sh:PropertyShape ;
+      sh:name "Contributors" ;
+      sh:path dcterms:contributor ;
+      sh:order 50 ;
+      sh:group
+        [
+          rdf:type sh:PropertyGroup ;
+          rdfs:label "Contributors" ;
+        ] ;
+      sh:description "Currently logged-in user will be used, if not set" ;
+      sh:nodeKind sh:BlankNode ;
+      sh:node
+        [
+          rdf:type sh:NodeShape ;
+          sh:property
+            [
+              rdf:type sh:PropertyShape ;
+              sh:name "Name" ;
+              sh:path schema:name ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+            ],
+            [
+              rdf:type sh:PropertyShape ;
+              sh:name "Email" ;
+              sh:path schema:email ;
+              sh:minCount 1 ;
+              sh:maxCount 1 ;
+            ] ;
+        ] ;
+    ],
+    [
+      rdf:type sh:PropertyShape ;
+      sh:path rdf:type ;
+      sh:group <#default-group> ;
+      sh:hasValue
+        hydra:Resource,
+        schema:DefinedTermSet,
+        <https://cube.link/meta/SharedDimension>,
+        <https://cube-creator.zazuko.com/shared-dimensions/vocab#SharedDimension> ;
+      dash:hidden true ;
+    ] .
+
+<#default-group> a sh:PropertyGroup ;
+  rdfs:label "Dimension" .
+
+xsd:dateTime rdfs:label "datetime" .
+
+qudt:NominalScale a rdfs:Resource ;
+  rdfs:label "Nominal"@en .
+
+qudt:OrdinalScale a rdfs:Resource ;
+  rdfs:label "Ordinal"@en .
+
+schema:GeoCoordinates a rdfs:Resource ;
+  rdfs:label "Geographic coordinates"@en .
+
+schema:GeoShape a rdfs:Resource ;
+  rdfs:label "Geographic shape"@en .
+
+time:GeneralDateTimeDescription a rdfs:Resource ;
+  rdfs:label "Time description"@en .
+
+time:unitYear a rdfs:Resource ;
+  rdfs:label "Year"@en .
+
+time:unitMonth a rdfs:Resource ;
+  rdfs:label "Month"@en .
+
+time:unitWeek a rdfs:Resource ;
+  rdfs:label "Week"@en .
+
+time:unitDay a rdfs:Resource ;
+  rdfs:label "Day"@en .
+
+time:unitHour a rdfs:Resource ;
+  rdfs:label "Hour"@en .
+
+time:unitMinute a rdfs:Resource ;
+  rdfs:label "Minute"@en .
+
+time:unitSecond a rdfs:Resource ;
+  rdfs:label "Second"@en .
+
+xsd:boolean rdfs:label "boolean" .
+
+xsd:string rdfs:label "string" .
+
+xsd:integer rdfs:label "integer" .
+
+xsd:decimal rdfs:label "decimal" .
+
+xsd:time rdfs:label "time" .
+
+xsd:date rdfs:label "date" .
+
+xsd:gDay rdfs:label "day" .
+
+xsd:gMonth rdfs:label "month" .
+
+xsd:gYear rdfs:label "year" .
+
+xsd:gYearMonth rdfs:label "year+month" .
+
+xsd:anyURI rdfs:label "URI" .
+
+<http://lexvo.org/id/iso639-1/de> a rdfs:Resource ;
+  rdfs:label "German" .
+
+<http://lexvo.org/id/iso639-1/fr> a rdfs:Resource ;
+  rdfs:label "French" .
+
+<http://lexvo.org/id/iso639-1/it> a rdfs:Resource ;
+  rdfs:label "Italian" .
+
+<http://lexvo.org/id/iso639-1/rm> a rdfs:Resource ;
+  rdfs:label "Romansh" .
+
+<http://lexvo.org/id/iso639-1/en> a rdfs:Resource ;
+  rdfs:label "English" .
+

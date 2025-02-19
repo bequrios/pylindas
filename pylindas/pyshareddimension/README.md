@@ -16,7 +16,6 @@ An example is given in the [example/Shared_Dimensions/shared_dimension_generatio
 To be noted that I took the terms from the BAFU's Red List, a use-case that I did work on
 - [sd_example.py](/example/Shared_Dimensions/shared_dimension_generation/sd_example.py): example code to run the transformation
 
-  
 ## WARNING: Persistent URLs
 It is to be noted that when publishing a SD, the goal is that other datasets will make links to that SD.  
 This link is the basic principle of Linked Data, and it consist in the re-use of the identifier of the SD and its terms (their URLs) in other datasets, as Cube's dimensions for instance.  
@@ -44,3 +43,16 @@ This currently handled hierarchy is in the data itself:
 Notes: 
 - The root term does not have a parent, this is currently handled properly  
 - The description of the hierarchy is not generated yet, this will be added in a coming version  
+
+## Generated Shared dimension's RDF validation with SHACL
+As the SHACL validation has now been implemented in PyCube, with the `validate()` method, a first temporary version is proposed here.
+
+**IMPORTANT Remark:**  
+The code of the `validate()` method is copied from the cube.py validate() and adapted.  
+However, no official SHACL file is available online to validate a Shared Dimension.  
+During former talks with Zazuko, when writing the [page about Data Validation](https://gitlab.ldbar.ch/hevs/lindas-architecture-and-components/-/blob/main/DataValidation.md?ref_type=heads), they sent us an extract of their data validation process, specific to Shared Dimension.  
+This extract is temporarily added in this project, in the [shared_dimension_shape.ttl](shared_dimension_shape.ttl) file, and used for that SHACL validation.  
+It is currently not hard-coded in the `validate()` method, but passed as parameter. See [sd_example.py](/example/Shared_Dimensions/shared_dimension_generation/sd_example.py) for an example.
+
+This code demonstrates the validation, but should be improved when that SHACL is finalized and saved online.
+
