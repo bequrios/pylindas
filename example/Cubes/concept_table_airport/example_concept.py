@@ -14,9 +14,9 @@ See the description in the README.
 This example script only generates the .ttl file, the upload operations are not performed
 """
 
-data_df = pd.read_csv("example/concept_table_airport/data.csv")
+data_df = pd.read_csv("example/Cubes/concept_table_airport/data.csv")
 
-with open("example/concept_table_airport/description.yml") as file:
+with open("example/Cubes/concept_table_airport/description.yml") as file:
     cube_yaml = yaml.safe_load(file)
 
 cube = Cube(dataframe=data_df, cube_yaml=cube_yaml, environment="TEST", local=True)
@@ -28,17 +28,17 @@ cube.write_shape()
 # Add the concept data
 # The concept must be defined in the cube_yaml file, as a nested key under the "Concepts" key
 #   "typeOfAirport" is the name of that nested key
-airport_concept_df = pd.read_csv("example/concept_table_airport/airportType.csv")
+airport_concept_df = pd.read_csv("example/Cubes/concept_table_airport/airportType.csv")
 cube.write_concept("typeOfAirport", airport_concept_df)
 # Check that all the generated URLs for the typeOfAirport are resources (concept) with a SCHEMA.name triple
 # This allows to check if all the entries in data.csv correspond to an entry in airportType.csv 
 allConceptsFound = cube.check_dimension_object_property("typeOfAirport", SCHEMA.name)
 
-cube.serialize("example/concept_table_airport/cube_with_concept.ttl")
+cube.serialize("example/Cubes/concept_table_airport/cube_with_concept.ttl")
 
 print(cube)
 
 if not allConceptsFound:
-    print("""WARNING: It seems that some objects of the \"typeOfAirport\" dimension have no matching concept.
+    print("""\nWARNING: It seems that some objects of the \"typeOfAirport\" dimension have no matching concept.
           See the log for details and check your data + cube dimension and concepts configuration""")
 

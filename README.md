@@ -7,7 +7,7 @@
 For further information, please refer to our [Wiki](https://github.com/Kronmar-Bafu/cubelink/wiki)
 
 ## TEMPORARY - About this branch: concept tables and multi-lingual concepts
-See the folder `example/concept_table_airport` and its [README](example/concept_table_airport/README.md) for detailed explanation
+See the folder `example/Cubes/concept_table_airport` and its [README](example/Cubes/concept_table_airport/README.md) for detailed explanation
 
 ## Installation
 

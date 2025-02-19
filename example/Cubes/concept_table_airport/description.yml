@@ -41,6 +41,7 @@ dimensions:
     dimension-type: Key Dimension
     scale-type: ordinal
     path: Jahr
+    datatype: URI
     data-kind:
       type: temporal
       unit: year
@@ -59,6 +60,7 @@ dimensions:
       it: Tipo di aeroporto - DESC
       en: Type of Airport - DESC
     dimension-type: Key Dimension
+    datatype: URI
     scale-type: nominal
     path: airport_type
     # This is a new mapping type, for concepts
