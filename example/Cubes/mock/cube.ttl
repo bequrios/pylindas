@@ -1,8 +1,14 @@
 @prefix cube: <https://cube.link/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix meta: <https://cube.link/meta/> .
 @prefix mock: <https://mock.ld.admin.ch/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix relation: <https://cube.link/relation/> .
 @prefix schema1: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -19,12 +25,15 @@
         "Mock Cube"@en,
         "Mock Cube"@fr,
         "Mock Cube"@it ;
+    schema1:contactPoint [ a schema1:ContactPoint ;
+            schema1:email "contact@mock.ld.admin.ch"^^xsd:string ;
+            schema1:name "Bundesamt für Mock Data"^^xsd:string ] ;
     schema1:contributor <https://register.ld.admin.ch/opendataswiss/org/bundesamt-fur-umwelt-bafu> ;
     schema1:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Draft> ;
     schema1:creator <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
     schema1:dateCreated "2024-08-26"^^xsd:date ;
-    schema1:dateModified "2024-11-22T13:02:34+00:00"^^xsd:dateTime ;
-    schema1:datePublished "2024-11-22"^^xsd:date ;
+    schema1:dateModified "2025-01-23T15:33:37+00:00"^^xsd:dateTime ;
+    schema1:datePublished "2025-01-23"^^xsd:date ;
     schema1:description "Ein Beispiel Cube, der simulierte Daten enthält"@de,
         "An example Cube containing some simulated data"@en ;
     schema1:name "Mock Cube"@de,
@@ -117,7 +126,7 @@
     mock:standardError 6.030296213104391 ;
     mock:station <https://mock.ld.admin.ch/station/02> ;
     mock:status "definitiv" ;
-    mock:value 21.65992433002125 ;
+    mock:value 21.659924330021255 ;
     mock:year <https://ld.admin.ch/time/year/2001> .
 
 <https://mock.ld.admin.ch/cube/mock-example/1/observation/2002_Bern> a cube:Observation ;
@@ -162,7 +171,7 @@
 
 <https://mock.ld.admin.ch/cube/mock-example/1/observation/2004_Z%C3%BCrich> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:standardError 7.390939821011258 ;
+    mock:standardError 7.390939821011259 ;
     mock:station <https://mock.ld.admin.ch/station/02> ;
     mock:status "definitiv" ;
     mock:value 19.06703223788886 ;
@@ -186,7 +195,7 @@
 
 <https://mock.ld.admin.ch/cube/mock-example/1/observation/2006_Bern> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:standardError 2.520552866392209 ;
+    mock:standardError 2.5205528663922094 ;
     mock:station <https://mock.ld.admin.ch/station/01> ;
     mock:status "definitiv" ;
     mock:value 17.851780950874087 ;
@@ -205,7 +214,7 @@
     mock:standardError 4.873759639672014 ;
     mock:station <https://mock.ld.admin.ch/station/01> ;
     mock:status "definitiv" ;
-    mock:value 18.321158320002034 ;
+    mock:value 18.32115832000203 ;
     mock:year <https://ld.admin.ch/time/year/2007> .
 
 <https://mock.ld.admin.ch/cube/mock-example/1/observation/2007_Z%C3%BCrich> a cube:Observation ;
@@ -266,7 +275,7 @@
 
 <https://mock.ld.admin.ch/cube/mock-example/1/observation/2011_Bern> a cube:Observation ;
     cube:observedBy <https://register.ld.admin.ch/opendataswiss/org/office_of_Mock> ;
-    mock:standardError 2.768558605478989 ;
+    mock:standardError 2.7685586054789892 ;
     mock:station <https://mock.ld.admin.ch/station/01> ;
     mock:status "definitiv" ;
     mock:value 15.23952733205338 ;
@@ -455,4 +464,70 @@
     mock:status "provisionally" ;
     mock:value 7.984094086903241 ;
     mock:year <https://ld.admin.ch/time/year/2022> .
+
+<https://mock.ld.admin.ch/cube/mock-example/1/shape> a cube:Constraint ;
+    sh:closed true ;
+    sh:property [ qudt:hasUnit unit:PERCENT ;
+            qudt:scaleType qudt:RatioScale ;
+            schema1:description "Standardfehler des berechneten Werts"@de ;
+            schema1:name "Standardfehler"@de,
+                "Standard error"@en,
+                "Erreur standard"@fr,
+                "Errore standard"@it ;
+            sh:max 9.624033e+00 ;
+            sh:maxCount 1 ;
+            sh:min 3.648574e-01 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path mock:standardError ;
+            meta:dimensionRelation [ a relation:StandardError ;
+                    meta:relatesTo mock:value ] ],
+        [ a cube:MeasureDimension ;
+            qudt:hasUnit unit:KiloGM ;
+            qudt:scaleType qudt:IntervalScale ;
+            schema1:description "Gemessener Wert an der Station"@de ;
+            schema1:name "Wert"@de,
+                "Value"@en,
+                "Valeur"@fr,
+                "Valore"@it ;
+            sh:max 2.355574e+01 ;
+            sh:maxCount 1 ;
+            sh:min 6.873746e+00 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path mock:value ],
+        [ a cube:KeyDimension ;
+            qudt:scaleType qudt:NominalScale ;
+            schema1:description "Station der Untersuchung"@de ;
+            schema1:name "Station"@de,
+                "Station"@en,
+                "Station"@fr,
+                "Stazione"@it ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path mock:station ],
+        [ qudt:scaleType qudt:NominalScale ;
+            schema1:description "Status der Veröffentlichung, provisorisch oder final"@de ;
+            schema1:name "Veröffentlichungsstatus"@de,
+                "State of publication"@en,
+                "Statut de publication"@fr,
+                "Stato di pubblicazione"@it ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:path mock:status ],
+        [ a cube:KeyDimension ;
+            qudt:scaleType qudt:OrdinalScale ;
+            schema1:description "Jahr der Erhebung"@de ;
+            schema1:name "Jahr"@de,
+                "Year"@en,
+                "An"@fr,
+                "Anno"@it ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path mock:year ;
+            meta:dataKind [ a time:GeneralDateTimeDescription ;
+                    time:unitType time:unitYear ] ] .
 
