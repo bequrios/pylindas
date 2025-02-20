@@ -14,7 +14,9 @@ See the description in the README.
 This example script only generates the .ttl file, the upload operations are not performed
 """
 
-data_df = pd.read_csv("example/Cubes/concept_table_airport/data.csv")
+# data_with_dummy.csv contains an airport type identifier that doesn't exist in airportType.csv
+# the goal is to demonstrate that the  check_dimension_object_property() called here under will detect that
+data_df = pd.read_csv("example/Cubes/concept_table_airport/data_with_dummy.csv")
 
 with open("example/Cubes/concept_table_airport/description.yml") as file:
     cube_yaml = yaml.safe_load(file)
@@ -30,15 +32,31 @@ cube.write_shape()
 #   "typeOfAirport" is the name of that nested key
 airport_concept_df = pd.read_csv("example/Cubes/concept_table_airport/airportType.csv")
 cube.write_concept("typeOfAirport", airport_concept_df)
+
 # Check that all the generated URLs for the typeOfAirport are resources (concept) with a SCHEMA.name triple
-# This allows to check if all the entries in data.csv correspond to an entry in airportType.csv 
+# This allows to check if all the entries in data_with_dummy.csv correspond to an entry in airportType.csv 
+# This check should identify the error of the 'dummy' airport type
 allConceptsFound = cube.check_dimension_object_property("typeOfAirport", SCHEMA.name)
+
+if not allConceptsFound:
+    print("""\nCheck result - WARNING: It seems that some objects of the \"typeOfAirport\" dimension have no matching concept.
+          See the log for details and check your data + cube dimension and concepts configuration""")
+else:
+    print("\nCheck result - SUCCESS: It seems that all objects of the \"typeOfAirport\" dimension have a matching concept.")
 
 cube.serialize("example/Cubes/concept_table_airport/cube_with_concept.ttl")
 
-print(cube)
+# Just for testing the functionality: add the 'dummy' airport type
+airport_concept_dummy_df = pd.read_csv("example/Cubes/concept_table_airport/airportType_dummy.csv")
+cube.write_concept("typeOfAirport", airport_concept_dummy_df)
+allConceptsFound = cube.check_dimension_object_property("typeOfAirport", SCHEMA.name)
 
 if not allConceptsFound:
-    print("""\nWARNING: It seems that some objects of the \"typeOfAirport\" dimension have no matching concept.
+    print("""\nCheck result - WARNING: It seems that some objects of the \"typeOfAirport\" dimension have no matching concept.
           See the log for details and check your data + cube dimension and concepts configuration""")
+else:
+    print("\nCheck result - SUCCESS: It seems that all objects of the \"typeOfAirport\" dimension have a matching concept.")
+
+print(cube)
+
 

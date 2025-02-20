@@ -1,3 +1,4 @@
+from pylindas.lindas.namespaces import SCHEMA
 from pylindas.pycube import Cube
 from rdflib import Graph
 import pandas as pd
@@ -23,6 +24,8 @@ class TestClass:
             "co2-limits/data.csv", "co2-limits/description.yml")
         self.hierarchies_cube = self.setup_test_cube(
             "Biotope_Statistik/biotope.csv", "Biotope_Statistik/biotope.yml")
+        self.concepts_cube = self.setup_test_cube(
+            "concept_table_airport/data_with_dummy.csv", "concept_table_airport/description.yml")
 
     def test_standard_error(self):
         sparql = (
@@ -191,3 +194,22 @@ class TestClass:
     def test_hierarchies_cube_validity(self):
         result_bool, result_message = self.hierarchies_cube.validate()
         assert result_message == "Cube is valid."
+
+    def test_concepts(self):
+        # Add the concept data to the cube's data
+        airport_concept_df = pd.read_csv(self.TEST_CASE_PATH + "/concept_table_airport/airportType.csv")
+        self.concepts_cube.write_concept("typeOfAirport", airport_concept_df)
+        # data_with_dummy.csv, the data file uploaded for that cube, contains an airport type identifier that doesn't exist in airportType.csv
+        # the goal is to demonstrate that the  check_dimension_object_property() called here under will detect that
+        # Check that all the generated URLs for the typeOfAirport are resources (concept) with a SCHEMA.name triple
+        # This allows to check if all the entries in data_with_dummy.csv correspond to an entry in airportType.csv 
+        allConceptsFound = self.concepts_cube.check_dimension_object_property("typeOfAirport", SCHEMA.name)
+        # allConceptsFound should be False: the dummy airport type has no correspondance in the concepts
+        assert not bool(allConceptsFound)
+
+        # Now add the dummy airportType 
+        airport_concept_dummy_df = pd.read_csv("example/Cubes/concept_table_airport/airportType_dummy.csv")
+        self.concepts_cube.write_concept("typeOfAirport", airport_concept_dummy_df)
+        allConceptsFound = self.concepts_cube.check_dimension_object_property("typeOfAirport", SCHEMA.name)
+        # allConceptsFound should be True: the dummy airport type has been added to the concepts
+        assert bool(allConceptsFound)
