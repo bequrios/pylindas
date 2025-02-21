@@ -24,8 +24,6 @@ class TestClass:
             "co2-limits/data.csv", "co2-limits/description.yml")
         self.hierarchies_cube = self.setup_test_cube(
             "Biotope_Statistik/biotope.csv", "Biotope_Statistik/biotope.yml")
-        self.concepts_cube = self.setup_test_cube(
-            "concept_table_airport/data_with_dummy.csv", "concept_table_airport/description.yml")
 
     def test_standard_error(self):
         sparql = (
@@ -196,6 +194,11 @@ class TestClass:
         assert result_message == "Cube is valid."
 
     def test_concepts(self):
+        # As setup_method() is called before each test
+        # -> create the concept cube only for this specific test
+        # To change later if needed
+        self.concepts_cube = self.setup_test_cube("concept_table_airport/data_with_dummy.csv", "concept_table_airport/description.yml")
+
         # Add the concept data to the cube's data
         airport_concept_df = pd.read_csv(self.TEST_CASE_PATH + "/concept_table_airport/airportType.csv")
         self.concepts_cube.write_concept("typeOfAirport", airport_concept_df)

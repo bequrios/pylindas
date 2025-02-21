@@ -268,18 +268,22 @@ class Cube:
                     case "concept":
                         repl = mapping.get("replacement")
                         # Prepare the replacement string, a URL with fields in-between {}, as a f-string:
-                        # input: /airport_type/{typeOfAirport}/{typeOfAirport2nd}
-                        # result: "/airport_type/{row['typeOfAirport']}/{row['typeOfAirport2nd']}"
-                        repl = repl.replace("{", "{row['")
-                        repl = repl.replace("}", "']}")
-                        # if the path is relative (it starts with "/"), then happen it to the cube's URL 
-                        # It also means that the concept is generated with the cube
-                        #   thus also add the hard-coded "/concept" path
+                        # # input: /airport_type/{typeOfAirport}/{typeOfAirport2nd}
+                        # # result: "/airport_type/{row['typeOfAirport']}/{row['typeOfAirport2nd']}"
+                        # repl = repl.replace("{", "{row['")
+                        # repl = repl.replace("}", "']}")
+                        # # if the path is relative (it starts with "/"), then happen it to the cube's URL 
+                        # # It also means that the concept is generated with the cube
+                        # #   thus also add the hard-coded "/concept" path
                         if repl.startswith("/"):
                             # cast the URIRef to a string to avoid log warnings "does not look like a valid URI"
                             repl = str(self._cube_uri) + "/concept" + repl
 
-                        self._dataframe[dim_name] = self._dataframe.apply( lambda row: eval(f"f'{repl}'"), axis=1)
+                        # self._dataframe[dim_name] = self._dataframe.apply( lambda row: eval(f"f'{repl}'"), axis=1)
+                        # self._dataframe[dim_name] = self._dataframe.apply(lambda row: repl.format(typeOfAirport=row['typeOfAirport'], typeOfAirport2nd=row['typeOfAirport2nd']), axis=1)
+
+                        # TODO temporary hard-coded values, to commi/push and see if the gitlab CI accepts it
+                        self._dataframe[dim_name] = self._dataframe.apply(lambda row: repl.replace("{typeOfAirport}", row['typeOfAirport']).replace("{typeOfAirport2nd}", row['typeOfAirport2nd']), axis=1)
                         
                 value_type = mapping.get("value-type", 'Shared')
                 assert value_type in ['Shared', 'Literal']
