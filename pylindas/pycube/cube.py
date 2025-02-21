@@ -240,6 +240,16 @@ class Cube:
         self._dataframe['obs-uri'] = self._dataframe['obs-uri'].map(URIRef)
         self._dataframe = self._dataframe.set_index("obs-uri")
 
+    # Function for dynamic replacement of column names, in between {} by effective column values in a row
+    #   template example: http://the_cube_uri/concept/airport_type/{typeOfAirport}/{typeOfAirport2nd}
+    def _replace_placeholders(self, row, template):
+        result = template
+        placeholders = re.findall(r'\{(.*?)\}', template)  # find each place holder inbetween {}
+        for placeholder in placeholders:
+            if placeholder in row:
+                result = result.replace(f'{{{placeholder}}}', str(row[placeholder]))
+        return result
+
     def _apply_mappings(self) -> None:
         """Apply mappings to the dataframe based on the specified mapping type.
         
@@ -266,24 +276,18 @@ class Cube:
                         repl = mapping.get("replacement")
                         self._dataframe[dim_name] = self._dataframe[dim_name].map(lambda x: re.sub(pat, repl, x))
                     case "concept":
+                        # The replacement string is a URL with fields in-between {}, as for example:
+                        #   /airport_type/{typeOfAirport}/{typeOfAirport2nd}
                         repl = mapping.get("replacement")
-                        # Prepare the replacement string, a URL with fields in-between {}, as a f-string:
-                        # # input: /airport_type/{typeOfAirport}/{typeOfAirport2nd}
-                        # # result: "/airport_type/{row['typeOfAirport']}/{row['typeOfAirport2nd']}"
-                        # repl = repl.replace("{", "{row['")
-                        # repl = repl.replace("}", "']}")
-                        # # if the path is relative (it starts with "/"), then happen it to the cube's URL 
-                        # # It also means that the concept is generated with the cube
-                        # #   thus also add the hard-coded "/concept" path
+                        # If the path is relative (it starts with "/"), then happen it to the cube's URL 
+                        #   It also means that the concept is generated with the cube
+                        #   thus also add the hard-coded "/concept" path
                         if repl.startswith("/"):
                             # cast the URIRef to a string to avoid log warnings "does not look like a valid URI"
                             repl = str(self._cube_uri) + "/concept" + repl
 
-                        # self._dataframe[dim_name] = self._dataframe.apply( lambda row: eval(f"f'{repl}'"), axis=1)
-                        # self._dataframe[dim_name] = self._dataframe.apply(lambda row: repl.format(typeOfAirport=row['typeOfAirport'], typeOfAirport2nd=row['typeOfAirport2nd']), axis=1)
-
-                        # TODO temporary hard-coded values, to commi/push and see if the gitlab CI accepts it
-                        self._dataframe[dim_name] = self._dataframe.apply(lambda row: repl.replace("{typeOfAirport}", row['typeOfAirport']).replace("{typeOfAirport2nd}", row['typeOfAirport2nd']), axis=1)
+                        # Perform the {} placeholder replacement with the column values, for each row
+                        self._dataframe[dim_name] = self._dataframe.apply(lambda row: self._replace_placeholders(row, repl), axis=1)
                         
                 value_type = mapping.get("value-type", 'Shared')
                 assert value_type in ['Shared', 'Literal']
@@ -453,20 +457,21 @@ class Cube:
         nameField = concept.get("name-field")
 
         # Handle the URI
-        uri = uri.replace("{", "{row['")
-        uri = uri.replace("}", "']}")
         # if the path is relative (it starts with "/"), then happen it to the cube's URL 
         # It also means that the concept is generated with the cube
         #   thus also add the hard-coded "/concept" path
         if uri.startswith("/"):
             # cast the URIRef to a string to avoid log warnings "does not look like a valid URI"
             uri_versioned = str(self._cube_uri) + "/concept" + uri
+            # If the concept is part of the cube (URI based on the cube's URI), its URL contains the cube's version
+            # Then link that version to a URI with no version as done by the Cube Creator to keep links between versions of a concept
             uri_unversioned = str(self._cube_uri_no_version) + "/concept" + uri
-            concept_data["URI_UNVERSIONED"] = concept_data.apply( lambda row: eval(f"f'{uri_unversioned}'"), axis=1)
+            concept_data["URI_UNVERSIONED"] = concept_data.apply(lambda row: self._replace_placeholders(row, uri_unversioned), axis=1)
         else:
             uri_versioned = uri
 
-        concept_data["URI"] = concept_data.apply( lambda row: eval(f"f'{uri_versioned}'"), axis=1)
+
+        concept_data["URI"] = concept_data.apply(lambda row: self._replace_placeholders(row, uri_versioned), axis=1)
 
         # Optional values
         if "multilingual" in concept:
@@ -536,6 +541,8 @@ class Cube:
         if positionField:
             self._graph.add((conceptURI, URIRef(SCHEMA.position), Literal(concept.get(positionField))))
 
+        # If the concept is part of the cube (URI based on the cube's URI), its URL contains the cube's version
+        # Then link that version to a URI with no version as done by the Cube Creator to keep links between versions of a concept
         if "URI_UNVERSIONED" in concept:
             self._graph.add((conceptURI, URIRef(SCHEMA.sameAs), URIRef(concept.URI_UNVERSIONED)))
 
