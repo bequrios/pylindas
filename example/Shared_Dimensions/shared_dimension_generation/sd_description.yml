@@ -21,8 +21,18 @@ Terms:
   identifier-field: code
   name-field: name
   multilingual: True
-  # parent-field is optional, must refer to another field in the data and will be linked to that field by skos:broader
-  parent-field: parent_code
+  # links-to-other-terms is optional
+  # It allows to create links between terms of a same dataset, as for instance the creation of a hierarchy based on child to parent relations with the skos:broader property
+  # The identifier of the other term must be found on the same line, as for example:
+  #   code;parent_code;name
+  #   1;;Alle Artengruppen
+  #   1.1;1;Tiere  
+  links-to-other-terms:
+    #parent_code: name of the column that contains the identifier of the other term
+    parent_code:
+      # property: the current proposal here does not handle relative URIs, but request an existing property
+      # to be adapted if needed
+      property: http://www.w3.org/2004/02/skos/core#broader
   # other-fields are optional, URI could be relative (and concatenated to the SD's URI) or a full URI starting with 'http/https'
   other-fields:
     parent_code:

@@ -32,17 +32,21 @@ This mechanism allows to avoid breaking existing datasets.
 
 The generation of the `schema:validThrough` triple is not currently handled in this code, further thoughts might be needed to handle this properly and allow to deprecate a whole SD, or only one/some of its terms.
 
-## Hierarchies
-A first implementation of hierarchies is available.
-This currently handled hierarchy is in the data itself:
-- [sd_terms.csv](sd_terms.csv): has an identifier for the term itself (the `code` field), and an identifier for its parent (the `parent_code` field)
-- [sd_description.yml](sd_description.yml): has a `parent-field` set to `parent_code`, which indicates that each term has a parent in the current dataset  
-`parent-field` is optional, just omit it if there is no hierarchy in the dataset
-- The code will thus add a `skos:broader` link between two terms
+## Links between terms: hierarchy example
+A first implementation is available, and the current example demonstrates how to build a hierarchy with `skos:broader` links from child to parent.
 
-Notes: 
+The links (hierarchy) must be provided in the data itself:  
+- [sd_terms.csv](sd_terms.csv): has an identifier for the term itself (the `code` field), and an identifier for its parent (the `parent_code` field)
+- [sd_description.yml](sd_description.yml): defines a link between terms with the `links-to-other-terms key`. The sub-key `parent_code` is the name of the column that contains the identifier of the other term. The value of `property` is the URL of the property to use to link the current term to its related term, the parent in this example.
+`links-to-other-terms key` is optional, just omit it if there is no links between terms in the dataset
+
+Notes about the hierarchy example: 
 - The root term does not have a parent, this is currently handled properly  
-- The description of the hierarchy is not generated yet, this will be added in a coming version  
+- The description of the hierarchy is not generated yet, this could be added in a coming version
+
+This current implementation allows to create links between two terms and can thus be configured to link the term to its parent with the `skos:broader` property.  
+Multiple links can be defined under the `links-to-other-terms key` key.  
+One current "limitation" is that it links one term to another (not to multiple others).  
 
 ## Generated Shared dimension's RDF validation with SHACL
 As the SHACL validation has now been implemented in PyCube, with the `validate()` method, a first temporary version is proposed here.

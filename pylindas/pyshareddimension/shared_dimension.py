@@ -63,9 +63,9 @@ class SharedDimension:
     def prepare_data(self) -> Self:
         """
         Prepare the cube data by constructing terms URIs and applying mappings.
-        Also handling the parent term if defined in the configuration.
+        Also handling links to other terms (as a parent term) if defined in the configuration.
 
-        This method constructs terms/parents URIs for each row in the dataframe and applies mappings to the dataframe.
+        This method constructs terms and linked other terms URIs for each row in the dataframe and applies mappings to the dataframe.
 
         Returns:
             self
@@ -73,8 +73,8 @@ class SharedDimension:
         self._construct_terms_uri()
 
         terms = self._sd_dict.get("Terms")
-        if "parent-field" in terms:
-            self._construct_parent_uri(terms.get("parent-field"))
+        if "links-to-other-terms" in terms:
+            self._construct_links_uri(terms.get("links-to-other-terms"))
 
         return self
 
@@ -171,23 +171,27 @@ class SharedDimension:
         self._dataframe['terms-uri'] = self._dataframe['terms-uri'].map(URIRef)
         self._dataframe = self._dataframe.set_index("terms-uri")
 
-    def _construct_parent_uri(self, parentField) -> None:
-        """Construct parent URIs for each row in the dataframe.
+    def _construct_links_uri(self, linksToOtherTerms) -> None:
+        """Construct other terms URIs for each row in the dataframe.
         
-        Note: the parentField is the field, in the data, that contains the parent ID from which to build a term's URI
-        IMPORTANT: this parentField could be empty, which is the case for the root node
+        Note: the key in the dictionary is the field, in the data, that contains the other term's ID from which to build a term's URI
+        IMPORTANT: this other term ID could be empty, which is the case for the root node in a hierarchy
 
         Returns:
             None
         """
         # Note: Shared Dimension usually do not have a trailing "/" in there URL
         #   -> add it 
-        def make_iri(row):
-            if not pd.isna(row[parentField]):
-                return URIRef(self._sd_uri + "/" + quote(row[parentField]))
-        self._dataframe['parent-uri'] = self._dataframe.apply(
-            make_iri, axis=1
-        )
+        for key, value in linksToOtherTerms.items():
+            keyForUri = str(key) + "-uri"
+
+            def make_iri(row):
+                if not pd.isna(row[key]):
+                    return URIRef(self._sd_uri + "/" + quote(row[key]))
+            
+            self._dataframe[keyForUri] = self._dataframe.apply(
+                make_iri, axis=1
+            )
 
     def _write_contributor(self, contributor_dict: dict) -> BNode:
         """Writes a contributor to the graph.
@@ -264,11 +268,16 @@ class SharedDimension:
         else:
             otherFields_dict = {}
 
+        if "links-to-other-terms" in terms:
+            linksToOtherTerms_dict = terms.get("links-to-other-terms")
+        else:
+            linksToOtherTerms_dict = {}
 
-        self._dataframe.apply(self._add_term, axis=1,  args=(termIdentifierField, termNameField, multilingual, validFrom, otherFields_dict))
+
+        self._dataframe.apply(self._add_term, axis=1,  args=(termIdentifierField, termNameField, multilingual, validFrom, linksToOtherTerms_dict, otherFields_dict))
         return self
 
-    def _add_term(self, termsData: pd.DataFrame, termIdentifierField: str, termNameField: str, multilingual: bool, validFrom, otherFields_dict) -> None:
+    def _add_term(self, termsData: pd.DataFrame, termIdentifierField: str, termNameField: str, multilingual: bool, validFrom, linksToOtherTerms_dict, otherFields_dict) -> None:
         """Add an observation to the cube.
         
             Args:
@@ -303,12 +312,16 @@ class SharedDimension:
         if validFrom:
             self._graph.add((termsData.name, SCHEMA.validFrom, Literal(validFrom, datatype=XSD.dateTime)))
 
-        # Handling parent field
-        # If terms have a parent field, a 'parent-uri' was prepared in the dataset (see prepareData())
-        if 'parent-uri' in termsData:
-            parentURL = termsData.get('parent-uri')
-            if parentURL:
-                self._graph.add((termsData.name, SKOS.broader, parentURL))
+        # Handle links to other terms
+        # The uris of the other therms were prepared in _construct_links_uri() and added to the data frame
+        for key, value in linksToOtherTerms_dict.items():
+            keyForUri = str(key) + "-uri"
+            property = value['property']
+            
+            if keyForUri in termsData:
+                otherTernmURL = termsData.get(keyForUri)
+                if otherTernmURL: # it can be empty, for instance the root not of a hierarchy has no 'parent'
+                    self._graph.add((termsData.name, URIRef(property), otherTernmURL))
 
         # Handling other fields/properties
         for key, value in otherFields_dict.items():
