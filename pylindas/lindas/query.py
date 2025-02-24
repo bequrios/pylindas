@@ -1,8 +1,13 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 def query_lindas(query: str, environment: str):
-    # to do: hardcoded endpoint
-    sparql = SPARQLWrapper("https://test.lindas.admin.ch/query")
+    match environment:
+        case "TEST":
+            sparql = SPARQLWrapper("https://test.lindas.admin.ch/query")
+        case "INT":
+            sparql = SPARQLWrapper("https://int.lindas.admin.ch/query")
+        case "PROD":
+            sparql = SPARQLWrapper("https://lindas.admin.ch/query")
     sparql.setQuery(query=query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
