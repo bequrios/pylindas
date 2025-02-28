@@ -6,9 +6,6 @@
 
 For further information, please refer to our [Wiki](https://github.com/Kronmar-Bafu/cubelink/wiki)
 
-## TEMPORARY - About this branch: concept tables and multi-lingual concepts
-See the folder `example/Cubes/concept_table_airport` and its [README](example/Cubes/concept_table_airport/README.md) for detailed explanation
-
 ## Installation
 
 There are two ways to install this package, locally or through the [Python Package Index (PyPI)](https://pypi.org).
@@ -176,3 +173,8 @@ from the examples.
 ```bash
 $ python cli.py example start-fuseki
 ```
+## About concept tables and multi-lingual concepts
+See the folder `example/Cubes/concept_table_airport` and its [README](example/Cubes/concept_table_airport/README.md) for detailed explanation
+
+## About generation of shared dimensions
+See the folder `pylindas/pyshareddimension` and its [README](pylindas/pyshareddimension/README.md) for detailed explanation

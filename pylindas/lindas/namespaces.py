@@ -17,7 +17,8 @@ UNIT = Namespace("http://qudt.org/vocab/unit/")
 VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
 VOID = Namespace("http://rdfs.org/ns/void#")
 GEO = Namespace("http://www.opengis.net/ont/geosparql#")
-
+SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
+SD_MD = Namespace("https://cube-creator.zazuko.com/shared-dimensions/vocab#")
 
 Namespaces = {
     "cube": CUBE,
@@ -36,4 +37,6 @@ Namespaces = {
     "vcard": VCARD,
     "void": VOID,
     "geo": GEO,
+    "skos": SKOS,
+    "sd_md": SD_MD,
 }
