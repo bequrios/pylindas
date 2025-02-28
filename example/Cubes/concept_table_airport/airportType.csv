@@ -1,0 +1,3 @@
+typeOfAirportID,typeOfAirportSecondID,typeOfAirport_en,typeOfAirport_de,typeOfAirport_fr,position,description_en,description_fr,other_property_example
+A,a,Domestic airport,Inlandflughafen,Aéroport national,1,Domestic airport description,Description de Aéroport national,another property example for domesctic airport
+B,b,International airport,Internationaler Flughafen,Aéroport international,2,International airport description,Description de Aéroport international,another property example for international airport

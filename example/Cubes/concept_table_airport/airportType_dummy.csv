@@ -1,0 +1,2 @@
+typeOfAirportID,typeOfAirportSecondID,typeOfAirport_en,typeOfAirport_de,typeOfAirport_fr,position,description_en,description_fr,other_property_example
+A,dummy,Dummy airport,Dummy airport (de),Dummy airport (fr),3,A dummy airport type to test the matchings,A dummy airport type to test the matchings (fr),another property example for dummy airport

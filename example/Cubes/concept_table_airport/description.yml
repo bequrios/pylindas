@@ -1,0 +1,130 @@
+---
+"$schema": "../../linpy/description.schema.json"
+Name:
+  en: Example with a concept table
+  fr: Exemple avec une table de concept
+  de: Example with a concept table (DE)
+  it: Example with a concept table (IT)
+Description:
+  fr: Un jeu de données avec deux csv, un pour une table de concept
+  en: A dataset containing two csv, one for a concept table
+Publisher:
+- IRI: https://register.ld.admin.ch/opendataswiss/org/office_of_Mock
+Creator:
+- IRI: https://register.ld.admin.ch/opendataswiss/org/office_of_Mock
+Contributor:
+- IRI: https://register.ld.admin.ch/opendataswiss/org/bundesamt-fur-umwelt-bafu
+  Name: Bundesamt für Mock Data
+Date Created: '2024-08-26T00:00:00.000Z'
+Contact Point:
+  E-Mail: contact@mock.ld.admin.ch
+  Name: Bundesamt für Mock Data
+Base-URI: https://mock-concept.ld.admin.ch/
+Identifier: mock-concept
+Version: 1
+Work Status: Draft
+Visualize: true
+Accrual Periodicity: yearly
+Namespace: mock
+dimensions:
+  year:
+    name:
+      de: Jahr
+      fr: Année
+      it: Anno
+      en: Year
+    description:
+      de: Jahr der Erhebung
+      fr: Année du relevé
+      it: Anno di rilevamento
+      en: Year of survey
+    dimension-type: Key Dimension
+    scale-type: ordinal
+    path: Jahr
+    datatype: URI
+    data-kind:
+      type: temporal
+      unit: year
+    mapping:
+      type: additive
+      base: https://ld.admin.ch/time/year/
+  typeOfAirport:
+    name:
+      fr: Type d'aéroport
+      de: Flughafentyp
+      it: Tipo di aeroporto
+      en: Type of Airport
+    description:
+      de: Flughafentyp - DESC
+      fr: Type d'aéroport - DESC
+      it: Tipo di aeroporto - DESC
+      en: Type of Airport - DESC
+    dimension-type: Key Dimension
+    datatype: URI
+    scale-type: nominal
+    path: airport_type
+    # This is a new mapping type, for concepts
+    # Concept are independant Resources, a little like Shared Dimension Terms
+    # See the 'Concepts' key here under
+    mapping:
+      type: concept
+      # Each value will be replaced by an URL that links to the concept
+      # The URL starts with "/" and is relative to the URL of the cube
+      # The URL must allow to identify a concept, and can be made of one ore more fields
+      # This is an example with two fields needed to identify an airport type: {typeOfAirport} and {typeOfAirport2nd}
+      # It must match the URI defined for the concept (see here under), and the fields name can be different as coming from different files
+      replacement: /airport_type/{typeOfAirport}/{typeOfAirport2nd}
+  typeOfAirport2nd:
+    name:
+      fr: Type d'aéroport (second key for demo)
+      de: Flughafentyp (second key for demo)
+      it: Tipo di aeroporto (second key for demo)
+      en: Type of Airport (second key for demo)
+    description:
+      de: Flughafentyp - second key for demo
+      fr: Type d'aéroport - second key for demo
+      it: Tipo di aeroporto - second key for demo
+      en: Type of Airport - second key for demo
+    dimension-type: Key Dimension
+    scale-type: nominal      
+    path: airport_type_2nd
+  measure:
+    name:
+      fr: Valeur
+      de: Wert
+      it: Valore
+      en: Value
+    description:
+      de: Wert - DESC
+      fr: Valeur - DESC
+      it: Valore - DESC
+      en: Value - DESC
+    dimension-type: Measure Dimension
+    scale-type: interval
+    path: value
+    unit: kilogramm
+# See the README for further explanation about the Concepts metadata
+Concepts:
+  typeOfAirport:
+    # The URL starts with "/" and is relative to the URL of the cube
+    # The URL must allow to identify a concept, and can be made of one ore more fields
+    # This is an example with two fields needed to identify an airport type: {typeOfAirportID} and {typeOfAirportSecondID}
+    # It must match the URI defined for the dimension's replacemetn (see here above), and the fields name can be different as coming from different files
+    URI: /airport_type/{typeOfAirportID}/{typeOfAirportSecondID}
+    # The name of the field/column that contains the name (label)
+    name-field: typeOfAirport
+    # Defines if the name is multilingual, meaning that a language suffix (_de, _fr, etc.) wil be concatenated to the name-field to find the different values
+    multilingual: true
+    # position-field is optional: the name of the csv column that contains a numeric position value for the concept
+    # used by Visualize to order the concept (instead of alphabe)
+    position-field: position
+    # other-fields are optional, URI could be relative (and concatenated to the concept's URI) or a full URI starting with 'http/https'
+    other-fields:
+      description:
+        URI: http://schema.org/description
+        multilingual: true
+        datatype: string
+      other_property_example:
+        URI: /airport_type/other_property_example   
+        datatype: string
+        language: en

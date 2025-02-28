@@ -3,7 +3,7 @@ from urllib.parse import quote
 from rdflib import BNode, Graph, Literal, RDF, URIRef, XSD, DCTERMS
 from rdflib.collection import Collection
 from datetime import datetime, timezone
-from typing import Self
+from typing import Self, Tuple
 import pandas as pd
 import numbers
 import sys
@@ -11,15 +11,16 @@ from pylindas.lindas.namespaces import *
 from pylindas.lindas.query import query_lindas
 from pyshacl import validate
 
-
 class Cube:
     _base_uri: URIRef
     _cube_uri: URIRef
+    _cube_uri_no_version: URIRef # same as _cube_uri but without the version, needed for concepts handling
     _cube_dict: dict
     _graph: Graph
     _dataframe: pd.DataFrame
     _shape_dict: dict
     _shape_URI: URIRef
+    _languages = ["fr", "en", "de", "it"]
 
     
     def __init__(self, dataframe: pd.DataFrame, cube_yaml: dict, environment: str, local=False):
@@ -37,7 +38,7 @@ class Cube:
         """
         self._dataframe = dataframe
         self._setup_cube_dict(cube_yaml=cube_yaml)
-        self._cube_uri = self._setup_cube_uri(local=local, environment=environment)
+        self._cube_uri, self._cube_uri_no_version = self._setup_cube_uri(local=local, environment=environment)
         assert self._cube_uri is not None
         self._setup_shape_dicts()
         self._graph = self._setup_graph()
@@ -178,20 +179,22 @@ class Cube:
         self._base_uri = URIRef(cube_yaml.get("Base-URI"))
         self._cube_dict = cube_yaml
 
-    def _setup_cube_uri(self, local: bool, environment="TEST") -> URIRef:
+    def _setup_cube_uri(self, local: bool, environment="TEST") ->  Tuple[URIRef, URIRef]:
         """
         Set up the cube URI by concatenating the base URI and the cube identifier with the version.
 
         Returns:
             URIRef: The constructed cube URI as a URIRef object.
         """
-        cube_uri = self._base_uri + "/".join(["cube", str(self._cube_dict.get("Identifier")), str(self._cube_dict.get("Version"))])
+        cube_uri_no_version = self._base_uri + "/".join(["cube", str(self._cube_dict.get("Identifier"))])
+        cube_uri = cube_uri_no_version + "/" + str(self._cube_dict.get("Version"))
+
         query = f"ASK {{ <{cube_uri}> ?p ?o}}"
         if not local:
             if query_lindas(query, environment=environment) == True:
                 sys.exit("Cube already exist! Please update your yaml")
-        else:
-            return URIRef(cube_uri)
+
+        return URIRef(cube_uri), URIRef(cube_uri_no_version)
     
     def _setup_shape_dicts(self) -> None:
         """Set up shape dictionaries by extracting key dimensions from cube dictionary.
@@ -237,6 +240,16 @@ class Cube:
         self._dataframe['obs-uri'] = self._dataframe['obs-uri'].map(URIRef)
         self._dataframe = self._dataframe.set_index("obs-uri")
 
+    # Function for dynamic replacement of column names, in between {} by effective column values in a row
+    #   template example: http://the_cube_uri/concept/airport_type/{typeOfAirport}/{typeOfAirport2nd}
+    def _replace_placeholders(self, row, template):
+        result = template
+        placeholders = re.findall(r'\{(.*?)\}', template)  # find each place holder inbetween {}
+        for placeholder in placeholders:
+            if placeholder in row:
+                result = result.replace(f'{{{placeholder}}}', str(row[placeholder]))
+        return result
+
     def _apply_mappings(self) -> None:
         """Apply mappings to the dataframe based on the specified mapping type.
         
@@ -262,6 +275,23 @@ class Cube:
                         pat = re.compile(mapping.get("pattern"))
                         repl = mapping.get("replacement")
                         self._dataframe[dim_name] = self._dataframe[dim_name].map(lambda x: re.sub(pat, repl, x))
+                    case "concept":
+                        # The replacement string is a URL with fields in-between {}, as for example:
+                        #   /airport_type/{typeOfAirport}/{typeOfAirport2nd}
+                        repl = mapping.get("replacement")
+                        # If the path is relative (it starts with "/"), then happen it to the cube's URL 
+                        #   It also means that the concept is generated with the cube
+                        #   thus also add the hard-coded "/concept" path
+                        if repl.startswith("/"):
+                            # cast the URIRef to a string to avoid log warnings "does not look like a valid URI"
+                            repl = str(self._cube_uri) + "/concept" + repl
+
+                        # Perform the {} placeholder replacement with the column values, for each row
+                        self._dataframe[dim_name] = self._dataframe.apply(lambda row: self._replace_placeholders(row, repl), axis=1)
+                        
+                value_type = mapping.get("value-type", 'Shared')
+                assert value_type in ['Shared', 'Literal']
+                self._dataframe[dim_name] = self._dataframe[dim_name].map(lambda v: URIRef(v) if value_type == "Shared" else Literal(v))
 
     def _write_dcat_contact_point(self, contact_dict: dict) -> BNode | URIRef:
         """Writes a contact point to the graph.
@@ -400,6 +430,179 @@ class Cube:
             self._graph.add((self._shape_URI, SH.property, shape))
         return self
     
+    def write_concept(self, concept_key: str, concept_data: pd.DataFrame):
+        """Write concepts in the cube's graph
+        
+        Args:
+            key: The concept must be defined in the cube_yaml file, as a nested key under the "Concepts" key
+            concept_data: A pandas dataframe containing values related to the concept (typically from a CSV file)
+        
+        Returns:
+            self
+        """
+        if not "Concepts" in self._cube_dict:
+            print(f"Error: call to write_concept() but the cube's information do not contain a \"Concepts\" key! The \"{concept_key}\" concepts will not be added to the graph.")
+            return self
+        
+        concepts = self._cube_dict.get("Concepts")
+
+        if not concept_key in concepts:
+            print(f"Error: call to write_concept() but the cube's information do not contain a \"{concept_key}\" nested key under the \"Concepts\" key! The \"{concept_key}\" concepts will not be added to the graph.")
+            return self
+
+        concept = concepts.get(concept_key)
+
+        # Mandatory value, will cause an exception if not found
+        uri = concept.get("URI")
+        nameField = concept.get("name-field")
+
+        # Handle the URI
+        # if the path is relative (it starts with "/"), then happen it to the cube's URL 
+        # It also means that the concept is generated with the cube
+        #   thus also add the hard-coded "/concept" path
+        if uri.startswith("/"):
+            # cast the URIRef to a string to avoid log warnings "does not look like a valid URI"
+            uri_versioned = str(self._cube_uri) + "/concept" + uri
+            # If the concept is part of the cube (URI based on the cube's URI), its URL contains the cube's version
+            # Then link that version to a URI with no version as done by the Cube Creator to keep links between versions of a concept
+            uri_unversioned = str(self._cube_uri_no_version) + "/concept" + uri
+            concept_data["URI_UNVERSIONED"] = concept_data.apply(lambda row: self._replace_placeholders(row, uri_unversioned), axis=1)
+        else:
+            uri_versioned = uri
+
+
+        concept_data["URI"] = concept_data.apply(lambda row: self._replace_placeholders(row, uri_versioned), axis=1)
+
+        # Optional values
+        if "multilingual" in concept:
+            multilingual = concept.get("multilingual")
+        else:
+            multilingual = False
+
+        if "position-field" in concept:
+            positionField = concept.get("position-field")
+        else:
+            positionField = ""
+
+        # Prepare the optional fields of the concept by:
+        # - taking only the fields that are founc in the data
+        #   remark: the key of the entry (under the other-fields entry) being the name of the field in the data
+        # - handle the URI field if it starts with a "/": adding the cubeURI + "/concept/prop" + the defined relative path
+        # If we wanted to take only the fields that are found in the data, we could add:
+        #    for key, value in otherFields.items() if key in concept_data
+        #  But this does not work now that multilingual fields are handled (the key will be suffixed with the langage tag, in the data)
+        if "other-fields" in concept:
+            otherFields = concept.get("other-fields")
+            cubeUri =  str(self._cube_uri)
+            
+            otherFields_dict = {
+                key: {
+                    **value, 
+                    "URI": cubeUri + "/concept/prop" + value["URI"] if value["URI"].startswith("/") else value["URI"]
+                }
+                for key, value in otherFields.items()
+            }            
+        else:
+            otherFields_dict = {}
+
+        # Add the concepts to the graph
+        concept_data.apply(self._add_concept, axis=1,  args=(nameField, multilingual, positionField, otherFields_dict))
+
+        return self
+    
+    def _add_concept(self, concept: pd.DataFrame, nameField: str, multilingual: bool, positionField:str, otherFields_dict):
+        """Add a concept to the graph.
+        
+            Args:
+                concept (pd.DataFrame): The concept data to be added (original file/csv values)
+                nameField: name of the field containing the name of the concept
+                multilingual: if true, a multilingual concept is created, looking for columns named 'nameField' + '_' + a pre-defined language
+                positionField: name of the field that contains a position for the concept. Empty if no position to be added
+                otherFields_dict: an optional dictionary value that contains other fields to add to a concept (or an empty dict if no other fields)
+                    About that dictionary:
+                        - the key is the name of the field in the data
+                        - URI field: the URI of the property, must be prepared before hand if it is a relative path in the yaml file 
+                        - multilingual:  optional, look for the fields named 'key' + '_' + a pre-defined language 
+
+            Note: from observing concepts in Lindas, a schema:sameAs is added to a generic URL based on the cube's URL but without the version
+
+            Returns:
+                None
+        """
+        conceptURI = URIRef(concept.URI)
+        if multilingual:
+            for lang in self._languages:
+                name_key = f"{nameField}_{lang}"
+                if name_key in concept:
+                    self._graph.add((conceptURI, URIRef(SCHEMA.name), Literal(concept.get(name_key), lang=lang)))            
+        else:
+            self._graph.add((conceptURI, URIRef(SCHEMA.name), Literal(concept.get(nameField))))
+
+        if positionField:
+            self._graph.add((conceptURI, URIRef(SCHEMA.position), Literal(concept.get(positionField))))
+
+        # If the concept is part of the cube (URI based on the cube's URI), its URL contains the cube's version
+        # Then link that version to a URI with no version as done by the Cube Creator to keep links between versions of a concept
+        if "URI_UNVERSIONED" in concept:
+            self._graph.add((conceptURI, URIRef(SCHEMA.sameAs), URIRef(concept.URI_UNVERSIONED)))
+
+        # Handling other fields/properties
+        for key, value in otherFields_dict.items():
+            if "multilingual" in value and value['multilingual']:
+                for lang in self._languages:
+                    key_lng = f"{key}_{lang}"
+                    if key_lng in concept:
+                        self._graph.add((conceptURI, URIRef(value['URI'] ), Literal(concept.get(key_lng), lang=lang)))
+            else:
+                if key in concept:
+                    # Note: get the datatype + language of the concept from the configuration file
+                    # if multilingual, this is handeled here above
+                    #   but it might happen that a field is not multilingual, but still concerns a specific language
+                    #   on the other hand, if the 'language' key is not in the configuration file -> it will be a simple string with no language tag
+                    sanitized_value = self._sanitize_value(concept.get(key), value.get('datatype'), value.get('language'))
+                    self._graph.add((conceptURI, URIRef(value['URI'] ), sanitized_value))
+
+
+
+        
+    def check_dimension_object_property(self, dimension_name: str, property: URIRef) -> bool:
+        try:
+            dimension = self._get_shape_column(dimension_name) # raises an exception if dimension not found
+            path = URIRef(self._base_uri + dimension.get("path"))
+
+            # Prepare the SPARQL query
+            query = f"""
+            SELECT DISTINCT ?obj ?value
+            WHERE {{
+                ?obs <{path}> ?obj .
+                FILTER NOT EXISTS {{?obj <{property}> ?value}}
+            }}
+            """
+
+            # Execute the query
+            results = self._graph.query(query)
+
+            print("\nChecking links to concept table")
+            print("--------------------------------") 
+            print("Checking that objects of the '" + dimension_name + "' dimension link to a concept with a '" + str(property) + "' property")
+      
+            # Print the objects that have no match with that property
+            allValuesFound = True
+            if results: 
+                allValuesFound = False
+                print("Result: problem with the following concept(s):")
+                for row in results:
+                    print("- ", row["obj"])
+            else:
+                print("Result: no problem found")
+                
+            print("--------------------------------") 
+
+            return allValuesFound
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return False
+
     def _write_dimension_shape(self, dim_dict: dict, values: pd.Series) -> BNode:
         """Write dimension shape based on the provided dictionary and values.
         
