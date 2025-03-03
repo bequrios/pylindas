@@ -1,5 +1,5 @@
 # Implementation of concept tables and multilingual concepts
-This is a proposal implementation to handle:
+This is a first implementation to handle:
 - concept tables
 - multilingual concepts
 

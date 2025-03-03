@@ -173,11 +173,34 @@ from the examples.
 ```bash
 $ python cli.py example start-fuseki
 ```
+
+## About shared dimensions queries
+When a data scientist wants to link a dimension to an existing Shared Dimension, he has to:
+- Find a suitable Shared Dimension 
+- Use the URLs of the terms of that Shared Dimension to configure dimension in the yml file and its "mapping" field
+
+This is a first implementation of:
+- Basic queries to request shared dimensions information from LINDAS (including terms and their URLs)
+- Display the results, line by line
+
+See the folder `pylindas/shared_dimension_queries` and its [README](pylindas/shared_dimension_queries/README.md) for detailed explanation
+
+About generating Shared Dimension, see here under.
+
 ## About concept tables and multi-lingual concepts
+This is first implementation to handle:
+- concept tables
+- multilingual concepts
+
+A concept table is the possibility to handle the values of a dimension as a url to a new resource (a concept).  
+This is similar to an object that is the URL of a Shared Dimension's term, but here the concepts are created for the cube and uploaded with the cube.  
+Remark: if the resource/concept already exist, than the case is similar to the handling of Shared Dimensions mapping, and this is already handled by pyCube with the "mapping" mechanism. 
+
 See the folder `example/Cubes/concept_table_airport` and its [README](example/Cubes/concept_table_airport/README.md) for detailed explanation
 
 ## About generation of shared dimensions
+This is a first implementation to generate a shared dimension, following an approach similar to pyCube, but to transform a .csv file to the corresponding RDF.  
+
 See the folder `pylindas/pyshareddimension` and its [README](pylindas/pyshareddimension/README.md) for detailed explanation
 
-## About shared dimensions queries
-See the folder `pylindas/shared_dimension_queries` and its [README](pylindas/shared_dimension_queries/README.md) for detailed explanation
+
