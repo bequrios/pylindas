@@ -278,7 +278,7 @@ class Cube:
                     case "concept":
                         # The replacement string is a URL with fields in-between {}, as for example:
                         #   /airport_type/{typeOfAirport}/{typeOfAirport2nd}
-                        repl = mapping.get("replacement")
+                        repl = mapping.get("replacement-automated")
                         # If the path is relative (it starts with "/"), then happen it to the cube's URL 
                         #   It also means that the concept is generated with the cube
                         #   thus also add the hard-coded "/concept" path

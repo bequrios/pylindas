@@ -73,7 +73,7 @@ dimensions:
       # The URL must allow to identify a concept, and can be made of one ore more fields
       # This is an example with two fields needed to identify an airport type: {typeOfAirport} and {typeOfAirport2nd}
       # It must match the URI defined for the concept (see here under), and the fields name can be different as coming from different files
-      replacement: /airport_type/{typeOfAirport}/{typeOfAirport2nd}
+      replacement-automated: /airport_type/{typeOfAirport}/{typeOfAirport2nd}
   typeOfAirport2nd:
     name:
       fr: Type d'aéroport (second key for demo)
