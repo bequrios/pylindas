@@ -22,7 +22,7 @@ In description.yml, the "typeOfAirport" dimension is defined with the standards 
 ```
 	mapping:
 		type: concept
-		replacement: /airport_type/{typeOfAirport}/{typeOfAirport2nd}    
+		replacement-automated: /airport_type/{typeOfAirport}/{typeOfAirport2nd}    
 ```
 
 In the code, this is handled in the existing `_apply_mappings()` method, with new this `concept` mapping type.  
@@ -32,7 +32,7 @@ The replacement will generate a URL replacing for each line the values of the id
 - If the value do not start with "/", it should be a full URL also containing {field} values that are replaced on the fly.  
 
 **Proposal 1**: this "replacement" handling could be also implement for shared dimensions.  
-It could be added to the current "replacements" (with -s) handling, where this replacements allows to give a one-to-one mapping
+It could be added to the current "replacements" handling, where this replacements allows to give a one-to-one mapping
 that might be needed if no corresponding key exists to automatically build the URL (map "Zurich" to 0 for example).  
 
 **Proposal 2**: maybe this way of handling the URL, with the {field} configuration, could replace the current "additive" and "replace" mappings type, handling both with one single syntax.
