@@ -2,7 +2,7 @@ import pandas as pd
 import yaml
 
 from pylindas.lindas.namespaces import SCHEMA
-from  pylindas.pycube import Cube
+from pylindas.pycube import Cube
 from pylindas.lindas.upload import upload_ttl
 from pylindas.lindas.query import cube_exists
 

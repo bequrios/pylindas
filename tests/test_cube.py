@@ -23,7 +23,7 @@ class TestClass:
         self.co2_cube = self.setup_test_cube(
             "co2-limits/data.csv", "co2-limits/description.yml")
         self.hierarchies_cube = self.setup_test_cube(
-            "Biotope_Statistik/biotope.csv", "Biotope_Statistik/biotope.yml")
+            "Biotope_Statistik/data.csv", "Biotope_Statistik/description.yml")
 
     def test_standard_error(self):
         sparql = (

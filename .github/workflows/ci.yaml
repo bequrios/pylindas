@@ -39,4 +39,4 @@ jobs:
         PYTHONWARNINGS: default
         PYTHONUTF8: 1
       run: |
-        pytest -s -vv tests example/Cubes/Biotope_Statistik/example_biotop.py
+        pytest -s -vv tests example/Cubes/Biotope_Statistik/biotope.py example/Cubes/concept_table_airport/airport.py
