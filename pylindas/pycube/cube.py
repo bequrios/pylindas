@@ -3,7 +3,13 @@ from urllib.parse import quote
 from rdflib import BNode, Graph, Literal, RDF, URIRef, XSD, DCTERMS
 from rdflib.collection import Collection
 from datetime import datetime, timezone
-from typing import Self, Tuple
+try:
+    from typing import Self
+except:
+    # fallback for Self in python 3.10
+    from typing import TypeVar
+    Self = TypeVar("Self", bound="Cube")
+from typing import Tuple
 import pandas as pd
 import numbers
 import sys
