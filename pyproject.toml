@@ -14,7 +14,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
 ]
 keywords = ["linked data", "LINDAS", "cubes", "RDF"]
-requires-python = ">=3.11"
+requires-python = ">=3.10.11"
 dynamic = ["dependencies"]
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
