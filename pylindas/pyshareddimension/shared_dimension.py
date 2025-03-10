@@ -3,7 +3,12 @@ from urllib.parse import quote
 from rdflib import BNode, Graph, Literal, RDF, URIRef, XSD
 from rdflib.collection import Collection
 from datetime import datetime, timezone
-from typing import Self
+try:
+    from typing import Self
+except:
+    # fallback for Self in python 3.10
+    from typing import TypeVar
+    Self = TypeVar("Self", bound="SharedDimension")
 import pandas as pd
 import numbers
 import sys
