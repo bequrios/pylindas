@@ -23,7 +23,7 @@ class TestClass:
         self.co2_cube = self.setup_test_cube(
             "co2-limits/data.csv", "co2-limits/description.yml")
         self.hierarchies_cube = self.setup_test_cube(
-            "Biotope_Statistik/biotope.csv", "Biotope_Statistik/biotope.yml")
+            "Biotope_Statistik/data.csv", "Biotope_Statistik/description.yml")
 
     def test_standard_error(self):
         sparql = (
@@ -197,10 +197,10 @@ class TestClass:
         # As setup_method() is called before each test
         # -> create the concept cube only for this specific test
         # To change later if needed
-        self.concepts_cube = self.setup_test_cube("concept_table_airport/data_with_dummy.csv", "concept_table_airport/description.yml")
+        self.concepts_cube = self.setup_test_cube("concept_table_airport/data.csv", "concept_table_airport/description.yml")
 
         # Add the concept data to the cube's data
-        airport_concept_df = pd.read_csv(self.TEST_CASE_PATH + "/concept_table_airport/airportType.csv")
+        airport_concept_df = pd.read_csv(self.TEST_CASE_PATH + "/concept_table_airport/airportconcept.csv")
         self.concepts_cube.write_concept("typeOfAirport", airport_concept_df)
         # data_with_dummy.csv, the data file uploaded for that cube, contains an airport type identifier that doesn't exist in airportType.csv
         # the goal is to demonstrate that the  check_dimension_object_property() called here under will detect that
@@ -211,7 +211,7 @@ class TestClass:
         assert not bool(allConceptsFound)
 
         # Now add the dummy airportType 
-        airport_concept_dummy_df = pd.read_csv("example/Cubes/concept_table_airport/airportType_dummy.csv")
+        airport_concept_dummy_df = pd.read_csv("example/Cubes/concept_table_airport/airportdummyconcept.csv")
         self.concepts_cube.write_concept("typeOfAirport", airport_concept_dummy_df)
         allConceptsFound = self.concepts_cube.check_dimension_object_property("typeOfAirport", SCHEMA.name)
         # allConceptsFound should be True: the dummy airport type has been added to the concepts
