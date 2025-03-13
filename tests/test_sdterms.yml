@@ -1,0 +1,21 @@
+Identifier: test_canton
+Name:
+  en: cantons
+  fr: cantons
+  de: cantons
+  it: cantons
+# Description is optional
+Description:
+  fr: cantons
+  en: cantons
+# Valid-from is optional, it is a date/time value  
+# Note: it is currently optional, but might need to become mandatory as validFrom, and later validThrough, are used to make a SD and its term 'deprecated'
+Valid-from: 2025-02-05T00:00:00Z
+# Contributor is optional, it is now added by the Cube Creator when creating a new SD
+Contributor:
+  name: Joshua Hirt
+  email: joshua.hirt@bafu.admin.ch
+Terms:
+  identifier-field: id
+  name-field: name
+  multilingual: False

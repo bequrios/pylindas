@@ -169,7 +169,7 @@ class SharedDimension:
         # Note: Shared Dimension usually do not have a trailing "/" in there URL
         #   -> add it 
         def make_iri(row):
-            return self._sd_uri + "/" + quote(row[termIdentifierField])
+            return self._sd_uri + "/" + quote(str(row[termIdentifierField]))
         self._dataframe['terms-uri'] = self._dataframe.apply(
             make_iri, axis=1
         )
@@ -192,7 +192,7 @@ class SharedDimension:
 
             def make_iri(row):
                 if not pd.isna(row[key]):
-                    return URIRef(self._sd_uri + "/" + quote(row[key]))
+                    return URIRef(self._sd_uri + "/" + quote((str(row[key]))))
             
             self._dataframe[keyForUri] = self._dataframe.apply(
                 make_iri, axis=1
