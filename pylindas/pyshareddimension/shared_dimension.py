@@ -5,7 +5,7 @@ from rdflib.collection import Collection
 from datetime import datetime, timezone
 try:
     from typing import Self
-except:
+except ImportError:
     # fallback for Self in python 3.10
     from typing import TypeVar
     Self = TypeVar("Self", bound="SharedDimension")

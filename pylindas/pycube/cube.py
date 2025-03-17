@@ -5,7 +5,7 @@ from rdflib.collection import Collection
 from datetime import datetime, timezone
 try:
     from typing import Self
-except:
+except ImportError:
     # fallback for Self in python 3.10
     from typing import TypeVar
     Self = TypeVar("Self", bound="Cube")
@@ -717,7 +717,7 @@ class Cube:
                         self._graph.add((dim_node, META.dataKind, data_kind_node))
             except AttributeError:
                 pass
-        except KeyError or AttributeError:
+        except (KeyError, AttributeError):
             pass
         
         if dim_dict.get("annotation"):
