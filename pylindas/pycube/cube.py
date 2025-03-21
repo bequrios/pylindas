@@ -26,7 +26,7 @@ class Cube:
     _dataframe: pd.DataFrame
     _shape_dict: dict
     _shape_URI: URIRef
-    _languages = ["fr", "en", "de", "it"]
+    _languages = (lst := ["fr", "en", "de", "it", "la", "rm"] ) + [item.upper() for item in lst]
 
     
     def __init__(self, dataframe: pd.DataFrame, cube_yaml: dict, environment: str, local=False):
@@ -540,7 +540,7 @@ class Cube:
             for lang in self._languages:
                 name_key = f"{nameField}_{lang}"
                 if name_key in concept:
-                    self._graph.add((conceptURI, URIRef(SCHEMA.name), Literal(concept.get(name_key), lang=lang)))            
+                    self._graph.add((conceptURI, URIRef(SCHEMA.name), Literal(concept.get(name_key), lang=lang.lower())))            
         else:
             self._graph.add((conceptURI, URIRef(SCHEMA.name), Literal(concept.get(nameField))))
 
@@ -558,7 +558,7 @@ class Cube:
                 for lang in self._languages:
                     key_lng = f"{key}_{lang}"
                     if key_lng in concept:
-                        self._graph.add((conceptURI, URIRef(value['URI'] ), Literal(concept.get(key_lng), lang=lang)))
+                        self._graph.add((conceptURI, URIRef(value['URI'] ), Literal(concept.get(key_lng), lang=lang.lower())))
             else:
                 if key in concept:
                     # Note: get the datatype + language of the concept from the configuration file

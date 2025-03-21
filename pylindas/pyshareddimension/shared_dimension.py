@@ -24,7 +24,7 @@ class SharedDimension:
     _dataframe: pd.DataFrame
     _shape_dict: dict
     _shape_URI: URIRef
-    _languages = ["fr", "en", "de", "it"]
+    _languages = (lst := ["fr", "en", "de", "it", "la", "rm"] ) + [item.upper() for item in lst]
     
     def __init__(self, dataframe: pd.DataFrame, sd_yaml: dict, environment: str, local=False):
         """
@@ -310,7 +310,7 @@ class SharedDimension:
             for lang in self._languages:
                 name_key = f"{termNameField}_{lang}"
                 if name_key in termsData:
-                    self._graph.add((termsData.name, URIRef(SCHEMA.name), Literal(termsData.get(name_key), lang=lang)))            
+                    self._graph.add((termsData.name, URIRef(SCHEMA.name), Literal(termsData.get(name_key), lang=lang.lower())))            
         else:
             self._graph.add((termsData.name, URIRef(SCHEMA.name), Literal(termsData.get(termNameField))))
 
@@ -334,7 +334,7 @@ class SharedDimension:
                 for lang in self._languages:
                     key_lng = f"{key}_{lang}"
                     if key_lng in termsData:
-                        self._graph.add((termsData.name, URIRef(value['URI']), Literal(termsData.get(key_lng), lang=lang)))
+                        self._graph.add((termsData.name, URIRef(value['URI']), Literal(termsData.get(key_lng), lang=lang.lower())))
             else:
                 if key in termsData:
                     rawValue = termsData.get(key)
