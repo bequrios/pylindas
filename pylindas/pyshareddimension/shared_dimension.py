@@ -80,8 +80,11 @@ class SharedDimension:
         terms = self._sd_dict.get("Terms")
         if "links-to-other-terms" in terms:
             self._construct_links_uri(terms.get("links-to-other-terms"))
+        if "mapping" in terms:
+            self._apply_mappings(terms.get("mapping"))
 
         return self
+    
 
     def write_sd(self) -> Self:
         """
@@ -186,7 +189,7 @@ class SharedDimension:
             None
         """
         # Note: Shared Dimension usually do not have a trailing "/" in there URL
-        #   -> add it 
+        #   -> add it $ 
         for key, value in linksToOtherTerms.items():
             keyForUri = str(key) + "-uri"
 
@@ -197,7 +200,34 @@ class SharedDimension:
             self._dataframe[keyForUri] = self._dataframe.apply(
                 make_iri, axis=1
             )
+    def _apply_mappings(self, mapping) -> None:
+        #TODO commentate, and YAML documentation
+        for key, value in mapping.items():
+            match value.get("type"):
+                case "additive":
+                    base = value.get("base")
+                    self._dataframe[key] = base + self._dataframe[key].astype(str)
+                case "replace":
+                    replacement = value.get("replacement")
+                    self._dataframe[key] = replacement
+                case "regex":
+                    pat = re.compile(value.get("pattern"))
+                    repl = value.get("replacement")
+                    self._dataframe[key] = self._dataframe[key].map(lambda x: re.sub(pat, repl, x))
+                case "concept":
+                    repl = value.get("replacement-automated")
+                    if repl.startswith("/"):
+                        repl = str(self._sd_uri) + "/concept" + repl
+                    self._dataframe[key] = self._dataframe.apply(lambda row: self._replace_placeholders(row, repl), axis=1)
 
+    def _replace_placeholders(self, row, template):
+        result = template
+        placeholders = re.findall(r'\{(.*?)\}', template)  # find each place holder inbetween {}
+        for placeholder in placeholders:
+            if placeholder in row:
+                result = result.replace(f'{{{placeholder}}}', str(row[placeholder]))
+        return result
+    
     def _write_contributor(self, contributor_dict: dict) -> BNode:
         """Writes a contributor to the graph.
         

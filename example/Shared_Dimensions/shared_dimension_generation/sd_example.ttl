@@ -12,6 +12,7 @@ ns1:1.1.1.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.1.1.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Säugetiere (ohne Fledermäuse)"@de,
         "Mammals (without bats)"@en,
         "Mammifères (sans Chauves-souris)"@fr,
@@ -24,6 +25,7 @@ ns1:1.1.1.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.1.1.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Fledermäuse"@de,
         "Bats"@en,
         "Chauves-souris"@fr,
@@ -36,6 +38,7 @@ ns1:1.1.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.1.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Brutvögel"@de,
         "Breeding birds"@en,
         "Oiseaux nicheurs"@fr,
@@ -48,6 +51,7 @@ ns1:1.1.1.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.1.3" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Reptilien"@de,
         "Reptiles"@en,
         "Reptiles"@fr,
@@ -60,6 +64,7 @@ ns1:1.1.1.4 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.1.4" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Amphibien"@de,
         "Amphibians"@en,
         "Amphibiens"@fr,
@@ -72,6 +77,7 @@ ns1:1.1.1.5 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.1.5" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Fische und Rundmäuler"@de,
         "Fishes and cyclostomes"@en,
         "Poissons et Cyclostomes"@fr,
@@ -84,6 +90,7 @@ ns1:1.1.2.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.2.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Muscheln"@de,
         "Bivalves"@en,
         "Bivalves"@fr,
@@ -96,6 +103,7 @@ ns1:1.1.2.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.2.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Schnecken"@de,
         "Gasteropodi"@en,
         "Gastéropodes"@fr,
@@ -108,6 +116,7 @@ ns1:1.1.3.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.3.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Zehnfusskrebse"@de,
         "Crayfishes"@en,
         "Écrevisses"@fr,
@@ -120,6 +129,7 @@ ns1:1.1.4.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.1.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Bienen"@de,
         "Bees"@en,
         "Abeilles"@fr,
@@ -132,6 +142,7 @@ ns1:1.1.4.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.1.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Ameisen"@de,
         "Ants"@en,
         "Fourmis"@fr,
@@ -144,6 +155,7 @@ ns1:1.1.4.10 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.10" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Libellen"@de,
         "Dragonflies"@en,
         "Libellules, Odonates"@fr,
@@ -156,6 +168,7 @@ ns1:1.1.4.11 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.11" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Eintagsfliegen"@de,
         "Mayflies"@en,
         "Éphémères"@fr,
@@ -168,6 +181,7 @@ ns1:1.1.4.2.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.2.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Tagfalter und Widderchen"@de,
         "Diurnal Butterflies and Zigene"@en,
         "Papillons diurnes et Zygènes"@fr,
@@ -180,6 +194,7 @@ ns1:1.1.4.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.3" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Köcherfliegen"@de,
         "Caddisflies"@en,
         "Trichoptères"@fr,
@@ -192,6 +207,7 @@ ns1:1.1.4.4 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.4" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Schnaken"@de,
         "Diptera Tipulids"@en,
         "Tipules"@fr,
@@ -204,6 +220,7 @@ ns1:1.1.4.5.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.5.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Pracht-, Bock-, Rosenkäfer und Schröter"@de,
         "Coleopterae Buprestides, Cerambicides, Cetonides, Lucanides"@en,
         "Coléoptères Buprestidés, Cérambycidés, Cétoniidés et Lucanidés"@fr,
@@ -216,6 +233,7 @@ ns1:1.1.4.5.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.5.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Laufkäfer und Sandlaufkäfer"@de,
         "Carabidae and Cicindelinae"@en,
         "Carabidés et Cicindèles"@fr,
@@ -228,6 +246,7 @@ ns1:1.1.4.5.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.5.3" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Wasserkäfer"@de,
         "Aquatic beetles Adefagians"@en,
         "Coléoptères hydradéphages"@fr,
@@ -240,6 +259,7 @@ ns1:1.1.4.6 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.6" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Netzflügler"@de,
         "Neuropterans"@en,
         "Névroptères"@fr,
@@ -252,6 +272,7 @@ ns1:1.1.4.7 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.7" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Singzikaden"@de,
         "Cicadas"@en,
         "Cigales"@fr,
@@ -264,6 +285,7 @@ ns1:1.1.4.8 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.8" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Heuschrecken"@de,
         "Ortopterans"@en,
         "Orthoptères"@fr,
@@ -276,6 +298,7 @@ ns1:1.1.4.9 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.9" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Steinfliegen"@de,
         "Stoneflies"@en,
         "Plécoptères"@fr,
@@ -288,6 +311,7 @@ ns1:1.2.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.2.1.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Blütenpflanzen"@de,
         "Flowering plants"@en,
         "Plantes â  fleurs"@fr,
@@ -300,6 +324,7 @@ ns1:1.2.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.2.1.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Farnartige Pflanzen"@de,
         "Ferns"@en,
         "Fougères"@fr,
@@ -312,6 +337,7 @@ ns1:1.2.2.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.2.2.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Lebermoose"@de,
         "Hepaticae"@en,
         "Hépatiques"@fr,
@@ -324,6 +350,7 @@ ns1:1.2.2.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.2.2.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Laubmoose"@de,
         "Musci"@en,
         "Mousses"@fr,
@@ -336,6 +363,7 @@ ns1:1.2.2.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.2.2.3" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Hormoose"@de,
         "Anthocerotae"@en,
         "Anthocérotes"@fr,
@@ -348,6 +376,7 @@ ns1:1.2.3.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.2.3.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Armleuchteralgen"@de,
         "Stoneworts"@en,
         "Characées"@fr,
@@ -360,6 +389,7 @@ ns1:1.3.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.3.1.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Baumflechten"@de,
         "Epiphytic lichens"@en,
         "Lichens épiphytes"@fr,
@@ -372,6 +402,7 @@ ns1:1.3.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.3.1.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Bodenflechten"@de,
         "Soil lichens"@en,
         "Lichens terricoles"@fr,
@@ -384,6 +415,7 @@ ns1:1.3.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.3.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Grosspilze"@de,
         "Macromycetes"@en,
         "Champignons supérieurs"@fr,
@@ -396,6 +428,7 @@ ns1:1.1.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.3" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Krebstiere"@de,
         "Crustaceans"@en,
         "Crustacés"@fr,
@@ -408,6 +441,7 @@ ns1:1.1.4.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Schmetterlinge"@de,
         "Butterflies"@en,
         "Papillons"@fr,
@@ -420,6 +454,7 @@ ns1:1.2.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.2.3" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Makroalgen"@de,
         "Macroalgae"@en,
         "Macroalgues"@fr,
@@ -432,6 +467,7 @@ ns1:1.1.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.1.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Säugetiere "@de,
         "Mammals"@en,
         "Mammifères"@fr,
@@ -444,6 +480,7 @@ ns1:1.1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Weichtiere"@de,
         "Molluscs"@en,
         "Mollusques"@fr,
@@ -456,6 +493,7 @@ ns1:1.1.4.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Hautflügler"@de,
         "Hymenopterae"@en,
         "Hyménoptères"@fr,
@@ -468,6 +506,7 @@ ns1:1.2.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.2.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Gefässpflanzen"@de,
         "Vascular plants"@en,
         "Plantes vasculaires"@fr,
@@ -480,6 +519,7 @@ ns1:1.3 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.3" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Flechten und Pilze"@de,
         "Lichens and mycetes"@en,
         "Lichens et champignons"@fr,
@@ -492,6 +532,7 @@ ns1:1.3.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.3.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Flechten"@de,
         "Lichens and fungi"@en,
         "Lichens"@fr,
@@ -504,6 +545,7 @@ ns1:1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Alle Artengruppen"@de,
         "All species groups"@en,
         "Tous les groupes d'espèces"@fr,
@@ -514,6 +556,7 @@ ns1:1.1.4.5 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4.5" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Käfer"@de,
         "Coleopterae"@en,
         "Coléoptères"@fr,
@@ -526,6 +569,7 @@ ns1:1.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Pflanzen"@de,
         "Plants"@en,
         "Plantes"@fr,
@@ -538,6 +582,7 @@ ns1:1.2.2 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.2.2" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Moose"@de,
         "Bryophytes"@en,
         "Bryophytes"@fr,
@@ -550,6 +595,7 @@ ns1:1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Tiere"@de,
         "Animals"@en,
         "Animaux"@fr,
@@ -562,6 +608,7 @@ ns1:1.1.1 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.1" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Wirbeltiere"@de,
         "Vertebrates"@en,
         "Vertébrés"@fr,
@@ -574,6 +621,7 @@ ns1:1.1.4 a schema1:DefinedTerm,
         sd_md:SharedDimensionTerm ;
     schema1:identifier "1.1.4" ;
     schema1:inDefinedTermSet <https://ld.admin.ch/cube/dimension/pylindas_sd_generation_example> ;
+    schema1:isPartOf <https://www.wikidata.org/wiki/Q2> ;
     schema1:name "Insekten"@de,
         "Insects"@en,
         "Insectes"@fr,

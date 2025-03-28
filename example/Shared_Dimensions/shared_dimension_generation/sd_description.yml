@@ -34,7 +34,16 @@ Terms:
       # to be adapted if needed
       property: http://www.w3.org/2004/02/skos/core#broader
   # other-fields are optional, URI could be relative (and concatenated to the SD's URI) or a full URI starting with 'http/https'
+  mapping:
+    location:
+      type: additive
+      base: https://www.wikidata.org/wiki/
+    replace:
+      
   other-fields:
     parent_code:
       URI: /parent_identifier_example
       datatype: string
+    location:
+      URI: http://schema.org/isPartOf 
+      datatype: URI
