@@ -136,8 +136,12 @@ class SharedDimension:
         Returns:
             None
         """
+        iden = sd_yaml.get("Identifier")
+        if iden.startswith("http"):
+            sd_uri = URIRef(iden)
         # Note: Shared Dimension usually do not have a trailing "/" in there URL
-        sd_uri = URIRef("https://ld.admin.ch/cube/dimension/" + sd_yaml.get("Identifier"))
+        else:
+            sd_uri = URIRef("https://ld.admin.ch/cube/dimension/" + iden)
 
         if not local:
             query = f"ASK {{ <{sd_uri}> ?p ?o}}"
@@ -201,7 +205,7 @@ class SharedDimension:
                 make_iri, axis=1
             )
     def _apply_mappings(self, mapping) -> None:
-        #TODO commentate, and YAML documentation
+        #Adapted directly from the _apply_mappings in cube.py
         for key, value in mapping.items():
             match value.get("type"):
                 case "additive":
@@ -212,13 +216,16 @@ class SharedDimension:
                     self._dataframe[key] = replacement
                 case "regex":
                     pat = re.compile(value.get("pattern"))
-                    repl = value.get("replacement")
-                    self._dataframe[key] = self._dataframe[key].map(lambda x: re.sub(pat, repl, x))
+                    reg = value.get("replacement")
+                    self._dataframe[key] = self._dataframe[key].map(lambda x, pat=pat, reg=reg: re.sub(pat, reg, x))
                 case "concept":
+                    # The replacement string is a URL with fields in-between {}, as for example:
+                    # /airport_type/{typeOfAirport}/{typeOfAirport2nd}
                     repl = value.get("replacement-automated")
-                    if repl.startswith("/"):
-                        repl = str(self._sd_uri) + "/concept" + repl
-                    self._dataframe[key] = self._dataframe.apply(lambda row: self._replace_placeholders(row, repl), axis=1)
+                    #if it starts with / it takes the base_uri as a base to do the concept on
+                    if repl.startswith("/"):    
+                        repl = str(self._sd_uri) + repl
+                    self._dataframe[key] = self._dataframe.apply(lambda row, repl=repl: self._replace_placeholders(row, repl), axis=1)
 
     def _replace_placeholders(self, row, template):
         result = template

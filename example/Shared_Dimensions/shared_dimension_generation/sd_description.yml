@@ -1,4 +1,5 @@
 # The SD URL will be the Identifier concatenated to the fixed "https://ld.admin.ch/cube/dimension/"
+# If the SD URL starts with http, it will instead use that instead of the default
 # Note: a SD's URL is not relative to the LINDAS environment, and it will be dereferenceable only when published on PROD
 Identifier: pylindas_sd_generation_example
 Name:
@@ -33,14 +34,38 @@ Terms:
       # property: the current proposal here does not handle relative URIs, but request an existing property
       # to be adapted if needed
       property: http://www.w3.org/2004/02/skos/core#broader
-  # other-fields are optional, URI could be relative (and concatenated to the SD's URI) or a full URI starting with 'http/https'
+
+  #mapping is optional, and is used to replace the entrys in the SharedDimension with URI's to different SharedDimensions
+  #there are currently 4 types additive, replace, regex and concept adapted from Cube.py
+  #anytime something is added to mapping, it should also be added to other-fields, and given the appropriate datatype and URI
+  #if made into an URI, make sure the entries are valid as URI's so no empty spaces
   mapping:
+    #this is the name of the column in which the entries are to be replaced
     location:
+      #type addtitive, adds whatever is in the entry at the end of the "base" so , "base" + "entry"
       type: additive
       base: https://www.wikidata.org/wiki/
-    replace:
-      
+    wikidata:
+      #type replace, replaces the entry fully with the given replacement, all entries are changed to the same thing, nondynamically
+      type: replace
+      replacement: https://www.wikidata.org/wiki/Q1
+    concept:
+      #type concept, the entry is changed to the URI given
+      #Columns can be placed in {} and when done so, those places in the URI will dynamically be appropriated as the given entries inside the Column
+      #if started with "/" it will use the cubes base_URL and add concept inside ex: /parent/{parent}, will give baseURI + /parent + /(entry in the column of parent)
+      type: concept
+      replacement-automated: http://the_cube_uri/concept/{concept}/{code}
+
+    #TODO Regex example
+  
+  # other-fields are optional, URI could be relative (and concatenated to the SD's URI) or a full URI starting with 'http/https'
   other-fields:
+    wikidata:
+      URI: http://schema.org/isPartOf
+      datatype: URI
+    concept:
+      URI: /partoftest
+      datatype: URI
     parent_code:
       URI: /parent_identifier_example
       datatype: string
