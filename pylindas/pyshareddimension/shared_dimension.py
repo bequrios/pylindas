@@ -80,8 +80,11 @@ class SharedDimension:
         terms = self._sd_dict.get("Terms")
         if "links-to-other-terms" in terms:
             self._construct_links_uri(terms.get("links-to-other-terms"))
+        if "mapping" in terms:
+            self._apply_mappings(terms.get("mapping"))
 
         return self
+    
 
     def write_sd(self) -> Self:
         """
@@ -133,8 +136,12 @@ class SharedDimension:
         Returns:
             None
         """
+        iden = sd_yaml.get("Identifier")
+        if iden.startswith("http"):
+            sd_uri = URIRef(iden)
         # Note: Shared Dimension usually do not have a trailing "/" in there URL
-        sd_uri = URIRef("https://ld.admin.ch/cube/dimension/" + sd_yaml.get("Identifier"))
+        else:
+            sd_uri = URIRef("https://ld.admin.ch/cube/dimension/" + iden)
 
         if not local:
             query = f"ASK {{ <{sd_uri}> ?p ?o}}"
@@ -186,7 +193,7 @@ class SharedDimension:
             None
         """
         # Note: Shared Dimension usually do not have a trailing "/" in there URL
-        #   -> add it 
+        #   -> add it $ 
         for key, value in linksToOtherTerms.items():
             keyForUri = str(key) + "-uri"
 
@@ -197,7 +204,37 @@ class SharedDimension:
             self._dataframe[keyForUri] = self._dataframe.apply(
                 make_iri, axis=1
             )
+    def _apply_mappings(self, mapping) -> None:
+        #Adapted directly from the _apply_mappings in cube.py
+        for key, value in mapping.items():
+            match value.get("type"):
+                case "additive":
+                    base = value.get("base")
+                    self._dataframe[key] = base + self._dataframe[key].astype(str)
+                case "replace":
+                    replacement = value.get("replacement")
+                    self._dataframe[key] = replacement
+                case "regex":
+                    pat = re.compile(value.get("pattern"))
+                    reg = value.get("replacement")
+                    self._dataframe[key] = self._dataframe[key].map(lambda x, pat=pat, reg=reg: re.sub(pat, reg, x))
+                case "concept":
+                    # The replacement string is a URL with fields in-between {}, as for example:
+                    # /airport_type/{typeOfAirport}/{typeOfAirport2nd}
+                    repl = value.get("replacement-automated")
+                    #if it starts with / it takes the base_uri as a base to do the concept on
+                    if repl.startswith("/"):    
+                        repl = str(self._sd_uri) + repl
+                    self._dataframe[key] = self._dataframe.apply(lambda row, repl=repl: self._replace_placeholders(row, repl), axis=1)
 
+    def _replace_placeholders(self, row, template):
+        result = template
+        placeholders = re.findall(r'\{(.*?)\}', template)  # find each place holder inbetween {}
+        for placeholder in placeholders:
+            if placeholder in row:
+                result = result.replace(f'{{{placeholder}}}', str(row[placeholder]))
+        return result
+    
     def _write_contributor(self, contributor_dict: dict) -> BNode:
         """Writes a contributor to the graph.
         

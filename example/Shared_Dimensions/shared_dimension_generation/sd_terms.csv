@@ -1,49 +1,49 @@
-code;parent_code;name_de;name_fr;name_it;name_EN
-1;;Alle Artengruppen;Tous les groupes d'espèces;Tutti i gruppi di specie;All species groups
-1.1;1;Tiere;Animaux;Animali;Animals
-1.1.1;1.1;Wirbeltiere;Vertébrés;Vertebrati;Vertebrates
-1.1.1.1;1.1.1;Säugetiere ;Mammifères;Mammiferi;Mammals
-1.1.1.1.1;1.1.1.1;Säugetiere (ohne Fledermäuse);Mammifères (sans Chauves-souris);Mammiferi (senza Pipistrelli);Mammals (without bats)
-1.1.1.1.2;1.1.1.1;Fledermäuse;Chauves-souris;Pipistrelli;Bats
-1.1.1.2;1.1.1;Brutvögel;Oiseaux nicheurs;Uccelli nidificanti;Breeding birds
-1.1.1.3;1.1.1;Reptilien;Reptiles;Rettili;Reptiles
-1.1.1.4;1.1.1;Amphibien;Amphibiens;Anfibi;Amphibians
-1.1.1.5;1.1.1;Fische und Rundmäuler;Poissons et Cyclostomes;Pesci e Ciclostomi;Fishes and cyclostomes
-1.1.2;1.1;Weichtiere;Mollusques;Molluschi;Molluscs
-1.1.2.1;1.1.2;Muscheln;Bivalves;Bivalvi;Bivalves
-1.1.2.2;1.1.2;Schnecken;Gastéropodes;Gasteropodi;Gasteropodi
-1.1.3;1.1;Krebstiere;Crustacés;Crostacei;Crustaceans
-1.1.3.1;1.1.3;Zehnfusskrebse;Écrevisses;Gamberi;Crayfishes
-1.1.4;1.1;Insekten;Insectes;Insetti;Insects
-1.1.4.1;1.1.4;Hautflügler;Hyménoptères;Imenotteri;Hymenopterae
-1.1.4.1.1;1.1.4.1;Bienen;Abeilles;Api;Bees
-1.1.4.1.2;1.1.4.1;Ameisen;Fourmis;Formiche;Ants
-1.1.4.2;1.1.4;Schmetterlinge;Papillons;Farfalle;Butterflies
-1.1.4.2.1;1.1.4.2;Tagfalter und Widderchen;Papillons diurnes et Zygènes;Farfalle diurne  e Zigene;Diurnal Butterflies and Zigene
-1.1.4.3;1.1.4;Köcherfliegen;Trichoptères;Tricotteri;Caddisflies
-1.1.4.4;1.1.4;Schnaken;Tipules;Ditteri Tipulidi;Diptera Tipulids
-1.1.4.5;1.1.4;Käfer;Coléoptères;Coleotteri;Coleopterae
-1.1.4.5.1;1.1.4.5;Pracht-, Bock-, Rosenkäfer und Schröter;Coléoptères Buprestidés, Cérambycidés, Cétoniidés et Lucanidés;Coleotteri Buprestidi, Cerambicidi, Cetonidi e Lucanidi;Coleopterae Buprestides, Cerambicides, Cetonides, Lucanides
-1.1.4.5.2;1.1.4.5;Laufkäfer und Sandlaufkäfer;Carabidés et Cicindèles;Carabidi e Cicindelidi;Carabidae and Cicindelinae
-1.1.4.5.3;1.1.4.5;Wasserkäfer;Coléoptères hydradéphages;Coleotteri Adefagi acquatici;Aquatic beetles Adefagians
-1.1.4.6;1.1.4;Netzflügler;Névroptères;Neurotteri;Neuropterans
-1.1.4.7;1.1.4;Singzikaden;Cigales;Cicale;Cicadas
-1.1.4.8;1.1.4;Heuschrecken;Orthoptères;Ortotteri;Ortopterans
-1.1.4.9;1.1.4;Steinfliegen;Plécoptères;Plecotteri;Stoneflies
-1.1.4.10;1.1.4;Libellen;Libellules, Odonates;Libellule;Dragonflies
-1.1.4.11;1.1.4;Eintagsfliegen;Éphémères;Efemerotteri;Mayflies
-1.2;1;Pflanzen;Plantes;Piante;Plants
-1.2.1;1.2;Gefässpflanzen;Plantes vasculaires;Piante vascolari;Vascular plants
-1.2.1.1;1.2.1;Blütenpflanzen;Plantes â  fleurs;Piante da fiori;Flowering plants
-1.2.1.2;1.2.1;Farnartige Pflanzen;Fougères;Felci;Ferns
-1.2.2;1.2;Moose;Bryophytes;Briofite;Bryophytes
-1.2.2.1;1.2.2;Lebermoose;Hépatiques;Epatiche;Hepaticae
-1.2.2.2;1.2.2;Laubmoose;Mousses;Muschi;Musci
-1.2.2.3;1.2.2;Hormoose;Anthocérotes;Antocerote;Anthocerotae
-1.2.3;1.2;Makroalgen;Macroalgues;Macroalga;Macroalgae
-1.2.3.1;1.2.3;Armleuchteralgen;Characées;Caracee;Stoneworts
-1.3;1;Flechten und Pilze;Lichens et champignons;Licheni e funghi;Lichens and mycetes
-1.3.1;1.3;Flechten;Lichens;Licheni;Lichens and fungi
-1.3.1.1;1.3.1;Baumflechten;Lichens épiphytes;Licheni epifiti;Epiphytic lichens
-1.3.1.2;1.3.1;Bodenflechten;Lichens terricoles;Licheni terricoli;Soil lichens
-1.3.2;1.3;Grosspilze;Champignons supérieurs;Macromiceti;Macromycetes
+code;parent_code;name_de;name_fr;name_it;name_EN;location;wikidata;concept
+1;;Alle Artengruppen;Tous les groupes d'espèces;Tutti i gruppi di specie;All species groups;Q2;x;1
+1.1;1;Tiere;Animaux;Animali;Animals;Q2;x;2
+1.1.1;1.1;Wirbeltiere;Vertébrés;Vertebrati;Vertebrates;Q2;x;3
+1.1.1.1;1.1.1;Säugetiere ;Mammifères;Mammiferi;Mammals;Q2;x;4
+1.1.1.1.1;1.1.1.1;Säugetiere (ohne Fledermäuse);Mammifères (sans Chauves-souris);Mammiferi (senza Pipistrelli);Mammals (without bats);Q2;x;5
+1.1.1.1.2;1.1.1.1;Fledermäuse;Chauves-souris;Pipistrelli;Bats;Q2;x;6
+1.1.1.2;1.1.1;Brutvögel;Oiseaux nicheurs;Uccelli nidificanti;Breeding birds;Q2;x;7
+1.1.1.3;1.1.1;Reptilien;Reptiles;Rettili;Reptiles;Q2;x;8
+1.1.1.4;1.1.1;Amphibien;Amphibiens;Anfibi;Amphibians;Q2;x;9
+1.1.1.5;1.1.1;Fische und Rundmäuler;Poissons et Cyclostomes;Pesci e Ciclostomi;Fishes and cyclostomes;Q2;x;10
+1.1.2;1.1;Weichtiere;Mollusques;Molluschi;Molluscs;Q2;x;11
+1.1.2.1;1.1.2;Muscheln;Bivalves;Bivalvi;Bivalves;Q2;x;12
+1.1.2.2;1.1.2;Schnecken;Gastéropodes;Gasteropodi;Gasteropodi;Q2;x;13
+1.1.3;1.1;Krebstiere;Crustacés;Crostacei;Crustaceans;Q2;x;14
+1.1.3.1;1.1.3;Zehnfusskrebse;Écrevisses;Gamberi;Crayfishes;Q2;x;15
+1.1.4;1.1;Insekten;Insectes;Insetti;Insects;Q2;x;16
+1.1.4.1;1.1.4;Hautflügler;Hyménoptères;Imenotteri;Hymenopterae;Q2;x;17
+1.1.4.1.1;1.1.4.1;Bienen;Abeilles;Api;Bees;Q2;x;18
+1.1.4.1.2;1.1.4.1;Ameisen;Fourmis;Formiche;Ants;Q2;x;19
+1.1.4.2;1.1.4;Schmetterlinge;Papillons;Farfalle;Butterflies;Q2;x;20
+1.1.4.2.1;1.1.4.2;Tagfalter und Widderchen;Papillons diurnes et Zygènes;Farfalle diurne  e Zigene;Diurnal Butterflies and Zigene;Q2;x;21
+1.1.4.3;1.1.4;Köcherfliegen;Trichoptères;Tricotteri;Caddisflies;Q2;x;22
+1.1.4.4;1.1.4;Schnaken;Tipules;Ditteri Tipulidi;Diptera Tipulids;Q2;x;23
+1.1.4.5;1.1.4;Käfer;Coléoptères;Coleotteri;Coleopterae;Q2;x;24
+1.1.4.5.1;1.1.4.5;Pracht-, Bock-, Rosenkäfer und Schröter;Coléoptères Buprestidés, Cérambycidés, Cétoniidés et Lucanidés;Coleotteri Buprestidi, Cerambicidi, Cetonidi e Lucanidi;Coleopterae Buprestides, Cerambicides, Cetonides, Lucanides;Q2;x;25
+1.1.4.5.2;1.1.4.5;Laufkäfer und Sandlaufkäfer;Carabidés et Cicindèles;Carabidi e Cicindelidi;Carabidae and Cicindelinae;Q2;x;26
+1.1.4.5.3;1.1.4.5;Wasserkäfer;Coléoptères hydradéphages;Coleotteri Adefagi acquatici;Aquatic beetles Adefagians;Q2;x;27
+1.1.4.6;1.1.4;Netzflügler;Névroptères;Neurotteri;Neuropterans;Q2;x;28
+1.1.4.7;1.1.4;Singzikaden;Cigales;Cicale;Cicadas;Q2;x;29
+1.1.4.8;1.1.4;Heuschrecken;Orthoptères;Ortotteri;Ortopterans;Q2;x;30
+1.1.4.9;1.1.4;Steinfliegen;Plécoptères;Plecotteri;Stoneflies;Q2;x;31
+1.1.4.10;1.1.4;Libellen;Libellules, Odonates;Libellule;Dragonflies;Q2;x;32
+1.1.4.11;1.1.4;Eintagsfliegen;Éphémères;Efemerotteri;Mayflies;Q2;x;33
+1.2;1;Pflanzen;Plantes;Piante;Plants;Q2;x;34
+1.2.1;1.2;Gefässpflanzen;Plantes vasculaires;Piante vascolari;Vascular plants;Q2;x;35
+1.2.1.1;1.2.1;Blütenpflanzen;Plantes â  fleurs;Piante da fiori;Flowering plants;Q2;x;36
+1.2.1.2;1.2.1;Farnartige Pflanzen;Fougères;Felci;Ferns;Q2;x;37
+1.2.2;1.2;Moose;Bryophytes;Briofite;Bryophytes;Q2;x;38
+1.2.2.1;1.2.2;Lebermoose;Hépatiques;Epatiche;Hepaticae;Q2;x;39
+1.2.2.2;1.2.2;Laubmoose;Mousses;Muschi;Musci;Q2;x;40
+1.2.2.3;1.2.2;Hormoose;Anthocérotes;Antocerote;Anthocerotae;Q2;x;41
+1.2.3;1.2;Makroalgen;Macroalgues;Macroalga;Macroalgae;Q2;x;42
+1.2.3.1;1.2.3;Armleuchteralgen;Characées;Caracee;Stoneworts;Q2;x;43
+1.3;1;Flechten und Pilze;Lichens et champignons;Licheni e funghi;Lichens and mycetes;Q2;x;44
+1.3.1;1.3;Flechten;Lichens;Licheni;Lichens and fungi;Q2;x;45
+1.3.1.1;1.3.1;Baumflechten;Lichens épiphytes;Licheni epifiti;Epiphytic lichens;Q2;x;46
+1.3.1.2;1.3.1;Bodenflechten;Lichens terricoles;Licheni terricoli;Soil lichens;Q2;x;47
+1.3.2;1.3;Grosspilze;Champignons supérieurs;Macromiceti;Macromycetes;Q2;x;48
