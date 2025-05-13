@@ -24,6 +24,9 @@ class TestClass:
             "co2-limits/data.csv", "co2-limits/description.yml")
         self.hierarchies_cube = self.setup_test_cube(
             "Biotope_Statistik/data.csv", "Biotope_Statistik/description.yml")
+        self.target_timespan_cube = self.setup_test_cube(
+            "greenhouse_limit/data.csv", "greenhouse_limit/description.yml"
+        )
 
     def test_standard_error(self):
         sparql = (
@@ -216,3 +219,30 @@ class TestClass:
         allConceptsFound = self.concepts_cube.check_dimension_object_property("typeOfAirport", SCHEMA.name)
         # allConceptsFound should be True: the dummy airport type has been added to the concepts
         assert bool(allConceptsFound)
+
+    def test_timespan_limit(self):
+        sparql = (
+            "ASK"
+            "{"
+            "  ?shape a cube:Constraint ;"
+            "    sh:property ?prop ."
+            "  ?prop sh:path limit_timespan:ghgEmissionLanduse ;"
+            "    meta:annotation ?annotation ."
+            "  ?annotation a meta:Limit ;"
+            "    schema:minValue 34.17533502 ;"
+            "    meta:annotationContext ["
+            "      sh:path limit_timespan:year ;"
+            "      sh:minInclusive <https://ld.admin.ch/time/year/2021> ;"
+            "      sh:maxInclusive <https://ld.admin.ch/time/year/2030> ;"
+            "    ] ."
+            "}"
+        )
+
+        result = self.target_timespan_cube._graph.query(sparql)
+        assert bool(result)
+
+    def test_limit_timespan_cube_validity(self):
+        result_bool, result_message = self.target_timespan_cube.validate()
+        assert result_message == "Cube is valid."
+
+
