@@ -83,7 +83,7 @@ dimensions:
     dimension-type: Measure Dimension
     datatype: float
     scale-type: ratio
-    path: roundedCO2Emissions
+    path: ghgEmissionLanduse
     unit: MegaTONNE
     annotation:
       - type: limit
