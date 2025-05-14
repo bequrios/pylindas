@@ -47,6 +47,8 @@ class TestClass:
         )
 
         result = self.mock_cube._graph.query(sparql)
+        if not result:
+            self.mock_cube.serialize("faulty_test_standard_error.ttl")
         assert bool(result)
 
     def test_upper_uncertainty(self):
@@ -116,6 +118,8 @@ class TestClass:
         )
     
         result = self.co2_cube._graph.query(sparql)
+        if not result:
+            self.co2_cube.serialize("faulty_graph_test_point_limit.ttl")
         assert bool(result)
     
     def test_range_limit(self):
@@ -141,6 +145,8 @@ class TestClass:
         )
 
         result = self.co2_cube._graph.query(sparql)
+        if not result:
+            self.co2_cube.serialize("faulty_graph_test_range_limit.ttl")
         assert bool(result)
 
     def test_limit_cube_validity(self):
@@ -166,6 +172,8 @@ class TestClass:
         )
 
         result = self.mock_cube._graph.query(sparql)
+        if not result:
+            self.mock_cube.serialize("faulty_graph_test_annotation_dimension.ttl")
         assert bool(result)
 
     def test_mock_cube_validity(self):
@@ -190,6 +198,8 @@ class TestClass:
         )
 
         result = self.hierarchies_cube._graph.query(sparql)
+        if not result:
+            self.hierarchies_cube.serialize("faulty_graph_test_hierarchies.ttl")
         assert bool(result)
 
     def test_hierarchies_cube_validity(self):
@@ -239,6 +249,8 @@ class TestClass:
         )
 
         result = self.target_timespan_cube._graph.query(sparql)
+        if not result:
+            self.target_timespan_cube.serialize("faulty_graph_test_timespan_limit.ttl")
         assert bool(result)
 
     def test_limit_timespan_cube_validity(self):
