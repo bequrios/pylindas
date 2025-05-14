@@ -9,7 +9,7 @@ except ImportError:
     # fallback for Self in python 3.10
     from typing import TypeVar
     Self = TypeVar("Self", bound="Cube")
-from typing import Tuple
+from typing import Tuple, Union
 import pandas as pd
 import numbers
 import sys
@@ -722,7 +722,7 @@ class Cube:
         
         if dim_dict.get("annotation"):
             for antn in dim_dict.get("annotation"):
-                annotation_node = self._write_annotation(antn)
+                annotation_node = self._write_annotation(antn, datatype=dim_dict.get("datatype"))
                 self._graph.add((dim_node, META.annotation, annotation_node))
 
         if dim_dict.get("hierarchy"):
@@ -786,39 +786,62 @@ class Cube:
         if next_dict.get("next-in-hierarchy"):
             self._write_next_in_hierarchy(next_dict.get("next-in-hierarchy"), next_node)
 
-    def _write_annotation(self, annotation_dict: dict) -> BNode:
+    def _write_annotation(self, annotation_dict: dict, datatype: str) -> BNode:
         annotation_node = BNode()
         for lan, name in annotation_dict.get("name").items():
             self._graph.add((annotation_node, SCHEMA.name, Literal(name, lang=lan)))
 
         if annotation_dict.get("context"):
-            for dimension, value in annotation_dict.get("context").items():
+            for dimension, context in annotation_dict.get("context").items():
                 dimension_dict = self._shape_dict.get(dimension)
-                dimension_path = dimension_dict.get("path")
 
-                type_of_mapping = dimension_dict.get("mapping").get("type")
-                match type_of_mapping:
-                    case "additive":
-                        value = dimension_dict.get("mapping").get("base") + str(value)
-                    case "replace":
-                        value = dimension_dict.get("mapping").get("replacements").get(value)
-
-                context_node = BNode()
-                self._graph.add((context_node, SH.path, URIRef(self._base_uri + dimension_path)))
-                self._graph.add((context_node, SH.hasValue, URIRef(value)))
+                context_node = self._write_context_node(dimension_dict, context)
 
                 self._graph.add((annotation_node, META.annotationContext, context_node))
 
         match annotation_dict.get("type"):
             case "limit":
                 self._graph.add((annotation_node, RDF.type, META.Limit))
-                self._graph.add((annotation_node, SCHEMA.value, Literal(annotation_dict.get("value"))))
+                value = self._sanitize_value(annotation_dict.get("value"), datatype=datatype)
+                self._graph.add((annotation_node, SCHEMA.value, value))
             case "limit-range":
                 self._graph.add((annotation_node, RDF.type, META.Limit))
-                self._graph.add((annotation_node, SCHEMA.minValue, Literal(annotation_dict.get("min-value"))))
-                self._graph.add((annotation_node, SCHEMA.maxValue, Literal(annotation_dict.get("max-value"))))
+                min_value = self._sanitize_value(annotation_dict.get("min-value"), datatype=datatype)
+                self._graph.add((annotation_node, SCHEMA.minValue, min_value))
+                max_value = self._sanitize_value(annotation_dict.get("max-value"), datatype=datatype)
+                self._graph.add((annotation_node, SCHEMA.maxValue, max_value))
 
         return annotation_node
+
+    def _write_context_node(self, dimension_dict: dict, context: Union[dict, int, float, str]):
+        dimension_path = dimension_dict.get("path")
+        context_node = BNode()
+        self._graph.add((context_node, SH.path, URIRef(self._base_uri + dimension_path)))
+        type_of_mapping = dimension_dict.get("mapping").get("type")
+
+        match context:
+            case int() | float() | str():
+                match type_of_mapping:
+                    case "additive":
+                        context = dimension_dict.get("mapping").get("base") + str(context)
+                    case "replace":
+                        context = dimension_dict.get("mapping").get("replacements").get(context)
+                self._graph.add((context_node, SH.hasValue, URIRef(context)))
+            case dict():
+                # for now, assume that the context when given as dict is a min and max
+                _min = context.get("min")
+                _max = context.get("max")
+                match type_of_mapping:
+                    case"additive":
+                        _min = dimension_dict.get("mapping").get("base") + str(_min)
+                        _max = dimension_dict.get("mapping").get("base") + str(_max)
+                    case "replace":
+                        _min = dimension_dict.get("mapping").get("base") + str(_min)
+                        _max = dimension_dict.get("mapping").get("base") + str(_max)
+                self._graph.add((context_node, SH.minInclusive, URIRef(_min)))
+                self._graph.add((context_node, SH.maxInclusive, URIRef(_max)))
+
+        return context_node
     
     def _add_sh_list(self, dim_node: BNode, values: pd.Series):
         """Add a SHACL list of all unique values to the given dimension node.
@@ -852,7 +875,7 @@ class Cube:
         self._graph.add((dim_node, SH.max, Literal(_max)))
 
     @staticmethod
-    def _sanitize_value(value, datatype, lang) -> Literal|URIRef:
+    def _sanitize_value(value, datatype, lang=None) -> Literal|URIRef:
         """Sanitize the input value to ensure it is in a valid format.
         
             Args:

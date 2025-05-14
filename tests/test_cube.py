@@ -24,6 +24,9 @@ class TestClass:
             "co2-limits/data.csv", "co2-limits/description.yml")
         self.hierarchies_cube = self.setup_test_cube(
             "Biotope_Statistik/data.csv", "Biotope_Statistik/description.yml")
+        self.target_timespan_cube = self.setup_test_cube(
+            "greenhouse_limit/data.csv", "greenhouse_limit/description.yml"
+        )
 
     def test_standard_error(self):
         sparql = (
@@ -44,6 +47,8 @@ class TestClass:
         )
 
         result = self.mock_cube._graph.query(sparql)
+        if not result:
+            self.mock_cube.serialize("faulty_test_standard_error.ttl")
         assert bool(result)
 
     def test_upper_uncertainty(self):
@@ -100,7 +105,7 @@ class TestClass:
             "  ?prop sh:path limit_1:co2Emissions ;"
             "    meta:annotation ?annotation ."
             "  ?annotation a meta:Limit ;"
-            "    schema:value 1.849298e+01 ;"
+            "    schema:value '18.49298'^^xsd:float ;"
             "    meta:annotationContext ["
             "      sh:path limit_1:year ;"
             "      sh:hasValue <https://ld.admin.ch/time/year/2012> ;"
@@ -113,6 +118,8 @@ class TestClass:
         )
     
         result = self.co2_cube._graph.query(sparql)
+        if not result:
+            self.co2_cube.serialize("faulty_graph_test_point_limit.ttl")
         assert bool(result)
     
     def test_range_limit(self):
@@ -124,8 +131,8 @@ class TestClass:
             "  ?prop sh:path limit_1:co2Emissions ;"
             "    meta:annotation ?annotation ."
             "  ?annotation a meta:Limit ;"
-            "    schema:minValue 1.708845e+01  ;"
-            "    schema:maxValue 1.779072e+01 ;"
+            "    schema:minValue '17.08845'^^xsd:float ;"
+            "    schema:maxValue '17.79072'^^xsd:float ;"
             "    meta:annotationContext ["
             "      sh:path limit_1:year ;"
             "      sh:hasValue <https://ld.admin.ch/time/year/2016> ;"
@@ -138,6 +145,8 @@ class TestClass:
         )
 
         result = self.co2_cube._graph.query(sparql)
+        if not result:
+            self.co2_cube.serialize("faulty_graph_test_range_limit.ttl")
         assert bool(result)
 
     def test_limit_cube_validity(self):
@@ -163,6 +172,8 @@ class TestClass:
         )
 
         result = self.mock_cube._graph.query(sparql)
+        if not result:
+            self.mock_cube.serialize("faulty_graph_test_annotation_dimension.ttl")
         assert bool(result)
 
     def test_mock_cube_validity(self):
@@ -187,6 +198,8 @@ class TestClass:
         )
 
         result = self.hierarchies_cube._graph.query(sparql)
+        if not result:
+            self.hierarchies_cube.serialize("faulty_graph_test_hierarchies.ttl")
         assert bool(result)
 
     def test_hierarchies_cube_validity(self):
@@ -216,3 +229,32 @@ class TestClass:
         allConceptsFound = self.concepts_cube.check_dimension_object_property("typeOfAirport", SCHEMA.name)
         # allConceptsFound should be True: the dummy airport type has been added to the concepts
         assert bool(allConceptsFound)
+
+    def test_timespan_limit(self):
+        sparql = (
+            "ASK"
+            "{"
+            "  ?shape a cube:Constraint ;"
+            "    sh:property ?prop ."
+            "  ?prop sh:path limit_timespan:ghgEmissionLanduse ;"
+            "    meta:annotation ?annotation ."
+            "  ?annotation a meta:Limit ;"
+            "    schema:value '34.17533502'^^xsd:float ;"
+            "    meta:annotationContext ["
+            "      sh:path limit_timespan:year ;"
+            "      sh:minInclusive <https://ld.admin.ch/time/year/2021> ;"
+            "      sh:maxInclusive <https://ld.admin.ch/time/year/2030> ;"
+            "    ] ."
+            "}"
+        )
+
+        result = self.target_timespan_cube._graph.query(sparql)
+        if not result:
+            self.target_timespan_cube.serialize("faulty_graph_test_timespan_limit.ttl")
+        assert bool(result)
+
+    def test_limit_timespan_cube_validity(self):
+        result_bool, result_message = self.target_timespan_cube.validate()
+        assert result_message == "Cube is valid."
+
+

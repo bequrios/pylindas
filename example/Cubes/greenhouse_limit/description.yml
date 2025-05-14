@@ -1,0 +1,109 @@
+Name:
+  de: Treibhausgasinventar
+  en: Greenhouse Gas Inventory
+  fr: Emissions de gaz a effet de serre
+  it: Emissioni di gas di effetto serre
+Description:
+  de: Ein Beispiel Cube mit einem Zielwert mit Anfangs- und Endpunkt
+  en: An example cube with a target value with start and end
+  fr: Un exemple de Cube avec une valeur cible avec une date de debut et une date de fin
+  it: Un esempio di Cube con un valore obiettivo con una data di inizio e una data di fine
+Publisher:
+  - IRI: https://register.ld.admin.ch/opendataswiss/org/bundesamt-fur-umwelt-bafu
+Creator:
+  - IRI: https://register.ld.admin.ch/opendataswiss/org/bundesamt-fur-umwelt-bafu
+Contributor:
+  - IRI: https://register.ld.admin.ch/opendataswiss/org/bundesamt-fur-umwelt-bafu
+    Name: Bundesamt für Umwelt
+Date Created:
+  2025-03-27
+Contact Point:
+  E-Mail: marco.kronenberg@bafu.admin.ch
+  Name: Bundesamt für Umwelt
+Base-URI: https://environment.ld.admin.ch/foen/test_target/
+Identifier: target_timespan
+Version: 1
+Work Status:
+  Draft
+Visualize:
+  True
+# Optional but recommended
+Accrual Periodicity: yearly
+
+Namespace: limit_timespan
+
+dimensions:
+  Jahr:
+    name:
+      de: Jahr
+      fr: An
+      it: Anno
+      en: Year
+    description:
+      de: Jahr der Erhebung
+    dimension-type: Key Dimension
+    datatype: URI
+    scale-type: ordinal
+    path: year
+    data-kind:
+      type: temporal
+      unit: year
+    mapping:
+      type: additive
+      base: https://ld.admin.ch/time/year/
+
+  THG-Emissionen ohne die Treibhausgasbilanz der Landnutzung:
+    name:
+      de: THG-Emissionen ohne die Treibhausgasbilanz der Landnutzung
+      en: GHG emissions without the greenhouse gas balance of land use
+      fr: Emissions de GES sans le bilan des émissions des gaz à effet de serre lié à l'utilisation des terres
+      it: Emissioni di gas serra senza il bilancio dei gas serra da uso del territorio
+    description:
+      de: THG-Emissionen ohne die Treibhausgasbilanz der Landnutzung
+      en: GHG emissions without the greenhouse gas balance of land use
+      fr: Emissions de GES sans le bilan des émissions des gaz à effet de serre lié à l'utilisation des terres
+      it: Emissioni di gas serra senza il bilancio dei gas serra da uso del territorio
+    dimension-type: Measure Dimension
+    datatype: float
+    scale-type: ratio
+    path: ghgEmission
+    unit: MegaTONNE
+
+  THG-Emissionen mit der Treibhausgasbilanz der Landnutzung:
+    name:
+      de: THG-Emissionen mit der Treibhausgasbilanz der Landnutzung
+      en: GHG emissions with the greenhouse gas balance of land use
+      fr: Emissions de GES avec le bilan des gaz à effet de serre lié à l'utilisation des terres
+      it: Emissioni di gas serra senza con il bilancio dei gas serra da uso del territorio
+    description:
+      de: THG-Emissionen mit der Treibhausgasbilanz der Landnutzung
+      en: GHG emissions with the greenhouse gas balance of land use
+      fr: Emissions de GES avec le bilan des gaz à effet de serre lié à l'utilisation des terres
+      it: Emissioni di gas serra senza con il bilancio dei gas serra da uso del territorio
+    dimension-type: Measure Dimension
+    datatype: float
+    scale-type: ratio
+    path: ghgEmissionLanduse
+    unit: MegaTONNE
+    annotation:
+      - type: limit
+        value: 26.28871925
+        name:
+          de: Ziel 2030 gemäss Übereinkommen von Paris
+          en: Target according to Paris Agreement for 2030
+          fr: Objectif selon l'accord de Paris pour 2030
+          it: Obiettivo secondo l'Accordo di Parigi per 2030
+        context:
+          Jahr: 2030
+      - type: limit
+        value: 34.17533502
+        name:
+          de: Durchschnittsziel gemäss Übereinkommen von Paris für 2021-2030
+          en: Average target according to Paris Agreement for 2021-2030
+          fr: Objectif moyen selon l'accord de Paris pour 2021-2030
+          it: Obiettivo medio secondo l'Accordo di Parigi per 2021-2030
+        context:
+          Jahr:
+            min: 2021
+            max: 2030
+
