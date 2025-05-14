@@ -722,7 +722,7 @@ class Cube:
         
         if dim_dict.get("annotation"):
             for antn in dim_dict.get("annotation"):
-                annotation_node = self._write_annotation(antn)
+                annotation_node = self._write_annotation(antn, datatype=dim_dict.get("datatype"))
                 self._graph.add((dim_node, META.annotation, annotation_node))
 
         if dim_dict.get("hierarchy"):
@@ -786,7 +786,7 @@ class Cube:
         if next_dict.get("next-in-hierarchy"):
             self._write_next_in_hierarchy(next_dict.get("next-in-hierarchy"), next_node)
 
-    def _write_annotation(self, annotation_dict: dict) -> BNode:
+    def _write_annotation(self, annotation_dict: dict, datatype: str) -> BNode:
         annotation_node = BNode()
         for lan, name in annotation_dict.get("name").items():
             self._graph.add((annotation_node, SCHEMA.name, Literal(name, lang=lan)))
@@ -802,11 +802,14 @@ class Cube:
         match annotation_dict.get("type"):
             case "limit":
                 self._graph.add((annotation_node, RDF.type, META.Limit))
-                self._graph.add((annotation_node, SCHEMA.value, Literal(annotation_dict.get("value"))))
+                value = self._sanitize_value(annotation_dict.get("value"), datatype=datatype)
+                self._graph.add((annotation_node, SCHEMA.value, value))
             case "limit-range":
                 self._graph.add((annotation_node, RDF.type, META.Limit))
-                self._graph.add((annotation_node, SCHEMA.minValue, Literal(annotation_dict.get("min-value"))))
-                self._graph.add((annotation_node, SCHEMA.maxValue, Literal(annotation_dict.get("max-value"))))
+                min_value = self._sanitize_value(annotation_dict.get("min-value"), datatype=datatype)
+                self._graph.add((annotation_node, SCHEMA.minValue, min_value))
+                max_value = self._sanitize_value(annotation_dict.get("max-value"), datatype=datatype)
+                self._graph.add((annotation_node, SCHEMA.maxValue, max_value))
 
         return annotation_node
 
@@ -872,7 +875,7 @@ class Cube:
         self._graph.add((dim_node, SH.max, Literal(_max)))
 
     @staticmethod
-    def _sanitize_value(value, datatype, lang) -> Literal|URIRef:
+    def _sanitize_value(value, datatype, lang=None) -> Literal|URIRef:
         """Sanitize the input value to ensure it is in a valid format.
         
             Args:
