@@ -705,7 +705,7 @@ class Cube:
                     case "temporal":
                         data_kind_node = BNode()
                         self._graph.add((data_kind_node, RDF.type, TIME.GeneralDateTimeDescription))
-                        self._graph.add((data_kind_node, TIME.unitType, TIME.unitYear))
+                        self._graph.add((data_kind_node, TIME.unitType, TIME["unit" + data_kind.get("unit").capitalize()]))
                         self._graph.add((dim_node, META.dataKind, data_kind_node))
                     case "spatial-shape":
                         data_kind_node = BNode()
