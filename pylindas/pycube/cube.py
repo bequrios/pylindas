@@ -9,7 +9,7 @@ except ImportError:
     # fallback for Self in python 3.10
     from typing import TypeVar
     Self = TypeVar("Self", bound="Cube")
-from typing import Tuple, Union
+from typing import Tuple, Union, Callable
 import pandas as pd
 import numbers
 import sys
@@ -302,7 +302,7 @@ class Cube:
                 assert value_type in ['Shared', 'Literal']
                 self._dataframe[dim_name] = self._dataframe[dim_name].map(lambda v: URIRef(v) if value_type == "Shared" else Literal(v))
 
-    def _load_function_via_exec(self, filepath, function_name):
+    def _load_function_via_exec(self, filepath: str, function_name: str) -> Callable:
         namespace = {}
         with open(filepath, "r") as f:
             code = f.read()
