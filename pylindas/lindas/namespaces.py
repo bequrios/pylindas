@@ -19,6 +19,7 @@ VOID = Namespace("http://rdfs.org/ns/void#")
 GEO = Namespace("http://www.opengis.net/ont/geosparql#")
 SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
 SD_MD = Namespace("https://cube-creator.zazuko.com/shared-dimensions/vocab#")
+XSD = Namespace("http://www.w3.org/2001/XMLSchema#")
 
 Namespaces = {
     "cube": CUBE,
@@ -39,4 +40,5 @@ Namespaces = {
     "geo": GEO,
     "skos": SKOS,
     "sd_md": SD_MD,
+    "xsd": XSD,
 }
