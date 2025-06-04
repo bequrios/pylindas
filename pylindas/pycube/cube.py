@@ -648,7 +648,6 @@ class Cube:
             case "Key Dimension":
                 self._graph.add((dim_node, RDF.type, CUBE.KeyDimension))
                 self._graph.add((dim_node, SH.nodeKind, SH.IRI))
-                self._graph.add((dim_node, SH.nodeKind, SH.IRI))
                 
             case "Measure Dimension":
                 self._graph.add((dim_node, RDF.type, CUBE.MeasureDimension))
