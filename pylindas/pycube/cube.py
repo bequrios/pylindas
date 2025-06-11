@@ -631,15 +631,18 @@ class Cube:
         
         self._graph.add((dim_node, SH.path, URIRef(self._base_uri + dim_dict.get("path"))))
 
+        if dim_dict.get("datatype") == "URI":
+            self._graph.add((dim_node, SH.nodeKind, SH.IRI))
+        else:
+            self._graph.add((dim_node, SH.nodeKind, SH.Literal))
+            self._graph.add((dim_node, SH.datatype, XSD[dim_dict.get("datatype")]))
+
         match dim_dict.get("dimension-type"):
             case "Key Dimension":
                 self._graph.add((dim_node, RDF.type, CUBE.KeyDimension))
-                self._graph.add((dim_node, SH.nodeKind, SH.IRI))
-                self._graph.add((dim_node, SH.nodeKind, SH.IRI))
                 
             case "Measure Dimension":
                 self._graph.add((dim_node, RDF.type, CUBE.MeasureDimension))
-                self._graph.add((dim_node, SH.nodeKind, SH.Literal))
             
             case "Annotation":
                 self._graph.add((dim_node, SH.nodeKind, SH.Literal))
@@ -685,10 +688,10 @@ class Cube:
                     self._add_sh_list(dim_node, values)
             case "interval":
                 self._graph.add((dim_node, QUDT.scaleType, QUDT.IntervalScale))
-                self._add_min_max(dim_node, values)
+                self._add_min_max(dim_dict, dim_node, values)
             case "ratio":
                 self._graph.add((dim_node, QUDT.scaleType, QUDT.RatioScale))
-                self._add_min_max(dim_node, values)
+                self._add_min_max(dim_dict, dim_node, values)
             case _ as unrecognized:
                 print(f"Scale Type '{unrecognized}' is not recognized")
         
@@ -871,7 +874,7 @@ class Cube:
         Collection(self._graph, list_node, [URIRef(vl) for vl in unique_values])
         self._graph.add((dim_node, URIRef(SH + "in"), list_node))
 
-    def _add_min_max(self, dim_node: BNode, values: pd.Series):
+    def _add_min_max(self, dim_dict: dict, dim_node: BNode, values: pd.Series):
         """Add minimum and maximum values to the given dimension node.
         
             Args:
@@ -884,8 +887,14 @@ class Cube:
         # todo: case of cube.Undefined should be covered
         _min = values.min()
         _max = values.max()
-        self._graph.add((dim_node, SH.min, Literal(_min)))
-        self._graph.add((dim_node, SH.max, Literal(_max)))
+
+        # If dataype is XSD.date, use minInclusive and maxInclusive and the correct datatype
+        if dim_dict.get("datatype") == "date":
+            self._graph.add((dim_node, SH.minInclusive, Literal(_min, datatype=XSD.date)))
+            self._graph.add((dim_node, SH.maxInclusive, Literal(_max, datatype=XSD.date)))
+        else:
+            self._graph.add((dim_node, SH.min, Literal(_min)))
+            self._graph.add((dim_node, SH.max, Literal(_max)))
 
     @staticmethod
     def _sanitize_value(value, datatype, lang=None) -> Literal|URIRef:
