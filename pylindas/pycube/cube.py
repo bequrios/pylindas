@@ -795,7 +795,20 @@ class Cube:
     def _write_next_in_hierarchy(self, next_dict: dict, parent_node: BNode):
         next_node = BNode()
         self._graph.add((next_node, SCHEMA.name, Literal(next_dict.get("name"))))
-        self._graph.add((next_node, SH.path, URIRef(next_dict.get("path"))))
+        
+        # path from top to bottom
+        if "path" in next_dict:
+            self._graph.add((next_node, SH.path, URIRef(next_dict.get("path"))))
+
+        # inverse path from bottom to top
+        if "inverse-path" in next_dict:
+            inverse_node = BNode()
+            self._graph.add((next_node, SH.path, inverse_node))
+            self._graph.add((inverse_node, SH.inversePath, URIRef(next_dict.get("inverse-path"))))
+        
+        # target class of the next node
+        if "target-class" in next_dict:
+            self._graph.add((next_node, SH.targetClass, URIRef(next_dict.get("target-class"))))
 
         self._graph.add((parent_node, META.nextInHierarchy, next_node))
 
