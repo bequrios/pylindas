@@ -4,7 +4,7 @@
 
 `pylindas` is a package to build and publish linked data such as cubes as defined by [cube.link](https://cube.link), describing a schema to describe structured data from tables in [RDF](https://www.w3.org/RDF/). It allows for an alternative to the [Cube-Creator](https://cube-creator.lindas.admin.ch). Currently this project is heavily linked to the [LINDAS](lindas.admin.ch) the Swiss Federal Linked Data Service.
 
-For further information, please refer to our [Wiki](https://github.com/Kronmar-Bafu/cubelink/wiki)
+For further information, please refer to our [docs]([https://github.com/Kronmar-Bafu/cubelink/wiki](https://github.com/Kronmar-Bafu/lindas-pylindas/tree/main/docs))
 
 ## Installation
 
