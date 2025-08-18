@@ -239,7 +239,12 @@ class Cube:
             None
         """
         def make_iri(row):
-            return self._cube_uri + "/observation/" + "_".join([quote(str(row[key_dim])) for key_dim in self._key_dimensions])
+            parts = [
+            quote(str(row[key_dim]), safe="")  # safe="" means *everything* that’s not unreserved will be encoded
+            for key_dim in self._key_dimensions
+            ]
+            return f"{self._cube_uri}/observation/{'_'.join(parts)}"
+        
         self._dataframe['obs-uri'] = self._dataframe.apply(
             make_iri, axis=1
         )
@@ -695,11 +700,11 @@ class Cube:
             case "nominal":
                 self._graph.add((dim_node, QUDT.scaleType, QUDT.NominalScale))
                 if dim_dict.get("dimension-type") == "Key Dimension":
-                    self._add_sh_list(dim_node, values)
+                    self._add_sh_list(dim_dict, dim_node, values)
             case "ordinal":
                 self._graph.add((dim_node, QUDT.scaleType, QUDT.OrdinalScale))
                 if dim_dict.get("dimension-type") == "Key Dimension":
-                    self._add_sh_list(dim_node, values)
+                    self._add_sh_list(dim_dict, dim_node, values)
             case "interval":
                 self._graph.add((dim_node, QUDT.scaleType, QUDT.IntervalScale))
                 self._add_min_max(dim_dict, dim_node, values)
@@ -873,7 +878,7 @@ class Cube:
 
         return context_node
     
-    def _add_sh_list(self, dim_node: BNode, values: pd.Series):
+    def _add_sh_list(self, dimension_dict: dict, dim_node: BNode, values: pd.Series):
         """Add a SHACL list of all unique values to the given dimension node.
         
             Args:
@@ -885,7 +890,10 @@ class Cube:
         """
         list_node = BNode()
         unique_values = values.unique()
-        Collection(self._graph, list_node, [URIRef(vl) for vl in unique_values])
+        if dimension_dict.get("datatype") == "URI":
+            Collection(self._graph, list_node, [URIRef(vl) for vl in unique_values])
+        else:
+            Collection(self._graph, list_node, [Literal(vl, datatype=XSD[dimension_dict.get("datatype")]) for vl in unique_values])
         self._graph.add((dim_node, URIRef(SH + "in"), list_node))
 
     def _add_min_max(self, dim_dict: dict, dim_node: BNode, values: pd.Series):
@@ -902,13 +910,9 @@ class Cube:
         _min = values.min()
         _max = values.max()
 
-        # If dataype is XSD.date, use minInclusive and maxInclusive and the correct datatype
-        if dim_dict.get("datatype") == "date":
-            self._graph.add((dim_node, SH.minInclusive, Literal(_min, datatype=XSD.date)))
-            self._graph.add((dim_node, SH.maxInclusive, Literal(_max, datatype=XSD.date)))
-        else:
-            self._graph.add((dim_node, SH.min, Literal(_min)))
-            self._graph.add((dim_node, SH.max, Literal(_max)))
+        _datatype = dim_dict.get("datatype")
+        self._graph.add((dim_node, SH.minInclusive, Literal(_min, datatype=XSD[_datatype])))
+        self._graph.add((dim_node, SH.maxInclusive, Literal(_max, datatype=XSD[_datatype])))
 
     @staticmethod
     def _sanitize_value(value, datatype, lang=None) -> Literal|URIRef:
