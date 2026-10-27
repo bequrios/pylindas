@@ -144,7 +144,7 @@ class Cube:
 
         self._graph.add(
             (self._cube_uri, SCHEMA.dateCreated, Literal(self._cube_dict.get("Date Created"), datatype=XSD.date)))
-        self._graph.add((self._cube_uri, SCHEMA.datePublished, Literal(today, datatype=XSD.date)))
+        self._graph.add((self._cube_uri, SCHEMA.datePublished, Literal(self._cube_dict.get("Date Published"), datatype=XSD.date)))
         # todo: serialization yields improper format for datetime (with timezone as +02:00 instead of proper UTC)
         self._graph.add((self._cube_uri, SCHEMA.dateModified, Literal(now, datatype=XSD.dateTime)))
 
