@@ -27,7 +27,8 @@ Below the table you'll find a working example. For additional examples, please r
 |**Publisher** | Required | List of Key-Value pairs, with `key = IRI` and the correct IRI | Describes the publisher of the dataset with the correct IRI | `schema:publisher`, `dcterms:publisher` |
 |**Creator** | Required | List of Key-Value pairs, with `key = IRI` and the correct IRI | Describes the creator of the dataset with the correct IRI | `schema:creator`, `dcterms:creator` |
 |**Contributor** | Required | List of Key-Value pairs, with `key = IRI` and the correct IRI and `key = Name`| Describes the contributors of the dataset. with both, the correct IRI and name | `schema:contributor`, `dcterms:contributor` |
-|**Date Created** | Required | Date of Publication, given in ISO Format xxxx, i.e. YYYY-MM-DD | Publication date of the dataset.  | 
+|**Date Created** | Required | Date of Creation, given in ISO Format xxxx, i.e. YYYY-MM-DD | Creation date of the dataset.  | `schema:dateCreated` |
+|**Date Published** | Required | Date of Publication, given in ISO Format xxxx, i.e. YYYY-MM-DD --> relevant for ordering of cubes in Visualize dataset selection | Publication date of the dataset.  | `schema:datePublished` |
 |**Contact Point** | Required | Key-Value pairs, with keys `E-Mail` and `Name` for contact E-mail as well as name | Contact point of the data set | `schema:contactPoint`, `dcat:contactPoint` |
 |**Base-URI** | Required | a valid URI | The Base-URI will be used to construct a URI for the cube as well as other parts of the cube. Please make sure to give something meaningful and contact the Federal Archive | |
 |**Identifier** | Required | a *unique* identifier for the cube | The unique identifier under which a cube (or a family of cubes with differing versions) can be identified | `dcterms:identifier` |
