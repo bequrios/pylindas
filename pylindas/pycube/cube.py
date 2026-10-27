@@ -758,6 +758,9 @@ class Cube:
         observation_class_shape = BNode()
         self._graph.add((observation_class_shape, SH.path, RDF.type))
         self._graph.add((observation_class_shape, SH.nodeKind, SH.IRI))
+        self._graph.add((observation_class_shape, QUDT.scaleType, QUDT.NominalScale))
+        self._graph.add((observation_class_shape, SH.minCount, Literal(1)))
+        self._graph.add((observation_class_shape, SH.maxCount, Literal(1)))
 
         list_node = BNode()
         Collection(self._graph, list_node, [CUBE.Observation])
@@ -768,6 +771,9 @@ class Cube:
         observed_by_node = BNode()
         self._graph.add((observed_by_node, SH.path, CUBE.observedBy))
         self._graph.add((observed_by_node, SH.nodeKind, SH.IRI))
+        self._graph.add((observed_by_node, QUDT.scaleType, QUDT.NominalScale))
+        self._graph.add((observed_by_node, SH.minCount, Literal(1)))
+        self._graph.add((observed_by_node, SH.maxCount, Literal(1)))
 
         list_node = BNode()
         Collection(self._graph, list_node, [URIRef(self._cube_dict.get("Creator")[0].get("IRI"))])
